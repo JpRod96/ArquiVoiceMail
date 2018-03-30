@@ -7,6 +7,32 @@ package main;
 */
 public class Connection
 {
+	private MailSystem system;
+	private Mailbox currentMailbox;
+	private String currentRecording;
+	private String accumulatedKeys;
+	private Telephone phone;
+	private int state;
+
+	private static final int DISCONNECTED = 0;
+	private static final int CONNECTED = 1;
+	private static final int RECORDING = 2;
+	private static final int MAILBOX_MENU = 3;
+	private static final int MESSAGE_MENU = 4;
+	private static final int CHANGE_PASSCODE = 5;
+	private static final int CHANGE_GREETING = 6;
+
+	private static final String INITIAL_PROMPT = 
+	      "Enter mailbox number followed by #";      
+	private static final String MAILBOX_MENU_TEXT = 
+	      "Enter 1 to listen to your messages\n"
+	      + "Enter 2 to change your passcode\n"
+	      + "Enter 3 to change your greeting";
+	private static final String MESSAGE_MENU_TEXT = 
+	      "Enter 1 to listen to the current message\n"
+	      + "Enter 2 to save the current message\n"
+	      + "Enter 3 to delete the current message\n"
+	      + "Enter 4 to return to the main menu";
    /**
       Construct a Connection object.
       @param s a MailSystem object
@@ -200,33 +226,6 @@ public class Connection
          phone.speak(MAILBOX_MENU_TEXT);
       }
    }
-
-   private MailSystem system;
-   private Mailbox currentMailbox;
-   private String currentRecording;
-   private String accumulatedKeys;
-   private Telephone phone;
-   private int state;
-
-   private static final int DISCONNECTED = 0;
-   private static final int CONNECTED = 1;
-   private static final int RECORDING = 2;
-   private static final int MAILBOX_MENU = 3;
-   private static final int MESSAGE_MENU = 4;
-   private static final int CHANGE_PASSCODE = 5;
-   private static final int CHANGE_GREETING = 6;
-
-   private static final String INITIAL_PROMPT = 
-         "Enter mailbox number followed by #";      
-   private static final String MAILBOX_MENU_TEXT = 
-         "Enter 1 to listen to your messages\n"
-         + "Enter 2 to change your passcode\n"
-         + "Enter 3 to change your greeting";
-   private static final String MESSAGE_MENU_TEXT = 
-         "Enter 1 to listen to the current message\n"
-         + "Enter 2 to save the current message\n"
-         + "Enter 3 to delete the current message\n"
-         + "Enter 4 to return to the main menu";
 }
 
 
