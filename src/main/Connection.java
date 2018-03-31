@@ -51,17 +51,17 @@ public class Connection
    */
    public void dial(String key)
    {
-      if (state == CONNECTED)
+      if (isConnected())
          connect(key);
-      else if (state == RECORDING)
+      else if (isRecording())
          login(key);
-      else if (state == CHANGE_PASSCODE)
+      else if (isChangePassCode())
          changePasscode(key);
-      else if (state == CHANGE_GREETING)
+      else if (isChangeGreeting())
          changeGreeting(key);
-      else if (state == MAILBOX_MENU)
+      else if (isMailBoxMenu())
          mailboxMenu(key);
-      else if (state == MESSAGE_MENU)
+      else if (isMessageMenu())
          messageMenu(key);
    }
    
@@ -73,6 +73,22 @@ public class Connection
 	   return state==RECORDING;
    }
 
+   public boolean isChangePassCode() {
+	   return state == CHANGE_PASSCODE;
+   }
+   
+   public boolean isChangeGreeting() {
+	   return state == CHANGE_GREETING;
+   }
+   
+   public boolean isMailBoxMenu() {
+	   return state == MAILBOX_MENU;
+   }
+   
+   public boolean isMessageMenu() {
+	   return state == MESSAGE_MENU;
+   }
+   
    /**
       Record voice.
       @param voice voice spoken by the user
