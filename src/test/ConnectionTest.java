@@ -43,6 +43,7 @@ public class ConnectionTest {
 		assertTrue(connection.isRecording());
 		verify(mockedTelephone).speak(chosenMailbox.getGreeting());
 	}
+	
 	@Test
 	public void shouldGetIntoMailBoxMenu() {
 		String idMailBox = "1";
@@ -57,6 +58,7 @@ public class ConnectionTest {
 
 		assertTrue(connection.isMailBoxMenu());
 	}
+	
 	@Test
 	public void shouldGetIntoMessageMenu() {
 		String idMailBox = "1";
@@ -74,6 +76,7 @@ public class ConnectionTest {
 
 		assertTrue(connection.isMessageMenu());
 	}
+	
 	@Test
 	public void shouldGetIntoChangePassCodeMenu() {
 		String idMailBox = "1";
@@ -89,5 +92,22 @@ public class ConnectionTest {
 		connection.dial(mailBoxMenuOption);
 
 		assertTrue(connection.isChangePassCode());
+	}
+	
+	@Test
+	public void shouldGetIntoChangeGreetingMenu() {
+		String idMailBox = "1";
+		String keyMailBox = "1";
+		String mailBoxMenuOption = "3";
+		Mailbox chosenMailbox = new Mailbox(idMailBox, "Hola, como estas?");
+
+		when(mockedMailsystem.findMailbox(idMailBox)).thenReturn(chosenMailbox);
+		connection.dial(idMailBox);
+		connection.dial("#");
+		connection.dial(keyMailBox);
+		connection.dial("#");
+		connection.dial(mailBoxMenuOption);
+
+		assertTrue(connection.isChangeGreeting());
 	}
 }
