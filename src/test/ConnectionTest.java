@@ -93,6 +93,34 @@ public class ConnectionTest {
 
 		assertTrue(connection.isChangePassCode());
 	}
+
+	@Test
+	public void shouldChangePassCodeFrom1To2() {
+		String idMailBox = "1";
+		String keyMailBox = "1";
+		String newKeyMailBox = "2";
+		String mailBoxMenuOption = "2";
+		String hangDown = "h";
+		Mailbox chosenMailbox = new Mailbox(idMailBox, "Hola, como estas?");
+
+		when(mockedMailsystem.findMailbox(idMailBox)).thenReturn(chosenMailbox);
+		connection.dial(idMailBox);
+		connection.dial("#");
+		connection.dial(keyMailBox);
+		connection.dial("#");
+		connection.dial(mailBoxMenuOption);
+		
+		connection.dial(newKeyMailBox);
+		connection.dial("#");
+		connection.dial(hangDown);
+		
+		connection.dial(idMailBox);
+		connection.dial("#");
+		connection.dial(newKeyMailBox);
+		connection.dial("#");
+		
+		assertTrue(connection.isMessageMenu());
+	}
 	
 	@Test
 	public void shouldGetIntoChangeGreetingMenu() {
@@ -110,4 +138,5 @@ public class ConnectionTest {
 
 		assertTrue(connection.isChangeGreeting());
 	}
+	
 }
