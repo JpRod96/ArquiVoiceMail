@@ -57,4 +57,21 @@ public class ConnectionTest {
 
 		assertTrue(connection.isMailBoxMenu());
 	}
+	@Test
+	public void shouldGetIntoMessageMenu() {
+		String idMailBox = "1";
+		String keyMailBox = "1";
+		String mailBoxMenuOption = "1";
+		Mailbox chosenMailbox = new Mailbox(idMailBox, "Hola, como estas?");
+
+		when(mockedMailsystem.findMailbox(idMailBox)).thenReturn(chosenMailbox);
+		connection.dial(idMailBox);
+		connection.dial("#");
+		connection.dial(keyMailBox);
+		connection.dial("#");
+		connection.dial(mailBoxMenuOption);
+		connection.dial("#");
+
+		assertTrue(connection.isMessageMenu());
+	}
 }
