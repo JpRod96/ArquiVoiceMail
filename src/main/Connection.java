@@ -64,6 +64,14 @@ public class Connection
       else if (state == MESSAGE_MENU)
          messageMenu(key);
    }
+   
+   public boolean isConnected() {
+	   return state==CONNECTED;
+   }
+   
+   public boolean isRecording() {
+	   return state==RECORDING;
+   }
 
    /**
       Record voice.
