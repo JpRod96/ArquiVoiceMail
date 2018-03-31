@@ -43,4 +43,18 @@ public class ConnectionTest {
 		assertTrue(connection.isRecording());
 		verify(mockedTelephone).speak(chosenMailbox.getGreeting());
 	}
+	@Test
+	public void shouldGetIntoMailBoxMenu() {
+		String idMailBox = "1";
+		String keyMailBox = "1";
+		Mailbox chosenMailbox = new Mailbox(idMailBox, "Hola, como estas?");
+
+		when(mockedMailsystem.findMailbox(idMailBox)).thenReturn(chosenMailbox);
+		connection.dial(idMailBox);
+		connection.dial("#");
+		connection.dial(keyMailBox);
+		connection.dial("#");
+
+		assertTrue(connection.isMailBoxMenu());
+	}
 }
