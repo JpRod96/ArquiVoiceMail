@@ -57,3 +57,4 @@ public class MessageQueue
 
    private ArrayList<Message> queue;
 }
+ 
