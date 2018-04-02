@@ -1,3 +1,5 @@
+package main;
+
 import java.util.ArrayList;
 
 /**
@@ -55,3 +57,4 @@ public class MessageQueue
 
    private ArrayList<Message> queue;
 }
+ 
