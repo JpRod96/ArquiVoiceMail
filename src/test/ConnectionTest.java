@@ -57,6 +57,9 @@ public class ConnectionTest {
 		connection.dial("#");
 
 		assertTrue(connection.isMailBoxMenu());
+		verify(mockedTelephone).speak("Enter 1 to listen to your messages\n"
+			      + "Enter 2 to change your passcode\n"
+			      + "Enter 3 to change your greeting");
 	}
 	
 	@Test
@@ -75,6 +78,10 @@ public class ConnectionTest {
 		connection.dial("#");
 
 		assertTrue(connection.isMessageMenu());
+		verify(mockedTelephone).speak("Enter 1 to listen to the current message\n"
+			      + "Enter 2 to save the current message\n"
+			      + "Enter 3 to delete the current message\n"
+			      + "Enter 4 to return to the main menu");
 	}
 	
 	@Test
@@ -92,6 +99,7 @@ public class ConnectionTest {
 		connection.dial(mailBoxMenuOption);
 
 		assertTrue(connection.isChangePassCode());
+		verify(mockedTelephone).speak("Enter new passcode followed by the # key");
 	}
 
 	@Test
@@ -137,6 +145,7 @@ public class ConnectionTest {
 		connection.dial(mailBoxMenuOption);
 
 		assertTrue(connection.isChangeGreeting());
+		verify(mockedTelephone).speak("Record your greeting, then press the # key");
 	}
 	
 }
