@@ -14,7 +14,6 @@ public class Connection
 	private Telephone phone;
 	private int state;
 
-	private static final int DISCONNECTED = 0;
 	private static final int CONNECTED = 1;
 	private static final int RECORDING = 2;
 	private static final int MAILBOX_MENU = 3;
@@ -62,7 +61,7 @@ public class Connection
       else if (isMailBoxMenu())
          mailboxMenu(key);
       else if (isMessageMenu())
-         messageMenu(key);
+         getMessageMenuStrings(key);
    }
    
    public boolean isConnected() {
@@ -221,30 +220,37 @@ public class Connection
 
    /**
       Respond to the user's selection from message menu.
-      @param key the phone key pressed by the user
+      @param keyPressed the phone key pressed by the user
    */
-   private void messageMenu(String key)
+   private void getMessageMenuStrings(String keyPressed)
    {
-      if (key.equals("1"))
+	   final String LISTEN_MESSAGE_OPTION="1",
+			     SAVE_MESSAGE_OPTION="2",
+			     DELETE_MESSAGE_OPTION="3",
+			     RETURN_TO_MAIN_MENU_OPTION="4";
+      if (keyPressed.equals(LISTEN_MESSAGE_OPTION))
       {
          String output = "";
-         Message m = currentMailbox.getCurrentMessage();
-         if (m == null) output += "No messages." + "\n";
-         else output += m.getText() + "\n";
+         Message message = currentMailbox.getCurrentMessage();
+         if (message == null) 
+        	 output += "No messages." + "\n";
+         else 
+        	 output += message.getText() + "\n";
+         
          output += MESSAGE_MENU_TEXT;
          phone.speak(output);
       }
-      else if (key.equals("2"))
+      else if (keyPressed.equals(SAVE_MESSAGE_OPTION))
       {
          currentMailbox.saveCurrentMessage();
          phone.speak(MESSAGE_MENU_TEXT);
       }
-      else if (key.equals("3"))
+      else if (keyPressed.equals(DELETE_MESSAGE_OPTION))
       {
          currentMailbox.removeCurrentMessage();
          phone.speak(MESSAGE_MENU_TEXT);
       }
-      else if (key.equals("4"))
+      else if (keyPressed.equals(RETURN_TO_MAIN_MENU_OPTION))
       {
          state = MAILBOX_MENU;
          phone.speak(MAILBOX_MENU_TEXT);
