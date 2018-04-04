@@ -1,11 +1,15 @@
 package main;
+import java.util.ArrayList;
+
+import observers.*;
+
 
 /**
    Connects a phone to the mail system. The purpose of this
    class is to keep track of the state of a connection, since
    the phone itself is just a source of individual key presses.
 */
-public class Connection
+public class Connection implements Observable
 {
 	private MailSystem system;
 	private Mailbox currentMailbox;
@@ -13,6 +17,7 @@ public class Connection
 	private String accumulatedKeys;
 	private Telephone phone;
 	private int state;
+	private ArrayList<Observer> observers;
 
 	private static final int DISCONNECTED = 0;
 	private static final int CONNECTED = 1;
@@ -43,6 +48,7 @@ public class Connection
       system = s;
       phone = p;
       resetConnection();
+      observers= new ArrayList<>();
    }
 
    /**
@@ -250,6 +256,12 @@ public class Connection
          phone.speak(MAILBOX_MENU_TEXT);
       }
    }
+   
+   @Override
+   public void addObserver(Observer observer) {
+	   observers.add(observer);
+   }
+   
 }
 
 
