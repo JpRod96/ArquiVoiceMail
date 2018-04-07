@@ -1,21 +1,36 @@
-package main;
+package observers;
 
 import java.util.Scanner;
+import main.*;
+
+import main.Connection;
+import main.Observable;
 
 /**
    A telephone that takes simulated keystrokes and voice input
    from the user and simulates spoken text.
 */
-public class Telephone
+public class Telephone implements Observer
 {
    /**
       Construct phone object.
       @param aScanner that reads text from a character-input stream
    */
+	private Observable observable;
    public Telephone(Scanner aScanner)
    {
       scanner = aScanner;
    }
+   
+   public Telephone(Observable observable) {
+		this.observable=observable;
+		observable.addObserver(this);
+	}
+	
+	public void update(String update) {
+		
+		System.out.println(update);
+	}
 
    /**
       Speak a message to System.out.

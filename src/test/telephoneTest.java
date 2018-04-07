@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import main.Connection;
 import main.MailSystem;
-import main.Telephone;
+import observers.Telephone;
 
 public class telephoneTest {
 	private static final Scanner Scanner = null;

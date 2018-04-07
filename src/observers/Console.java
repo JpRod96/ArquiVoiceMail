@@ -9,7 +9,7 @@ public class Console implements Observer{
 		observable.addObserver(this);
 	}
 	
-	public void update() {
+	public void update(String update) {
 		
 	}
 }
