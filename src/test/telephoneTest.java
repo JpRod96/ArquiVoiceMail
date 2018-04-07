@@ -44,10 +44,11 @@ public class telephoneTest {
 		System.setOut(originalOut);
 	
 	}
-   @Test
-   public void shouldHangUp() {
-	   
-   }
+	@Test
+	public void createPhone(){
+		Telephone t = new Telephone(Scanner);
+		assertNotNull(t);
+	}
 }
 
 
