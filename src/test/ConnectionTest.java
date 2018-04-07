@@ -1,5 +1,6 @@
 package test;
 import main.*;
+import observers.Telephone;
 
 import static com.sun.xml.internal.ws.dump.LoggingDumpTube.Position.Before;
 import static org.junit.jupiter.api.Assertions.assertTrue;

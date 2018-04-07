@@ -2,6 +2,8 @@
 
 import java.util.Scanner;
 
+import observers.Telephone;
+
 /**
    This program tests the mail system. A single phone
    communicates with the program through System.in/System.out.
