@@ -7,6 +7,7 @@ import observers.*;
 /**
    Connects a phone to the mail system. The purpose of this
    class is to keep track of the state of a connection, since
+ 
    the phone itself is just a source of individual key presses.
 */
 public class Connection implements Observable
