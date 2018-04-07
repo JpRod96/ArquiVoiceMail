@@ -27,9 +27,9 @@ public class Telephone implements Observer
 		observable.addObserver(this);
 	}
 	
-	public void update() {
+	public void update(String update) {
 		
-		System.out.println();
+		System.out.println(update);
 	}
 
    /**
