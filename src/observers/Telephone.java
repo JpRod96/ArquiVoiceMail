@@ -1,8 +1,6 @@
 package observers;
 
 import java.util.Scanner;
-import main.*;
-
 import main.Connection;
 import main.Observable;
 
@@ -17,19 +15,22 @@ public class Telephone implements Observer
       @param aScanner that reads text from a character-input stream
    */
 	private Observable observable;
+
+	public Telephone(){}
    public Telephone(Scanner aScanner)
    {
       scanner = aScanner;
    }
    
-   public Telephone(Observable observable) {
+   public Telephone(Observable observable, Scanner aScanner) {
+        scanner = aScanner;
 		this.observable=observable;
 		observable.addObserver(this);
 	}
 	
-	public void update(String update) {
-		
-		System.out.println(update);
+	@Override
+	public void update() {
+		speak(observable.toString());
 	}
 
    /**

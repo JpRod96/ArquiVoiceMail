@@ -1,5 +1,5 @@
 package observers;
 
 public interface Observer {
-	void update(String notify);
+	void update();
 }

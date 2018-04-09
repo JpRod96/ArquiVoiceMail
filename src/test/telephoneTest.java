@@ -1,9 +1,6 @@
 package test;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
@@ -11,6 +8,8 @@ import java.util.Scanner;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.jupiter.api.Test;
+
+import static org.mockito.Mockito.mock;
 
 import main.Connection;
 import main.MailSystem;
