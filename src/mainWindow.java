@@ -7,26 +7,38 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
-
-public class mainWindow {
+import main.Observable;
+import observers.Observer;
+public class mainWindow implements Observer{
 
 	protected Shell shell;
 	private Text text;
+	private String message="hola";
+	private Observable observable;
+
 	public String label="";
 
 	/**
 	 * Launch the application.
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args,Observable observable) {
 		try {
-			mainWindow window = new mainWindow();
+			mainWindow window = new mainWindow(observable);
 			window.open();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
+	
+	public mainWindow(Observable observable) {
+		this.observable = observable;
+		observable.addObserver(this);
+	}
+	@Override
+	public void update() {
+		message = observable.toString();
+	}
 	/**
 	 * Open the window.
 	 */
@@ -37,7 +49,7 @@ public class mainWindow {
 		shell.layout();
 		while (!shell.isDisposed()) {
 			if (!display.readAndDispatch()) {
-				display.sleep();
+				//display.sleep();
 			}
 		}
 	}
@@ -169,7 +181,11 @@ public class mainWindow {
 		btnContestar.setBounds(48, 226, 75, 25);
 		btnContestar.setText("Contestar");
 		
-		
+
+	    
+		lblNewLabel.setBounds(49, 10, 230, 98);
+		lblNewLabel.setText(message);
+
 		
 		text = new Text(shell, SWT.BORDER);
 		text.setBounds(298, 10, 126, 60);
