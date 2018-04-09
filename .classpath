@@ -18,6 +18,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="mockito-all-1.9.0-rc1.jar"/>
-	<classpathentry exported="true" kind="var" path="SWT_LIB"/>
+	<classpathentry kind="lib" path="D:/U/9no Sem/ArquiSoft/ArquiVoiceMail/swt.jar"/>
+	<classpathentry kind="lib" path="D:/U/9no Sem/ArquiSoft/ArquiVoiceMail/swt-debug.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
