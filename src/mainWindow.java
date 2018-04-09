@@ -22,11 +22,16 @@ public class mainWindow implements Observer{
 	 */
 	public static void main(String[] args,Observable observable) {
 		try {
-			mainWindow window = new mainWindow();
+			mainWindow window = new mainWindow(observable);
 			window.open();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public mainWindow(Observable observable) {
+		this.observable = observable;
+		observable.addObserver(this);
 	}
 	@Override
 	public void update() {
@@ -42,7 +47,7 @@ public class mainWindow implements Observer{
 		shell.layout();
 		while (!shell.isDisposed()) {
 			if (!display.readAndDispatch()) {
-				display.sleep();
+				//display.sleep();
 			}
 		}
 	}

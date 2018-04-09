@@ -19,12 +19,31 @@ public class MailSystemTester
    {
       MailSystem system = new MailSystem(MAILBOX_COUNT);
       Scanner console = new Scanner(System.in);
-      Connection c = new Connection(system);
-      Telephone telephone = new Telephone(c, console);
-      mainWindow mainwindow = new mainWindow();
+      Connection connection = new Connection(system);
+      Telephone telephone = new Telephone(connection, console);
+      mainWindow mainwindow = new mainWindow(connection);
+      mainwindow.open();
+      run(connection, console);
       
-      telephone.run(c);
-   // mainwindow.main(args, c);
+   }
+   
+   public static void run(Connection connection, Scanner scanner)
+   {
+      boolean more = true;
+      while (more)
+      {
+         String input = scanner.nextLine();
+         if (input == null) return;
+         if (input.equalsIgnoreCase("H"))
+            connection.hangup();
+         else if (input.equalsIgnoreCase("Q"))
+            more = false;
+         else if (input.length() == 1
+            && "1234567890#".indexOf(input) >= 0)
+            connection.dial(input);
+         else
+            connection.record(input);
+      }
    }
 
    private static final int MAILBOX_COUNT = 20;
