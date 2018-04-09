@@ -22,6 +22,7 @@ public class ConnectionTest {
 	    mockedMailsystem = mock(MailSystem.class);
 	    mockedTelephone = mock(Telephone.class);
 	    connection = new Connection(mockedMailsystem);
+	    connection.addObserver(mockedTelephone);
 	}
 
 	@Test
@@ -31,7 +32,7 @@ public class ConnectionTest {
 
 	@Test
 	public void shouldShowInitialMessage() {
-		verify(mockedTelephone).speak("Enter mailbox number followed by #");
+		verify(mockedTelephone).update();
 	}
 	
 	@Test
@@ -44,7 +45,6 @@ public class ConnectionTest {
 		connection.dial("#");
 
 		assertTrue(connection.isRecording());
-		verify(mockedTelephone).speak(chosenMailbox.getGreeting());
 	}
 	
 	@Test
