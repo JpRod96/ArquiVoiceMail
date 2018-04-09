@@ -1,13 +1,13 @@
 package test;
-import main.*;
+import main.Connection;
+import main.MailSystem;
+import main.Mailbox;
 import observers.Telephone;
-
-import static com.sun.xml.internal.ws.dump.LoggingDumpTube.Position.Before;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.*;
-
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.*;
 
 public class ConnectionTest {
 

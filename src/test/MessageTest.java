@@ -1,15 +1,13 @@
 package test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.Test;
-
 import main.Message;
+import org.junit.Test;
 
-class MessageTest {
+import static org.junit.Assert.*;
+public class MessageTest {
 
 	@Test
-	void testGetMessage() {
+	public void testGetMessage() {
 		Message message=new Message("hola buen dia");
 		assertEquals(message.getText(),"hola buen dia");
 		

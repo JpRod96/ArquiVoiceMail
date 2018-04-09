@@ -1,50 +1,49 @@
 package test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.Test;
-
 import main.Mailbox;
 import main.Message;
 
-class MailboxTest {
+import org.junit.Test;
+
+import static org.junit.Assert.*;
+public class MailboxTest {
 	
 	Mailbox mailbox=new Mailbox("pass","saludos");
 	@Test
-	void shouldChangePasscode() {
+	public void shouldChangePasscode() {
 		mailbox.setPasscode("newpass");
 		assertEquals(mailbox.checkPasscode("saludos"),false);
 	}
 	@Test
-	void shouldChangeGreeting() {
+	public void shouldChangeGreeting() {
 		mailbox.setGreeting("Hola");
 		assertEquals(mailbox.getGreeting(),"Hola");
 	}
 
 	@Test
-	void shouldReturnCurretMessage() {
+	public void shouldReturnCurretMessage() {
 		assertEquals(mailbox.getCurrentMessage(),null);
 	}
 	
 	@Test
-	void shouldAddMessage() {
+	public void shouldAddMessage() {
 		Message newMessage=new Message("nuevo mensaje");
 		mailbox.addMessage(newMessage);
 		assertEquals(mailbox.getCurrentMessage(),newMessage);
 	}
 	@Test 
-	void shouldRemoveCurretMessage() {
+	public void shouldRemoveCurretMessage() {
 		assertEquals(mailbox.removeCurrentMessage(),null);
 	}
 	@Test
-	void ShouldRemoveCurretMessageFromNewMessages() {
+	public void  ShouldRemoveCurretMessageFromNewMessages() {
 		Message newMessage=new Message("nuevo mensaje");
 		mailbox.addMessage(newMessage);
 		mailbox.removeCurrentMessage();
 		assertEquals(mailbox.getCurrentMessage(),null);
 	}
 	@Test
-	void ShouldRemoveCurretMessageFromKeptMessages() {
+	public void ShouldRemoveCurretMessageFromKeptMessages() {
 		Message newMessage=new Message("nuevo mensaje");
 		mailbox.addMessage(newMessage);
 		mailbox.saveCurrentMessage();
@@ -52,7 +51,7 @@ class MailboxTest {
 		assertEquals(mailbox.getCurrentMessage(),null);
 	}
 	@Test
-	void ShouldSaveCurretMessage() {
+	public void ShouldSaveCurretMessage() {
 		Message newMessage=new Message("nuevo mensaje");
 		mailbox.addMessage(newMessage);
 		mailbox.saveCurrentMessage();
