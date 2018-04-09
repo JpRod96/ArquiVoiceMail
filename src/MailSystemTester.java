@@ -1,5 +1,3 @@
-  
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -21,8 +19,6 @@ public class MailSystemTester
       Scanner console = new Scanner(System.in);
       Connection connection = new Connection(system);
       Telephone telephone = new Telephone(connection, console);
-      mainWindow mainwindow = new mainWindow(connection);
-      mainwindow.open();
       run(connection, console);
       
    }
