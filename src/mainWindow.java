@@ -145,7 +145,7 @@ public class mainWindow {
 		button_8.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent button_8) {
-				label+="8";
+				label+="9";
 				lblNewLabel.setText(label);
 			}
 		});
