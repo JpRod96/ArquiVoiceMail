@@ -12,6 +12,7 @@ public class mainWindow {
 
 	protected Shell shell;
 	private Text text;
+	public String label="";
 
 	/**
 	 * Launch the application.
@@ -48,8 +49,18 @@ public class mainWindow {
 		shell = new Shell();
 		shell.setSize(450, 300);
 		shell.setText("VOICE MAIL");
+		Label lblNewLabel = new Label(shell, SWT.NONE);
+		lblNewLabel.setBounds(49, 10, 230, 98);
+		
 		
 		Button button = new Button(shell, SWT.NONE);
+		button.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent button) {
+				label+="1";
+				lblNewLabel.setText(label);
+			}
+		});
 		button.setBounds(48, 133, 75, 25);
 		button.setText("1");
 		
@@ -102,9 +113,7 @@ public class mainWindow {
 		btnContestar.setBounds(48, 226, 75, 25);
 		btnContestar.setText("Contestar");
 		
-		Label lblNewLabel = new Label(shell, SWT.NONE);
-		lblNewLabel.setBounds(49, 10, 230, 98);
-		lblNewLabel.setText("......");
+		
 		
 		text = new Text(shell, SWT.BORDER);
 		text.setBounds(298, 10, 126, 60);
