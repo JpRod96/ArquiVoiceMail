@@ -4,9 +4,7 @@ import observers.Telephone;
 
 import static com.sun.xml.internal.ws.dump.LoggingDumpTube.Position.Before;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -32,7 +30,7 @@ public class ConnectionTest {
 
 	@Test
 	public void shouldShowInitialMessage() {
-		verify(mockedTelephone).update();
+		verify(mockedTelephone, times(1)).update();
 	}
 	
 	@Test
@@ -45,6 +43,7 @@ public class ConnectionTest {
 		connection.dial("#");
 
 		assertTrue(connection.isRecording());
+		verify(mockedTelephone, times(2)).update();
 	}
 	
 	@Test
@@ -60,6 +59,7 @@ public class ConnectionTest {
 		connection.dial("#");
 
 		assertTrue(connection.isMailBoxMenu());
+		verify(mockedTelephone, times(3)).update();
 	}
 	
 	@Test
@@ -78,6 +78,7 @@ public class ConnectionTest {
 		connection.dial("#");
 
 		assertTrue(connection.isMessageMenu());
+		verify(mockedTelephone, times(4)).update();
 	}
 	
 	@Test
@@ -95,6 +96,7 @@ public class ConnectionTest {
 		connection.dial(mailBoxMenuOption);
 
 		assertTrue(connection.isChangePassCode());
+		verify(mockedTelephone, times(4)).update();
 	}
 
 	@Test
@@ -123,6 +125,7 @@ public class ConnectionTest {
 		connection.dial("#");
 		
 		assertTrue(connection.isMessageMenu());
+		verify(mockedTelephone, times(7)).update();
 	}
 	
 	@Test
@@ -140,6 +143,7 @@ public class ConnectionTest {
 		connection.dial(mailBoxMenuOption);
 
 		assertTrue(connection.isChangeGreeting());
+		verify(mockedTelephone, times(4)).update();
 	}
 	
 }
