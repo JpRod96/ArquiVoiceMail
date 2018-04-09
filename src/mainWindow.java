@@ -7,17 +7,20 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
-
-public class mainWindow {
+import main.Observable;
+import observers.Observer;
+public class mainWindow implements Observer{
 
 	protected Shell shell;
 	private Text text;
+	private String message="hola";
+	private Observable observable;
 
 	/**
 	 * Launch the application.
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args,Observable observable) {
 		try {
 			mainWindow window = new mainWindow();
 			window.open();
@@ -25,7 +28,10 @@ public class mainWindow {
 			e.printStackTrace();
 		}
 	}
-
+	@Override
+	public void update() {
+		message = observable.toString();
+	}
 	/**
 	 * Open the window.
 	 */
@@ -104,7 +110,7 @@ public class mainWindow {
 		
 		Label lblNewLabel = new Label(shell, SWT.NONE);
 		lblNewLabel.setBounds(49, 10, 230, 98);
-		lblNewLabel.setText("......");
+		lblNewLabel.setText(message);
 		
 		text = new Text(shell, SWT.BORDER);
 		text.setBounds(298, 10, 126, 60);
