@@ -4,15 +4,14 @@ import observers.Telephone;
 
 import static com.sun.xml.internal.ws.dump.LoggingDumpTube.Position.Before;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
 public class ConnectionTest {
-    MailSystem mockedMailsystem;
+
+	MailSystem mockedMailsystem;
     Telephone mockedTelephone;
     Connection connection;
 
@@ -20,7 +19,8 @@ public class ConnectionTest {
 	public void init() {
 	    mockedMailsystem = mock(MailSystem.class);
 	    mockedTelephone = mock(Telephone.class);
-	    connection = new Connection(mockedMailsystem, mockedTelephone);
+	    connection = new Connection(mockedMailsystem);
+	    connection.addObserver(mockedTelephone);
 	}
 
 	@Test
@@ -30,7 +30,7 @@ public class ConnectionTest {
 
 	@Test
 	public void shouldShowInitialMessage() {
-		verify(mockedTelephone).speak("Enter mailbox number followed by #");
+		verify(mockedTelephone, times(1)).update();
 	}
 	
 	@Test
@@ -43,7 +43,7 @@ public class ConnectionTest {
 		connection.dial("#");
 
 		assertTrue(connection.isRecording());
-		verify(mockedTelephone).speak(chosenMailbox.getGreeting());
+		verify(mockedTelephone, times(2)).update();
 	}
 	
 	@Test
@@ -59,6 +59,7 @@ public class ConnectionTest {
 		connection.dial("#");
 
 		assertTrue(connection.isMailBoxMenu());
+		verify(mockedTelephone, times(3)).update();
 	}
 	
 	@Test
@@ -77,6 +78,7 @@ public class ConnectionTest {
 		connection.dial("#");
 
 		assertTrue(connection.isMessageMenu());
+		verify(mockedTelephone, times(4)).update();
 	}
 	
 	@Test
@@ -94,6 +96,7 @@ public class ConnectionTest {
 		connection.dial(mailBoxMenuOption);
 
 		assertTrue(connection.isChangePassCode());
+		verify(mockedTelephone, times(4)).update();
 	}
 
 	@Test
@@ -122,6 +125,7 @@ public class ConnectionTest {
 		connection.dial("#");
 		
 		assertTrue(connection.isMessageMenu());
+		verify(mockedTelephone, times(7)).update();
 	}
 	
 	@Test
@@ -139,6 +143,7 @@ public class ConnectionTest {
 		connection.dial(mailBoxMenuOption);
 
 		assertTrue(connection.isChangeGreeting());
+		verify(mockedTelephone, times(4)).update();
 	}
 	
 }
