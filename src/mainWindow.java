@@ -131,6 +131,13 @@ public class mainWindow {
 		button_6.setText("7");
 		
 		Button button_7 = new Button(shell, SWT.NONE);
+		button_7.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent button_7) {
+				label+="8";
+				lblNewLabel.setText(label);
+			}
+		});
 		button_7.setBounds(129, 198, 75, 25);
 		button_7.setText("8");
 		
