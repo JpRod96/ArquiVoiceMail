@@ -21,7 +21,7 @@ public class ConnectionTest {
 	public void init() {
 	    mockedMailsystem = mock(MailSystem.class);
 	    mockedTelephone = mock(Telephone.class);
-	    connection = new Connection(mockedMailsystem, mockedTelephone);
+	    connection = new Connection(mockedMailsystem);
 	}
 
 	@Test

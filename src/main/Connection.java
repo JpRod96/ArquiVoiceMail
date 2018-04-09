@@ -16,7 +16,6 @@ public class Connection implements Observable
 	private Mailbox currentMailbox;
 	private String currentRecording;
 	private String accumulatedKeys;
-	private Telephone phone;
 	private int state;
 	private ArrayList<Observer> observers;
 	private String stringState;
@@ -40,24 +39,11 @@ public class Connection implements Observable
 	      + "Enter 2 to save the current message\n"
 	      + "Enter 3 to delete the current message\n"
 	      + "Enter 4 to return to the main menu";
-   /**
-      Construct a Connection object.
-      @param s a MailSystem object
-      @param p a Telephone object
-   */
-   public Connection(MailSystem s, Telephone p)
-   {
-      system = s;
-      phone = p;
-      resetConnection();
-      observers= new ArrayList<>();
-   }
-   
+
    public Connection(MailSystem s)
    {
       system = s;
       observers= new ArrayList<>();
-      phone=new Telephone();
    }
 
    /**
@@ -133,7 +119,6 @@ public class Connection implements Observable
       currentRecording = "";
       accumulatedKeys = "";
       state = CONNECTED;
-      phone.speak(INITIAL_PROMPT);
       stringState=INITIAL_PROMPT;
       notifyObservers();
    }
@@ -150,12 +135,10 @@ public class Connection implements Observable
          if (currentMailbox != null)
          {
             state = RECORDING;
-            phone.speak(currentMailbox.getGreeting());
             stringState=currentMailbox.getGreeting();
             notifyObservers();
          }
          else {
-        	 phone.speak("Incorrect mailbox number. Try again!");
         	 stringState="Incorrect mailbox number. Try again!";
              notifyObservers();
          }
@@ -176,12 +159,10 @@ public class Connection implements Observable
          if (currentMailbox.checkPasscode(accumulatedKeys))
          {
             state = MAILBOX_MENU;
-            phone.speak(MAILBOX_MENU_TEXT);
             stringState=MAILBOX_MENU_TEXT;
             notifyObservers();
          }
          else {
-        	 phone.speak("Incorrect passcode. Try again!");
         	 stringState="Incorrect passcode. Try again!";
              notifyObservers();
          }
@@ -202,7 +183,6 @@ public class Connection implements Observable
       {
          currentMailbox.setPasscode(accumulatedKeys);
          state = MAILBOX_MENU;
-         phone.speak(MAILBOX_MENU_TEXT);
          stringState=MAILBOX_MENU_TEXT;
          notifyObservers();
          accumulatedKeys = "";
@@ -222,7 +202,6 @@ public class Connection implements Observable
          currentMailbox.setGreeting(currentRecording);
          currentRecording = "";
          state = MAILBOX_MENU;
-         phone.speak(MAILBOX_MENU_TEXT);
          stringState=MAILBOX_MENU_TEXT;
          notifyObservers();
       }
@@ -237,21 +216,18 @@ public class Connection implements Observable
       if (key.equals("1"))
       {
          state = MESSAGE_MENU;
-         phone.speak(MESSAGE_MENU_TEXT);
          stringState=MESSAGE_MENU_TEXT;
          notifyObservers();
       }
       else if (key.equals("2"))
       {
          state = CHANGE_PASSCODE;
-         phone.speak("Enter new passcode followed by the # key");
          stringState="Enter new passcode followed by the # key";
          notifyObservers();
       }
       else if (key.equals("3"))
       {
          state = CHANGE_GREETING;
-         phone.speak("Record your greeting, then press the # key");
          stringState="Record your greeting, then press the # key";
          notifyObservers();
       }
@@ -270,28 +246,24 @@ public class Connection implements Observable
          if (m == null) output += "No messages." + "\n";
          else output += m.getText() + "\n";
          output += MESSAGE_MENU_TEXT;
-         phone.speak(output);
          stringState=output;
          notifyObservers();
       }
       else if (key.equals("2"))
       {
          currentMailbox.saveCurrentMessage();
-         phone.speak(MESSAGE_MENU_TEXT);
          stringState=MESSAGE_MENU_TEXT;
          notifyObservers();
       }
       else if (key.equals("3"))
       {
          currentMailbox.removeCurrentMessage();
-         phone.speak(MESSAGE_MENU_TEXT);
          stringState=MESSAGE_MENU_TEXT;
          notifyObservers();
       }
       else if (key.equals("4"))
       {
          state = MAILBOX_MENU;
-         phone.speak(MAILBOX_MENU_TEXT);
          stringState=MAILBOX_MENU_TEXT;
          notifyObservers();
       }
