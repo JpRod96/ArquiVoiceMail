@@ -1,6 +1,9 @@
+import main.Observable;
+import observers.Observer;
+
 import javax.swing.*;
 
-public class GUI extends JFrame{
+public class GUI extends JFrame implements Observer{
     private JPanel rootPanel;
     private JButton a1Button;
     private JButton a2Button;
@@ -11,12 +14,21 @@ public class GUI extends JFrame{
     private JButton a7Button;
     private JButton a8Button;
     private JButton a9Button;
+    private JLabel labelText;
+
+    Observable observable;
 
 
-    public GUI(){
+    public GUI(Observable observable){
             super("jp,mauri,abel");
             setContentPane(rootPanel);
             setSize(400,200);
+            this.observable=observable;
+            this.observable.addObserver(this);
         }
+    @Override
+    public void update(){
+        labelText.setText(observable.toString());
+    }
 
 }

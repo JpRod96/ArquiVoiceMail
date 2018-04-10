@@ -24,7 +24,7 @@ public class MailSystemTester
       Scanner console = new Scanner(System.in);
       Connection connection = new Connection(system);
       Telephone telephone = new Telephone(connection, console);
-       GUI form= new GUI();
+       GUI form= new GUI(connection);
        form.setVisible(true);
        form.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
       run(connection, console);
