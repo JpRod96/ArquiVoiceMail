@@ -16,7 +16,7 @@ public class GUI extends JFrame{
     public GUI(){
             super("jp,mauri,abel");
             setContentPane(rootPanel);
-            setSize(600,400);
+            setSize(400,200);
         }
 
 }
