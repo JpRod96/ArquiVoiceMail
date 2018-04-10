@@ -4,4 +4,5 @@ import observers.Observer;
 public interface Observable {
 	void addObserver(Observer observer);
 	void notifyObservers();
+	void recibeData(String key);
 }

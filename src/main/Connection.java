@@ -147,6 +147,9 @@ public class Connection implements Observable
       else
          accumulatedKeys += key;
    }
+   public void recibeData(String key){
+      this.dial(key);
+   }
 
    /**
       Try to log in the user.
