@@ -19,10 +19,12 @@ public class GUI extends JFrame implements Observer{
     Observable observable;
 
 
-    public GUI(){
+    public GUI(Observable observable){
             super("jp,mauri,abel");
             setContentPane(rootPanel);
             setSize(400,200);
+            this.observable=observable;
+            this.observable.addObserver(this);
         }
     @Override
     public void update(){
