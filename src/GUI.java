@@ -75,6 +75,13 @@ public class GUI extends JFrame implements Observer, ActionListener {
             this.observable.recibeData(userOption.getText());
             userOption.setText("");
         }
+        if (e.getSource()==hButton){
+            this.observable.recibeData("h");
+            userOption.setText("");
+        }
+        if (e.getSource()==qButton){
+            this.dispose();
+        }
     }
 
 }
