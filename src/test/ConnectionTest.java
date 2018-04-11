@@ -39,13 +39,12 @@ public class ConnectionTest {
 		Mailbox chosenMailbox = new Mailbox(idMailBox, "Hola, como estas?");
 
 		when(mockedMailsystem.findMailbox(idMailBox)).thenReturn(chosenMailbox);
-		connection.dial(idMailBox);
-		connection.dial("#");
+		stepsForGettingIntoMailBox(idMailBox);
 
 		assertTrue(connection.isRecording());
 		verify(mockedTelephone, times(2)).update();
 	}
-	
+
 	@Test
 	public void shouldGetIntoMailBoxMenu() {
 		String idMailBox = "1";
@@ -53,15 +52,12 @@ public class ConnectionTest {
 		Mailbox chosenMailbox = new Mailbox(idMailBox, "Hola, como estas?");
 
 		when(mockedMailsystem.findMailbox(idMailBox)).thenReturn(chosenMailbox);
-		connection.dial(idMailBox);
-		connection.dial("#");
-		connection.dial(keyMailBox);
-		connection.dial("#");
+		stepsForGettingIntoMailBoxMenu(idMailBox, keyMailBox);
 
 		assertTrue(connection.isMailBoxMenu());
 		verify(mockedTelephone, times(3)).update();
 	}
-	
+
 	@Test
 	public void shouldGetIntoMessageMenu() {
 		String idMailBox = "1";
@@ -70,17 +66,12 @@ public class ConnectionTest {
 		Mailbox chosenMailbox = new Mailbox(idMailBox, "Hola, como estas?");
 
 		when(mockedMailsystem.findMailbox(idMailBox)).thenReturn(chosenMailbox);
-		connection.dial(idMailBox);
-		connection.dial("#");
-		connection.dial(keyMailBox);
-		connection.dial("#");
-		connection.dial(mailBoxMenuOption);
-		connection.dial("#");
+		stepsForGettingIntoMailboxMenuOption(idMailBox, keyMailBox, mailBoxMenuOption);
 
 		assertTrue(connection.isMessageMenu());
 		verify(mockedTelephone, times(4)).update();
 	}
-	
+
 	@Test
 	public void shouldGetIntoChangePassCodeMenu() {
 		String idMailBox = "1";
@@ -89,11 +80,7 @@ public class ConnectionTest {
 		Mailbox chosenMailbox = new Mailbox(idMailBox, "Hola, como estas?");
 
 		when(mockedMailsystem.findMailbox(idMailBox)).thenReturn(chosenMailbox);
-		connection.dial(idMailBox);
-		connection.dial("#");
-		connection.dial(keyMailBox);
-		connection.dial("#");
-		connection.dial(mailBoxMenuOption);
+		stepsForGettingIntoMailboxMenuOption(idMailBox, keyMailBox, mailBoxMenuOption);
 
 		assertTrue(connection.isChangePassCode());
 		verify(mockedTelephone, times(4)).update();
@@ -109,25 +96,18 @@ public class ConnectionTest {
 		Mailbox chosenMailbox = new Mailbox(idMailBox, "Hola, como estas?");
 
 		when(mockedMailsystem.findMailbox(idMailBox)).thenReturn(chosenMailbox);
-		connection.dial(idMailBox);
-		connection.dial("#");
-		connection.dial(keyMailBox);
-		connection.dial("#");
-		connection.dial(mailBoxMenuOption);
-		
+		stepsForGettingIntoMailboxMenuOption(idMailBox, keyMailBox, mailBoxMenuOption);
+
 		connection.dial(newKeyMailBox);
 		connection.dial("#");
 		connection.dial(hangDown);
-		
-		connection.dial(idMailBox);
-		connection.dial("#");
-		connection.dial(newKeyMailBox);
-		connection.dial("#");
-		
+
+		stepsForGettingIntoMailBoxMenu(idMailBox, newKeyMailBox);
+
 		assertTrue(connection.isMessageMenu());
 		verify(mockedTelephone, times(7)).update();
 	}
-	
+
 	@Test
 	public void shouldGetIntoChangeGreetingMenu() {
 		String idMailBox = "1";
@@ -136,14 +116,26 @@ public class ConnectionTest {
 		Mailbox chosenMailbox = new Mailbox(idMailBox, "Hola, como estas?");
 
 		when(mockedMailsystem.findMailbox(idMailBox)).thenReturn(chosenMailbox);
-		connection.dial(idMailBox);
-		connection.dial("#");
-		connection.dial(keyMailBox);
-		connection.dial("#");
-		connection.dial(mailBoxMenuOption);
+		stepsForGettingIntoMailboxMenuOption(idMailBox, keyMailBox, mailBoxMenuOption);
 
 		assertTrue(connection.isChangeGreeting());
 		verify(mockedTelephone, times(4)).update();
 	}
-	
+
+	private void stepsForGettingIntoMailBox(String mailBoxNumber){
+		connection.dial(mailBoxNumber);
+		connection.dial("#");
+	}
+
+	private void stepsForGettingIntoMailBoxMenu(String mailboxNumber, String keyMailBox){
+		stepsForGettingIntoMailBox(mailboxNumber);
+		connection.dial(keyMailBox);
+		connection.dial("#");
+	}
+
+	private void stepsForGettingIntoMailboxMenuOption(String mailboxNumber, String keyMailBox, String mailBoxMenuOption){
+		stepsForGettingIntoMailBoxMenu(mailboxNumber, keyMailBox);
+		connection.dial(mailBoxMenuOption);
+	}
+
 }
