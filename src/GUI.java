@@ -44,8 +44,8 @@ public class GUI extends JFrame implements Observer, ActionListener {
         numeralButton.addActionListener(this);
     }
     @Override
-    public void update(){
-        labelText.setText("<html>" + observable.toString().replaceAll("\n", "<br/>") + "</html>");
+    public void update(String updateString){
+        labelText.setText("<html>" + updateString.replaceAll("\n", "<br/>") + "</html>");
     }
 
     public void actionPerformed(ActionEvent e){
