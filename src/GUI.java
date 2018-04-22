@@ -13,17 +13,17 @@ public class GUI extends JFrame implements StateWatcher, ActionListener {
     private JButton numeralButton;
 
 
-    Subject observable;
+    Subject subject;
 
 
-    public GUI(Subject observable){
+    public GUI(Subject subject){
             super("jp,mauri,abel");
             setContentPane(rootPanel);
             setSize(290,400);
             initializeActionButtons();
             initializeNumeralButtons();
-            this.observable=observable;
-            this.observable.addObserver(this);
+            this.subject=subject;
+            this.subject.addObserver(this);
         }
     public void initializeNumeralButtons(){
         a1Button.addActionListener(this);
@@ -72,11 +72,11 @@ public class GUI extends JFrame implements StateWatcher, ActionListener {
         if(e.getSource()==numeralButton)
             userOption.setText(userOption.getText().concat("#"));
         if (e.getSource()==actionButton){
-            this.observable.recibeData(userOption.getText());
+            this.subject.recibeData(userOption.getText());
             userOption.setText("");
         }
         if (e.getSource()==hButton){
-            this.observable.recibeData("H");
+            this.subject.recibeData("H");
             userOption.setText("");
         }
         if (e.getSource()==qButton){
