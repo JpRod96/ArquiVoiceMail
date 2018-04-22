@@ -45,7 +45,7 @@ public class GUI extends JFrame implements Observer, ActionListener {
     }
     @Override
     public void update(){
-        labelText.setText(observable.toString());
+        labelText.setText("<html>" + observable.toString().replaceAll("\n", "<br/>") + "</html>");
     }
 
     public void actionPerformed(ActionEvent e){
@@ -76,7 +76,7 @@ public class GUI extends JFrame implements Observer, ActionListener {
             userOption.setText("");
         }
         if (e.getSource()==hButton){
-            this.observable.recibeData("h");
+            this.observable.recibeData("H");
             userOption.setText("");
         }
         if (e.getSource()==qButton){
