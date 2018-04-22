@@ -14,18 +14,17 @@ public class Telephone implements StateWatcher
       Construct phone object.
       @param aScanner that reads text from a character-input stream
    */
-	private Subject observable;
+	private Subject subject;
 
-	public Telephone(){}
    public Telephone(Scanner aScanner)
    {
       scanner = aScanner;
    }
    
-   public Telephone(Subject observable, Scanner aScanner) {
+   public Telephone(Subject subject, Scanner aScanner) {
         scanner = aScanner;
-		this.observable=observable;
-		observable.addObserver(this);
+		this.subject=subject;
+		subject.addObserver(this);
 	}
 	
 	@Override

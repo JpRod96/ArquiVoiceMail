@@ -43,8 +43,14 @@ public class telephoneTest {
 	
 	}
 	@Test
-	public void createPhone(){
+	public void createPhoneJustWithScanner(){
 		Telephone t = new Telephone(Scanner);
+		assertNotNull(t);
+	}
+
+	@Test
+	public void createPhoneWithStateWatcher(){
+		Telephone t = new Telephone(connection, Scanner);
 		assertNotNull(t);
 	}
 }

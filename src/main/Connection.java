@@ -17,7 +17,7 @@ public class Connection implements Subject
 	private String currentRecording;
 	private String accumulatedKeys;
 	private int state;
-	private ArrayList<StateWatcher> observers;
+	private ArrayList<StateWatcher> stateWatchers;
 
 	private static final int DISCONNECTED = 0;
 	private static final int CONNECTED = 1;
@@ -42,7 +42,7 @@ public class Connection implements Subject
    public Connection(MailSystem s)
    {
       system = s;
-      observers= new ArrayList<>();
+      stateWatchers= new ArrayList<>();
    }
 
    /**
@@ -257,15 +257,15 @@ public class Connection implements Subject
    }
    
    @Override
-   public void addObserver(StateWatcher observer) {
-	   observers.add(observer);
+   public void addObserver(StateWatcher stateWatcher) {
+	   stateWatchers.add(stateWatcher);
 	   resetConnection();
    }
    
    @Override
    public void notifyObservers(String updateString) {
-	   for(StateWatcher observer : observers) {
-		   observer.update(updateString);
+	   for(StateWatcher stateWatcher : stateWatchers) {
+		   stateWatcher.update(updateString);
 	   }
    }
    @Override
