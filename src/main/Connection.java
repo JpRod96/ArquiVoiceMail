@@ -64,6 +64,7 @@ public class Connection implements Observable
          mailboxMenu(key);
       else if (isMessageMenu())
          messageMenu(key);
+
    }
    
    public boolean isConnected() {
@@ -147,9 +148,7 @@ public class Connection implements Observable
       else
          accumulatedKeys += key;
    }
-   public void recibeData(String key){
-      this.dial(key);
-   }
+
 
    /**
       Try to log in the user.
@@ -288,6 +287,10 @@ public class Connection implements Observable
 	   for(Observer observer : observers) {
 		   observer.update();
 	   }
+   }
+   @Override
+   public void recibeData(String key){
+      this.dial(key);
    }
    
 }
