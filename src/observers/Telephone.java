@@ -29,8 +29,8 @@ public class Telephone implements Observer
 	}
 	
 	@Override
-	public void update() {
-		speak(observable.toString());
+	public void update(String updateString) {
+		speak(updateString);
 	}
 
    /**

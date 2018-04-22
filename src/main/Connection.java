@@ -18,7 +18,6 @@ public class Connection implements Observable
 	private String accumulatedKeys;
 	private int state;
 	private ArrayList<Observer> observers;
-	private String stringState;
 
 	private static final int DISCONNECTED = 0;
 	private static final int CONNECTED = 1;
@@ -120,8 +119,7 @@ public class Connection implements Observable
       currentRecording = "";
       accumulatedKeys = "";
       state = CONNECTED;
-      stringState=INITIAL_PROMPT;
-      notifyObservers();
+      notifyObservers(INITIAL_PROMPT);
    }
 
    /**
@@ -136,12 +134,10 @@ public class Connection implements Observable
          if (currentMailbox != null)
          {
             state = RECORDING;
-            stringState=currentMailbox.getGreeting();
-            notifyObservers();
+            notifyObservers(currentMailbox.getGreeting());
          }
          else {
-        	 stringState="Incorrect mailbox number. Try again!";
-             notifyObservers();
+             notifyObservers("Incorrect mailbox number. Try again!");
          }
          accumulatedKeys = "";
       }
@@ -161,12 +157,10 @@ public class Connection implements Observable
          if (currentMailbox.checkPasscode(accumulatedKeys))
          {
             state = MAILBOX_MENU;
-            stringState=MAILBOX_MENU_TEXT;
-            notifyObservers();
+            notifyObservers(MAILBOX_MENU_TEXT);
          }
          else {
-        	 stringState="Incorrect passcode. Try again!";
-             notifyObservers();
+             notifyObservers("Incorrect passcode. Try again!");
          }
          	
          accumulatedKeys = "";
@@ -185,8 +179,7 @@ public class Connection implements Observable
       {
          currentMailbox.setPasscode(accumulatedKeys);
          state = MAILBOX_MENU;
-         stringState=MAILBOX_MENU_TEXT;
-         notifyObservers();
+         notifyObservers(MAILBOX_MENU_TEXT);
          accumulatedKeys = "";
       }
       else
@@ -204,8 +197,7 @@ public class Connection implements Observable
          currentMailbox.setGreeting(currentRecording);
          currentRecording = "";
          state = MAILBOX_MENU;
-         stringState=MAILBOX_MENU_TEXT;
-         notifyObservers();
+         notifyObservers(MAILBOX_MENU_TEXT);
       }
    }
 
@@ -218,20 +210,17 @@ public class Connection implements Observable
       if (key.equals("1"))
       {
          state = MESSAGE_MENU;
-         stringState=MESSAGE_MENU_TEXT;
-         notifyObservers();
+         notifyObservers(MESSAGE_MENU_TEXT);
       }
       else if (key.equals("2"))
       {
          state = CHANGE_PASSCODE;
-         stringState="Enter new passcode followed by the # key";
-         notifyObservers();
+         notifyObservers("Enter new passcode followed by the # key");
       }
       else if (key.equals("3"))
       {
          state = CHANGE_GREETING;
-         stringState="Record your greeting, then press the # key";
-         notifyObservers();
+         notifyObservers("Record your greeting, then press the # key");
       }
    }
 
@@ -248,32 +237,23 @@ public class Connection implements Observable
          if (m == null) output += "No messages." + "\n";
          else output += m.getText() + "\n";
          output += MESSAGE_MENU_TEXT;
-         stringState=output;
-         notifyObservers();
+         notifyObservers(output);
       }
       else if (key.equals("2"))
       {
          currentMailbox.saveCurrentMessage();
-         stringState=MESSAGE_MENU_TEXT;
-         notifyObservers();
+         notifyObservers(MESSAGE_MENU_TEXT);
       }
       else if (key.equals("3"))
       {
          currentMailbox.removeCurrentMessage();
-         stringState=MESSAGE_MENU_TEXT;
-         notifyObservers();
+         notifyObservers(MESSAGE_MENU_TEXT);
       }
       else if (key.equals("4"))
       {
          state = MAILBOX_MENU;
-         stringState=MAILBOX_MENU_TEXT;
-         notifyObservers();
+         notifyObservers(MAILBOX_MENU_TEXT);
       }
-   }
-   
-   @Override
-   public String toString() {
-	   return stringState;
    }
    
    @Override
@@ -283,9 +263,9 @@ public class Connection implements Observable
    }
    
    @Override
-   public void notifyObservers() {
+   public void notifyObservers(String updateString) {
 	   for(Observer observer : observers) {
-		   observer.update();
+		   observer.update(updateString);
 	   }
    }
    @Override

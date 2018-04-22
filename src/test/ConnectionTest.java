@@ -30,7 +30,7 @@ public class ConnectionTest {
 
 	@Test
 	public void shouldShowInitialMessage() {
-		verify(mockedTelephone, times(1)).update();
+		verify(mockedTelephone, times(1)).update("");
 	}
 	
 	@Test
@@ -42,7 +42,7 @@ public class ConnectionTest {
 		stepsForGettingIntoMailBox(idMailBox);
 
 		assertTrue(connection.isRecording());
-		verify(mockedTelephone, times(2)).update();
+		verify(mockedTelephone, times(2)).update("");
 	}
 
 	@Test
@@ -55,7 +55,7 @@ public class ConnectionTest {
 		stepsForGettingIntoMailBoxMenu(idMailBox, keyMailBox);
 
 		assertTrue(connection.isMailBoxMenu());
-		verify(mockedTelephone, times(3)).update();
+		verify(mockedTelephone, times(3)).update("");
 	}
 
 	@Test
@@ -69,7 +69,7 @@ public class ConnectionTest {
 		stepsForGettingIntoMailboxMenuOption(idMailBox, keyMailBox, mailBoxMenuOption);
 
 		assertTrue(connection.isMessageMenu());
-		verify(mockedTelephone, times(4)).update();
+		verify(mockedTelephone, times(4)).update("");
 	}
 
 	@Test
@@ -83,7 +83,7 @@ public class ConnectionTest {
 		stepsForGettingIntoMailboxMenuOption(idMailBox, keyMailBox, mailBoxMenuOption);
 
 		assertTrue(connection.isChangePassCode());
-		verify(mockedTelephone, times(4)).update();
+		verify(mockedTelephone, times(4)).update("");
 	}
 
 	@Test
@@ -105,7 +105,7 @@ public class ConnectionTest {
 		stepsForGettingIntoMailBoxMenu(idMailBox, newKeyMailBox);
 
 		assertTrue(connection.isMessageMenu());
-		verify(mockedTelephone, times(7)).update();
+		verify(mockedTelephone, times(7)).update("");
 	}
 
 	@Test
@@ -119,7 +119,7 @@ public class ConnectionTest {
 		stepsForGettingIntoMailboxMenuOption(idMailBox, keyMailBox, mailBoxMenuOption);
 
 		assertTrue(connection.isChangeGreeting());
-		verify(mockedTelephone, times(4)).update();
+		verify(mockedTelephone, times(4)).update("");
 	}
 
 	private void stepsForGettingIntoMailBox(String mailBoxNumber){
