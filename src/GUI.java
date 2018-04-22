@@ -19,7 +19,7 @@ public class GUI extends JFrame implements Observer, ActionListener {
     public GUI(Observable observable){
             super("jp,mauri,abel");
             setContentPane(rootPanel);
-            setSize(600,400);
+            setSize(290,400);
             initializeActionButtons();
             initializeNumeralButtons();
             this.observable=observable;
