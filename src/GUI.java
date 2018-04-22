@@ -1,11 +1,11 @@
-import main.Observable;
-import observers.Observer;
+import main.Subject;
+import observers.StateWatcher;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GUI extends JFrame implements Observer, ActionListener {
+public class GUI extends JFrame implements StateWatcher, ActionListener {
     private JPanel rootPanel;
     private JButton a1Button, a2Button, a3Button, a4Button, a5Button, a6Button, a7Button, a8Button, a9Button, a0Button, qButton, hButton, actionButton;
     private JLabel labelText;
@@ -13,10 +13,10 @@ public class GUI extends JFrame implements Observer, ActionListener {
     private JButton numeralButton;
 
 
-    Observable observable;
+    Subject observable;
 
 
-    public GUI(Observable observable){
+    public GUI(Subject observable){
             super("jp,mauri,abel");
             setContentPane(rootPanel);
             setSize(290,400);

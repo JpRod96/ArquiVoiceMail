@@ -10,14 +10,14 @@ import observers.*;
  
    the phone itself is just a source of individual key presses.
 */
-public class Connection implements Observable
+public class Connection implements Subject
 {
 	private MailSystem system;
 	private Mailbox currentMailbox;
 	private String currentRecording;
 	private String accumulatedKeys;
 	private int state;
-	private ArrayList<Observer> observers;
+	private ArrayList<StateWatcher> observers;
 
 	private static final int DISCONNECTED = 0;
 	private static final int CONNECTED = 1;
@@ -257,14 +257,14 @@ public class Connection implements Observable
    }
    
    @Override
-   public void addObserver(Observer observer) {
+   public void addObserver(StateWatcher observer) {
 	   observers.add(observer);
 	   resetConnection();
    }
    
    @Override
    public void notifyObservers(String updateString) {
-	   for(Observer observer : observers) {
+	   for(StateWatcher observer : observers) {
 		   observer.update(updateString);
 	   }
    }
