@@ -14,6 +14,17 @@ public class ConnectionTest {
 	MailSystem mockedMailsystem;
     Telephone mockedTelephone;
     Connection connection;
+	private static final String INITIAL_PROMPT =
+			"Enter mailbox number followed by #";
+	private static final String MAILBOX_MENU_TEXT =
+			"Enter 1 to listen to your messages\n"
+					+ "Enter 2 to change your passcode\n"
+					+ "Enter 3 to change your greeting";
+	private static final String MESSAGE_MENU_TEXT =
+			"Enter 1 to listen to the current message\n"
+					+ "Enter 2 to save the current message\n"
+					+ "Enter 3 to delete the current message\n"
+					+ "Enter 4 to return to the main menu";
 
     @Before
 	public void init() {
@@ -30,7 +41,7 @@ public class ConnectionTest {
 
 	@Test
 	public void shouldShowInitialMessage() {
-		verify(mockedTelephone, times(1)).update("");
+		verify(mockedTelephone).update(INITIAL_PROMPT);
 	}
 	
 	@Test
@@ -42,7 +53,7 @@ public class ConnectionTest {
 		stepsForGettingIntoMailBox(idMailBox);
 
 		assertTrue(connection.isRecording());
-		verify(mockedTelephone, times(2)).update("");
+		verify(mockedTelephone).update(chosenMailbox.getGreeting());
 	}
 
 	@Test
@@ -55,7 +66,7 @@ public class ConnectionTest {
 		stepsForGettingIntoMailBoxMenu(idMailBox, keyMailBox);
 
 		assertTrue(connection.isMailBoxMenu());
-		verify(mockedTelephone, times(3)).update("");
+		verify(mockedTelephone).update(MAILBOX_MENU_TEXT);
 	}
 
 	@Test
@@ -69,7 +80,7 @@ public class ConnectionTest {
 		stepsForGettingIntoMailboxMenuOption(idMailBox, keyMailBox, mailBoxMenuOption);
 
 		assertTrue(connection.isMessageMenu());
-		verify(mockedTelephone, times(4)).update("");
+		verify(mockedTelephone).update(MESSAGE_MENU_TEXT);
 	}
 
 	@Test
@@ -83,7 +94,7 @@ public class ConnectionTest {
 		stepsForGettingIntoMailboxMenuOption(idMailBox, keyMailBox, mailBoxMenuOption);
 
 		assertTrue(connection.isChangePassCode());
-		verify(mockedTelephone, times(4)).update("");
+		verify(mockedTelephone).update("Enter new passcode followed by the # key");
 	}
 
 	@Test
@@ -105,7 +116,7 @@ public class ConnectionTest {
 		stepsForGettingIntoMailBoxMenu(idMailBox, newKeyMailBox);
 
 		assertTrue(connection.isMessageMenu());
-		verify(mockedTelephone, times(7)).update("");
+		verify(mockedTelephone, times(2)).update(MAILBOX_MENU_TEXT);
 	}
 
 	@Test
@@ -119,7 +130,7 @@ public class ConnectionTest {
 		stepsForGettingIntoMailboxMenuOption(idMailBox, keyMailBox, mailBoxMenuOption);
 
 		assertTrue(connection.isChangeGreeting());
-		verify(mockedTelephone, times(4)).update("");
+		verify(mockedTelephone).update("Record your greeting, then press the # key");
 	}
 
 	private void stepsForGettingIntoMailBox(String mailBoxNumber){
