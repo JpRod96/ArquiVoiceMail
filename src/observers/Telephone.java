@@ -1,20 +1,20 @@
 package observers;
 
 import java.util.Scanner;
-import main.Connection;
-import main.Observable;
+
+import main.Subject;
 
 /**
    A telephone that takes simulated keystrokes and voice input
    from the user and simulates spoken text.
 */
-public class Telephone implements Observer
+public class Telephone implements StateWatcher
 {
    /**
       Construct phone object.
       @param aScanner that reads text from a character-input stream
    */
-	private Observable observable;
+	private Subject observable;
 
 	public Telephone(){}
    public Telephone(Scanner aScanner)
@@ -22,7 +22,7 @@ public class Telephone implements Observer
       scanner = aScanner;
    }
    
-   public Telephone(Observable observable, Scanner aScanner) {
+   public Telephone(Subject observable, Scanner aScanner) {
         scanner = aScanner;
 		this.observable=observable;
 		observable.addObserver(this);
