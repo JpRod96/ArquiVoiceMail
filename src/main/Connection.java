@@ -64,6 +64,7 @@ public class Connection implements Observable
          mailboxMenu(key);
       else if (isMessageMenu())
          messageMenu(key);
+
    }
    
    public boolean isConnected() {
