@@ -19,7 +19,7 @@ public class GUI extends JFrame implements StateWatcher, ActionListener {
     public GUI(Subject subject){
             super("jp,mauri,abel");
             setContentPane(rootPanel);
-            setSize(290,400);
+            setSize(340,400);
             initializeActionButtons();
             initializeNumeralButtons();
             this.subject=subject;
