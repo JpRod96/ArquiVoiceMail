@@ -94,6 +94,7 @@ public class Connection implements Subject
       Record voice.
       @param voice voice spoken by the user
    */
+   @Override
    public void record(String voice)
    {
       if (state == RECORDING || state == CHANGE_GREETING)
@@ -103,6 +104,7 @@ public class Connection implements Subject
    /**
       The user hangs up the phone.
    */
+   @Override
    public void hangup()
    {
       if (state == RECORDING)
