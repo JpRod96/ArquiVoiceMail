@@ -5,7 +5,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GUI extends JFrame implements StateWatcher, ActionListener {
+public class MainWindow extends JFrame implements StateWatcher, ActionListener {
     private JPanel rootPanel;
     private JButton a1Button, a2Button, a3Button, a4Button, a5Button, a6Button, a7Button, a8Button, a9Button, a0Button, hButton, actionButton;
     private JLabel labelText;
@@ -16,7 +16,7 @@ public class GUI extends JFrame implements StateWatcher, ActionListener {
     Subject subject;
 
 
-    public GUI(Subject subject){
+    public MainWindow(Subject subject){
             super("jp,mauri,abel");
             setContentPane(rootPanel);
             setSize(340,400);

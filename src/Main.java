@@ -1,16 +1,10 @@
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 import main.Connection;
 import main.MailSystem;
-import observers.*;
 import observers.Telephone;
 
 import javax.swing.*;
-
-import static java.awt.BorderLayout.*;
 
 /**
    This program tests the mail system. A single phone
@@ -24,7 +18,7 @@ public class Main
       Scanner console = new Scanner(System.in);
       Connection connection = new Connection(system);
       Telephone telephone = new Telephone(connection, console);
-       GUI form= new GUI(connection);
+       MainWindow form= new MainWindow(connection);
        form.setVisible(true);
        form.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
       run(connection, console);
