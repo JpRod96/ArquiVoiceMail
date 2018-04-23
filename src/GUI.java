@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 
 public class GUI extends JFrame implements StateWatcher, ActionListener {
     private JPanel rootPanel;
-    private JButton a1Button, a2Button, a3Button, a4Button, a5Button, a6Button, a7Button, a8Button, a9Button, a0Button, qButton, hButton, actionButton;
+    private JButton a1Button, a2Button, a3Button, a4Button, a5Button, a6Button, a7Button, a8Button, a9Button, a0Button, hButton, actionButton;
     private JLabel labelText;
     private JTextArea userOption;
     private JButton numeralButton;
@@ -19,7 +19,7 @@ public class GUI extends JFrame implements StateWatcher, ActionListener {
     public GUI(Subject subject){
             super("jp,mauri,abel");
             setContentPane(rootPanel);
-            setSize(290,400);
+            setSize(340,400);
             initializeActionButtons();
             initializeNumeralButtons();
             this.subject=subject;
@@ -38,7 +38,7 @@ public class GUI extends JFrame implements StateWatcher, ActionListener {
         a0Button.addActionListener(this);
     }
     public void initializeActionButtons(){
-        qButton.addActionListener(this);
+
         hButton.addActionListener(this);
         actionButton.addActionListener(this);
         numeralButton.addActionListener(this);
@@ -49,6 +49,7 @@ public class GUI extends JFrame implements StateWatcher, ActionListener {
     }
 
     public void actionPerformed(ActionEvent e){
+
         if(e.getSource()==a1Button)
             userOption.setText(userOption.getText().concat("1"));
         if(e.getSource()==a2Button)
@@ -72,16 +73,25 @@ public class GUI extends JFrame implements StateWatcher, ActionListener {
         if(e.getSource()==numeralButton)
             userOption.setText(userOption.getText().concat("#"));
         if (e.getSource()==actionButton){
-            this.subject.recibeData(userOption.getText());
+
+            if(userOption.getText().length() == 1
+                    && "1234567890#".indexOf(userOption.getText()) >= 0)
+            {
+                this.subject.recibeData(userOption.getText());
+            }
+            else
+            {
+                this.subject.record(userOption.getText());
+            }
+
             userOption.setText("");
         }
         if (e.getSource()==hButton){
-            this.subject.recibeData("H");
-            userOption.setText("");
+
+            this.subject.hangup();
+
         }
-        if (e.getSource()==qButton){
-            this.dispose();
-        }
+
     }
 
 }

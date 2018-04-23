@@ -5,4 +5,8 @@ public interface Subject {
 	void addObserver(StateWatcher observer);
 	void notifyObservers(String updateString);
 	void recibeData(String key);
+
+	void hangup();
+
+	void record(String text);
 }
