@@ -55,7 +55,44 @@ public class ConnectionTest {
 		assertTrue(connection.isRecording());
 		verify(mockedTelephone).update(chosenMailbox.getGreeting());
 	}
+	@Test
+	public void shouldChangeGretting(){
 
+		String idMailBox = "1";
+		String keyMailBox = "1";
+		Mailbox chosenMailbox = new Mailbox(idMailBox, "Hola, como estas?");
+
+		when(mockedMailsystem.findMailbox(idMailBox)).thenReturn(chosenMailbox);
+		stepsForGettingIntoMailBoxMenu(idMailBox, keyMailBox);
+		connection.dial("3");
+		connection.dial("nuevo saludo");
+		connection.dial("#");
+		verify(mockedTelephone,times(2)).update(MAILBOX_MENU_TEXT);
+
+	}
+	@Test
+	public void shouldHangUp(){
+
+		String idMailBox = "1";
+		String keyMailBox = "1";
+		Mailbox chosenMailbox = new Mailbox(idMailBox, "Hola, como estas?");
+
+		when(mockedMailsystem.findMailbox(idMailBox)).thenReturn(chosenMailbox);
+		stepsForGettingIntoMailBox(idMailBox);
+		connection.dial("H");
+		verify(mockedTelephone).update("Enter mailbox number followed by #");
+
+	}
+	@Test
+	public void shouldShowIncorrectPass(){
+		String idMailBox = "1";
+		Mailbox chosenMailbox = new Mailbox(idMailBox, "Hola, como estas?");
+
+		when(mockedMailsystem.findMailbox(idMailBox)).thenReturn(chosenMailbox);
+		stepsForGettingIntoMailBox(idMailBox);
+		connection.dial("#");
+		verify(mockedTelephone).update("Incorrect passcode. Try again!");
+	}
 	@Test
 	public void shouldGetIntoMailBoxMenu() {
 		String idMailBox = "1";
