@@ -12,6 +12,7 @@ import observers.*;
 */
 public class Connection
 {
+    private ConnectionState _state;
 	public MailSystem system;
 	public Mailbox currentMailbox;
 	private String currentRecording;
@@ -43,6 +44,10 @@ public class Connection
    {
       system = s;
       stateWatchers= new ArrayList<>();
+      _state = new Connected();
+   }
+   private void changeState(ConnectionState c){
+       _state=c;
    }
 
    /**
@@ -52,7 +57,8 @@ public class Connection
    public void dial(String key)
    {
       if (isConnected())
-         connect(key);
+         //connect(key);
+         _state.dial(key,this);
       else if (isRecording())
          login(key);
       else if (isChangePassCode())
