@@ -145,7 +145,7 @@ public class Connection
       if (_state instanceof MailBoxMenuState) {
          if (key.equals("#")) {
             currentMailbox.setPasscode(accumulatedKeys);
-            changeState(new MailBoxMenuState());
+            state = MAILBOX_MENU;
 
             notifyObservers(MAILBOX_MENU_TEXT);
             accumulatedKeys = "";
@@ -164,10 +164,10 @@ public class Connection
          if (key.equals("#")) {
             currentMailbox.setGreeting(currentRecording);
             currentRecording = "";
-            changeState(new MailBoxMenuState());
+            state = MAILBOX_MENU;
             notifyObservers(MAILBOX_MENU_TEXT);
          }
-      }
+     }
    }
 
    /**
@@ -197,7 +197,7 @@ public class Connection
             currentMailbox.removeCurrentMessage();
             notifyObservers(MESSAGE_MENU_TEXT);
          } else if (key.equals("4")) {
-            changeState(new MailBoxMenuState());
+            state = MAILBOX_MENU;
             notifyObservers(MAILBOX_MENU_TEXT);
          }
       }
