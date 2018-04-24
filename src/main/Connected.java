@@ -8,7 +8,8 @@ public class Connected implements ConnectionState {
             connection.currentMailbox = connection.system.findMailbox(connection.accumulatedKeys);
             if (connection.currentMailbox != null)
             {
-                connection.state = Connection.RECORDING;
+                //connection.state = Connection.RECORDING;
+                changeState(connection,new Recording());
                 connection.notifyObservers(connection.currentMailbox.getGreeting());
             }
             else {
@@ -21,7 +22,7 @@ public class Connected implements ConnectionState {
     }
 
     @Override
-    public void changeState(Connection c) {
-
+    public void changeState(Connection connection, ConnectionState connectionState) {
+        connection.changeState(connectionState);
     }
 }

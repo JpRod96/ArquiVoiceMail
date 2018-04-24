@@ -23,18 +23,18 @@ public class Connection
 	private static final int DISCONNECTED = 0;
 	private static final int CONNECTED = 1;
 	public static final int RECORDING = 2;
-	private static final int MAILBOX_MENU = 3;
-	private static final int MESSAGE_MENU = 4;
+	public static final int MAILBOX_MENU = 3;
+	public static final int MESSAGE_MENU = 4;
 	private static final int CHANGE_PASSCODE = 5;
 	private static final int CHANGE_GREETING = 6;
 
 	private static final String INITIAL_PROMPT = 
 	      "Enter mailbox number followed by #";      
-	private static final String MAILBOX_MENU_TEXT = 
+	public static final String MAILBOX_MENU_TEXT =
 	      "Enter 1 to listen to your messages\n"
 	      + "Enter 2 to change your passcode\n"
 	      + "Enter 3 to change your greeting";
-	private static final String MESSAGE_MENU_TEXT = 
+	public static final String MESSAGE_MENU_TEXT =
 	      "Enter 1 to listen to the current message\n"
 	      + "Enter 2 to save the current message\n"
 	      + "Enter 3 to delete the current message\n"
@@ -46,7 +46,7 @@ public class Connection
       stateWatchers= new ArrayList<>();
       _state = new Connected();
    }
-   private void changeState(ConnectionState c){
+   public void changeState(ConnectionState c){
        _state=c;
    }
 
@@ -57,27 +57,28 @@ public class Connection
    public void dial(String key)
    {
       if (isConnected())
-         //connect(key);
          _state.dial(key,this);
       else if (isRecording())
-         login(key);
+         _state.dial(key, this);
       else if (isChangePassCode())
          changePasscode(key);
       else if (isChangeGreeting())
          changeGreeting(key);
       else if (isMailBoxMenu())
-         mailboxMenu(key);
+          mailboxMenu(key);
       else if (isMessageMenu())
          messageMenu(key);
 
    }
    
    public boolean isConnected() {
-	   return state==CONNECTED;
+	   //return state==CONNECTED;
+       return _state instanceof Connected;
    }
    
    public boolean isRecording() {
-	   return state==RECORDING;
+	   //return state==RECORDING;
+	    return _state instanceof  Recording;
    }
 
    public boolean isChangePassCode() {
@@ -102,7 +103,7 @@ public class Connection
    */
    public void record(String voice)
    {
-      if (state == RECORDING || state == CHANGE_GREETING)
+      if (_state instanceof Recording || state == CHANGE_GREETING)
          currentRecording += voice;
    }
 
@@ -111,7 +112,7 @@ public class Connection
    */
    public void hangup()
    {
-      if (state == RECORDING)
+      if (_state instanceof Recording)
          currentMailbox.addMessage(new Message(currentRecording));
       resetConnection();
    }
@@ -124,7 +125,8 @@ public class Connection
    {
       currentRecording = "";
       accumulatedKeys = "";
-      state = CONNECTED;
+      //state = CONNECTED;
+       changeState(new Connected());
       notifyObservers(INITIAL_PROMPT);
    }
 
@@ -132,50 +134,9 @@ public class Connection
       Try to connect the user with the specified mailbox.
       @param key the phone key pressed by the user
    */
-   private void connect(String key)
-   {
-      if (key.equals("#"))
-      {
-         currentMailbox = system.findMailbox(accumulatedKeys);
-         if (currentMailbox != null)
-         {
-            state = RECORDING;
-            notifyObservers(currentMailbox.getGreeting());
-         }
-         else {
-             notifyObservers("Incorrect mailbox number. Try again!");
-         }
-         accumulatedKeys = "";
-      }
-      else
-         accumulatedKeys += key;
-   }
 
 
-   /**
-      Try to log in the user.
-      @param key the phone key pressed by the user
-   */
-   private void login(String key)
-   {
-      if (key.equals("#"))
-      {
-         if (currentMailbox.checkPasscode(accumulatedKeys))
-         {
-            state = MAILBOX_MENU;
-            notifyObservers(MAILBOX_MENU_TEXT);
-         }
-         else {
-             notifyObservers("Incorrect passcode. Try again!");
-         }
-         	
-         accumulatedKeys = "";
-      }
-      else
-         accumulatedKeys += key;
-   }
-
-   /**
+    /**
       Change passcode.
       @param key the phone key pressed by the user
    */
