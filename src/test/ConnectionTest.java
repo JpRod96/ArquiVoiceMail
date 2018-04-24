@@ -79,8 +79,8 @@ public class ConnectionTest {
 
 		when(mockedMailsystem.findMailbox(idMailBox)).thenReturn(chosenMailbox);
 		stepsForGettingIntoMailBox(idMailBox);
-		connection.dial("H");
-		verify(mockedTelephone).update("Enter mailbox number followed by #");
+		connection.hangup();
+		verify(mockedTelephone,times(2)).update("Enter mailbox number followed by #");
 
 	}
 	@Test
