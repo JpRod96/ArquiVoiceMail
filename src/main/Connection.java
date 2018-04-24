@@ -12,16 +12,16 @@ import observers.*;
 */
 public class Connection
 {
-	private MailSystem system;
-	private Mailbox currentMailbox;
+	public MailSystem system;
+	public Mailbox currentMailbox;
 	private String currentRecording;
-	private String accumulatedKeys;
-	private int state;
+	public String accumulatedKeys;
+	public int state;
 	private ArrayList<StateWatcher> stateWatchers;
 
 	private static final int DISCONNECTED = 0;
 	private static final int CONNECTED = 1;
-	private static final int RECORDING = 2;
+	public static final int RECORDING = 2;
 	private static final int MAILBOX_MENU = 3;
 	private static final int MESSAGE_MENU = 4;
 	private static final int CHANGE_PASSCODE = 5;
