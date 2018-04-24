@@ -79,8 +79,8 @@ public class ConnectionTest {
 
 		when(mockedMailsystem.findMailbox(idMailBox)).thenReturn(chosenMailbox);
 		stepsForGettingIntoMailBox(idMailBox);
-		connection.dial("H");
-		verify(mockedTelephone).update("Enter mailbox number followed by #");
+		connection.hangup();
+		verify(mockedTelephone,times(2)).update("Enter mailbox number followed by #");
 
 	}
 	@Test
@@ -107,6 +107,42 @@ public class ConnectionTest {
 	}
 
 	@Test
+	 public void shouldAccessUsingRecibeMethod(){
+		String idMailBox = "1";
+		Mailbox chosenMailbox = new Mailbox(idMailBox, "Hola, como estas?");
+
+		when(mockedMailsystem.findMailbox(idMailBox)).thenReturn(chosenMailbox);
+		connection.recibeData(idMailBox);
+		verify(mockedTelephone).update("Enter mailbox number followed by #");
+	}
+	@Test
+	public void shouldQuitFromMessageMenu() {
+		String idMailBox = "1";
+		String keyMailBox = "1";
+		String mailBoxMenuOption = "1";
+		Mailbox chosenMailbox = new Mailbox(idMailBox, "Hola, como estas?");
+
+		when(mockedMailsystem.findMailbox(idMailBox)).thenReturn(chosenMailbox);
+		stepsForGettingIntoMailboxMenuOption(idMailBox, keyMailBox, mailBoxMenuOption);
+		connection.dial("4");
+		assertTrue(connection.isMailBoxMenu());
+		verify(mockedTelephone,times(2)).update(MAILBOX_MENU_TEXT);
+	}
+
+	@Test
+	public void shouldRemoveActualMessage() {
+		String idMailBox = "1";
+		String keyMailBox = "1";
+		String mailBoxMenuOption = "1";
+		Mailbox chosenMailbox = new Mailbox(idMailBox, "Hola, como estas?");
+
+		when(mockedMailsystem.findMailbox(idMailBox)).thenReturn(chosenMailbox);
+		stepsForGettingIntoMailboxMenuOption(idMailBox, keyMailBox, mailBoxMenuOption);
+		connection.dial("3");
+		assertTrue(connection.isMessageMenu());
+		verify(mockedTelephone,times(2)).update(MESSAGE_MENU_TEXT );
+	}
+	@Test
 	public void shouldGetIntoMessageMenu() {
 		String idMailBox = "1";
 		String keyMailBox = "1";
@@ -119,7 +155,6 @@ public class ConnectionTest {
 		assertTrue(connection.isMessageMenu());
 		verify(mockedTelephone).update(MESSAGE_MENU_TEXT);
 	}
-
 	@Test
 	public void shouldGetIntoChangePassCodeMenu() {
 		String idMailBox = "1";
