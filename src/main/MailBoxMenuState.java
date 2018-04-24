@@ -9,7 +9,7 @@ public class MailBoxMenuState implements ConnectionState {
 
             if (key.equals("1"))
             {
-                connection.state = connection.MESSAGE_MENU;
+                changeState(connection,new MessageMenuState());
                 connection.notifyObservers(connection.MESSAGE_MENU_TEXT);
             }
             else if (key.equals("2"))

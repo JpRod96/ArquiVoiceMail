@@ -67,7 +67,7 @@ public class Connection
       else if (isMailBoxMenu())
           _state.dial(key,this);
       else if (isMessageMenu())
-         messageMenu(key);
+         _state.dial(key,this);
 
    }
    
@@ -94,7 +94,7 @@ public class Connection
    }
    
    public boolean isMessageMenu() {
-	   return state == MESSAGE_MENU;
+      return _state instanceof MessageMenuState;
    }
    
    /**
@@ -145,7 +145,7 @@ public class Connection
       if (_state instanceof MailBoxMenuState) {
          if (key.equals("#")) {
             currentMailbox.setPasscode(accumulatedKeys);
-            state = MAILBOX_MENU;
+            changeState(new MailBoxMenuState());
 
             notifyObservers(MAILBOX_MENU_TEXT);
             accumulatedKeys = "";
@@ -164,7 +164,7 @@ public class Connection
          if (key.equals("#")) {
             currentMailbox.setGreeting(currentRecording);
             currentRecording = "";
-            state = MAILBOX_MENU;
+            changeState(new MessageMenuState());
             notifyObservers(MAILBOX_MENU_TEXT);
          }
      }
@@ -180,28 +180,7 @@ public class Connection
       Respond to the user's selection from message menu.
       @param key the phone key pressed by the user
    */
-   private void messageMenu(String key)
-   {
-      if (_state instanceof MailBoxMenuState) {
-         if (key.equals("1")) {
-            String output = "";
-            Message m = currentMailbox.getCurrentMessage();
-            if (m == null) output += "No messages." + "\n";
-            else output += m.getText() + "\n";
-            output += MESSAGE_MENU_TEXT;
-            notifyObservers(output);
-         } else if (key.equals("2")) {
-            currentMailbox.saveCurrentMessage();
-            notifyObservers(MESSAGE_MENU_TEXT);
-         } else if (key.equals("3")) {
-            currentMailbox.removeCurrentMessage();
-            notifyObservers(MESSAGE_MENU_TEXT);
-         } else if (key.equals("4")) {
-            state = MAILBOX_MENU;
-            notifyObservers(MAILBOX_MENU_TEXT);
-         }
-      }
-   }
+
    
    public void addObserver(StateWatcher stateWatcher) {
 	   stateWatchers.add(stateWatcher);
