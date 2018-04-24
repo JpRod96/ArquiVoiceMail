@@ -7,8 +7,8 @@ public class Recording implements ConnectionState {
         {
             if (connection.currentMailbox.checkPasscode(connection.accumulatedKeys))
             {
-                connection.state = Connection.MAILBOX_MENU;
-                changeState(connection,null);
+                changeState(connection,new MailBoxMenuState());
+                
                 connection.notifyObservers(Connection.MAILBOX_MENU_TEXT);
             }
             else {

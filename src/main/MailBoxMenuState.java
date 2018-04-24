@@ -9,19 +9,22 @@ public class MailBoxMenuState implements ConnectionState {
 
             if (key.equals("1"))
             {
-               // state = MESSAGE_MENU;
+                connection.state = connection.MESSAGE_MENU;
                 connection.notifyObservers(connection.MESSAGE_MENU_TEXT);
             }
             else if (key.equals("2"))
             {
                 connection.state=connection.CHANGE_PASSCODE;
-                changeState(connection,null);
                 connection.notifyObservers("Enter new passcode followed by the # key");
             }
             else if (key.equals("3"))
             {
-                state = CHANGE_GREETING;
-                notifyObservers("Record your greeting, then press the # key");
+                connection.state=connection.CHANGE_GREETING;
+                connection.notifyObservers("Record your greeting, then press the # key");
             }
+    }
+    @Override
+    public void changeState(Connection connection, ConnectionState connectionState) {
+        connection.changeState(connectionState);
     }
 }
