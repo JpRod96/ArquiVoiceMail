@@ -25,8 +25,8 @@ public class Connection
 	public static final int RECORDING = 2;
 	public static final int MAILBOX_MENU = 3;
 	public static final int MESSAGE_MENU = 4;
-	private static final int CHANGE_PASSCODE = 5;
-	private static final int CHANGE_GREETING = 6;
+	public static final int CHANGE_PASSCODE = 5;
+	public static final int CHANGE_GREETING = 6;
 
 	private static final String INITIAL_PROMPT = 
 	      "Enter mailbox number followed by #";      
@@ -65,7 +65,7 @@ public class Connection
       else if (isChangeGreeting())
          changeGreeting(key);
       else if (isMailBoxMenu())
-          mailboxMenu(key);
+          _state.dial(key,this);
       else if (isMessageMenu())
          messageMenu(key);
 
@@ -90,7 +90,7 @@ public class Connection
    }
    
    public boolean isMailBoxMenu() {
-	   return state == MAILBOX_MENU;
+	   return _state instanceof MailBoxMenuState;
    }
    
    public boolean isMessageMenu() {
@@ -142,15 +142,16 @@ public class Connection
    */
    private void changePasscode(String key)
    {
-      if (key.equals("#"))
-      {
-         currentMailbox.setPasscode(accumulatedKeys);
-         state = MAILBOX_MENU;
-         notifyObservers(MAILBOX_MENU_TEXT);
-         accumulatedKeys = "";
+      if (_state instanceof MailBoxMenuState) {
+         if (key.equals("#")) {
+            currentMailbox.setPasscode(accumulatedKeys);
+            state = MAILBOX_MENU;
+
+            notifyObservers(MAILBOX_MENU_TEXT);
+            accumulatedKeys = "";
+         } else
+            accumulatedKeys += key;
       }
-      else
-         accumulatedKeys += key;
    }
 
    /**
@@ -159,37 +160,21 @@ public class Connection
    */
    private void changeGreeting(String key)
    {
-      if (key.equals("#"))
-      {
-         currentMailbox.setGreeting(currentRecording);
-         currentRecording = "";
-         state = MAILBOX_MENU;
-         notifyObservers(MAILBOX_MENU_TEXT);
-      }
+      if (_state instanceof MailBoxMenuState) {
+         if (key.equals("#")) {
+            currentMailbox.setGreeting(currentRecording);
+            currentRecording = "";
+            state = MAILBOX_MENU;
+            notifyObservers(MAILBOX_MENU_TEXT);
+         }
+     }
    }
 
    /**
       Respond to the user's selection from mailbox menu.
       @param key the phone key pressed by the user
    */
-   private void mailboxMenu(String key)
-   {
-      if (key.equals("1"))
-      {
-         state = MESSAGE_MENU;
-         notifyObservers(MESSAGE_MENU_TEXT);
-      }
-      else if (key.equals("2"))
-      {
-         state = CHANGE_PASSCODE;
-         notifyObservers("Enter new passcode followed by the # key");
-      }
-      else if (key.equals("3"))
-      {
-         state = CHANGE_GREETING;
-         notifyObservers("Record your greeting, then press the # key");
-      }
-   }
+
 
    /**
       Respond to the user's selection from message menu.
@@ -197,29 +182,24 @@ public class Connection
    */
    private void messageMenu(String key)
    {
-      if (key.equals("1"))
-      {
-         String output = "";
-         Message m = currentMailbox.getCurrentMessage();
-         if (m == null) output += "No messages." + "\n";
-         else output += m.getText() + "\n";
-         output += MESSAGE_MENU_TEXT;
-         notifyObservers(output);
-      }
-      else if (key.equals("2"))
-      {
-         currentMailbox.saveCurrentMessage();
-         notifyObservers(MESSAGE_MENU_TEXT);
-      }
-      else if (key.equals("3"))
-      {
-         currentMailbox.removeCurrentMessage();
-         notifyObservers(MESSAGE_MENU_TEXT);
-      }
-      else if (key.equals("4"))
-      {
-         state = MAILBOX_MENU;
-         notifyObservers(MAILBOX_MENU_TEXT);
+      if (_state instanceof MailBoxMenuState) {
+         if (key.equals("1")) {
+            String output = "";
+            Message m = currentMailbox.getCurrentMessage();
+            if (m == null) output += "No messages." + "\n";
+            else output += m.getText() + "\n";
+            output += MESSAGE_MENU_TEXT;
+            notifyObservers(output);
+         } else if (key.equals("2")) {
+            currentMailbox.saveCurrentMessage();
+            notifyObservers(MESSAGE_MENU_TEXT);
+         } else if (key.equals("3")) {
+            currentMailbox.removeCurrentMessage();
+            notifyObservers(MESSAGE_MENU_TEXT);
+         } else if (key.equals("4")) {
+            state = MAILBOX_MENU;
+            notifyObservers(MAILBOX_MENU_TEXT);
+         }
       }
    }
    

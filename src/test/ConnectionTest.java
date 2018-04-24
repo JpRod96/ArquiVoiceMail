@@ -126,7 +126,7 @@ public class ConnectionTest {
 		stepsForGettingIntoMailboxMenuOption(idMailBox, keyMailBox, mailBoxMenuOption);
 		connection.dial("4");
 		assertTrue(connection.isMailBoxMenu());
-		verify(mockedTelephone,times(2)).update(MAILBOX_MENU_TEXT);
+		verify(mockedTelephone).update(MAILBOX_MENU_TEXT);
 	}
 
 	@Test
@@ -139,8 +139,8 @@ public class ConnectionTest {
 		when(mockedMailsystem.findMailbox(idMailBox)).thenReturn(chosenMailbox);
 		stepsForGettingIntoMailboxMenuOption(idMailBox, keyMailBox, mailBoxMenuOption);
 		connection.dial("3");
-		assertTrue(connection.isMessageMenu());
-		verify(mockedTelephone,times(2)).update(MESSAGE_MENU_TEXT );
+		assertTrue(connection.isMailBoxMenu());
+		verify(mockedTelephone).update(MAILBOX_MENU_TEXT );
 	}
 	@Test
 	public void shouldGetIntoMessageMenu() {
@@ -187,8 +187,8 @@ public class ConnectionTest {
 
 		stepsForGettingIntoMailBoxMenu(idMailBox, newKeyMailBox);
 
-		assertTrue(connection.isMessageMenu());
-		verify(mockedTelephone, times(2)).update(MAILBOX_MENU_TEXT);
+		assertTrue(connection.isMailBoxMenu());
+		verify(mockedTelephone,times(3)).update(MAILBOX_MENU_TEXT);
 	}
 
 	@Test
