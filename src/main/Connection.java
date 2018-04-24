@@ -19,13 +19,13 @@ public class Connection
 	public int state;
 	private ArrayList<StateWatcher> stateWatchers;
 
-	private static final int DISCONNECTED = 0;
+	/*private static final int DISCONNECTED = 0;
 	private static final int CONNECTED = 1;
 	public static final int RECORDING = 2;
 	public static final int MAILBOX_MENU = 3;
 	public static final int MESSAGE_MENU = 4;
 	public static final int CHANGE_PASSCODE = 5;
-	//private static final int CHANGE_GREETING = 6;
+	private static final int CHANGE_GREETING = 6;*/
 
 	private static final String INITIAL_PROMPT = 
 	      "Enter mailbox number followed by #";      
@@ -130,25 +130,6 @@ public class Connection
        changeState(new Connected());
       notifyObservers(INITIAL_PROMPT);
    }
-
-   /**
-
-   }
-   }
-      Respond to the user's selection from mailbox menu.
-      @param key the phone key pressed by the user
-   */
-
-         //state = CHANGE_PASSCODE;
-         _state=new ChangePassCode();
-         //state = CHANGE_GREETING;
-         _state=new ChangeGreeting();
-
-   /**
-      Respond to the user's selection from message menu.
-      @param key the phone key pressed by the user
-   */
-
    
    public void addObserver(StateWatcher stateWatcher) {
 	   stateWatchers.add(stateWatcher);
