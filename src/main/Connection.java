@@ -25,8 +25,8 @@ public class Connection
 	public static final int RECORDING = 2;
 	public static final int MAILBOX_MENU = 3;
 	public static final int MESSAGE_MENU = 4;
-	private static final int CHANGE_PASSCODE = 5;
-	private static final int CHANGE_GREETING = 6;
+	public static final int CHANGE_PASSCODE = 5;
+	public static final int CHANGE_GREETING = 6;
 
 	private static final String INITIAL_PROMPT = 
 	      "Enter mailbox number followed by #";      

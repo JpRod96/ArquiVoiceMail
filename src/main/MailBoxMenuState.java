@@ -6,15 +6,17 @@ package main;
 public class MailBoxMenuState implements ConnectionState {
     @Override
     public void dial (String key, Connection connection){
+
             if (key.equals("1"))
             {
                // state = MESSAGE_MENU;
-                notifyObservers(MESSAGE_MENU_TEXT);
+                connection.notifyObservers(connection.MESSAGE_MENU_TEXT);
             }
             else if (key.equals("2"))
             {
-                state = CHANGE_PASSCODE;
-                notifyObservers("Enter new passcode followed by the # key");
+                connection.state=connection.CHANGE_PASSCODE;
+                changeState(connection,null);
+                connection.notifyObservers("Enter new passcode followed by the # key");
             }
             else if (key.equals("3"))
             {
