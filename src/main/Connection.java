@@ -16,16 +16,7 @@ public class Connection
 	public Mailbox currentMailbox;
 	public String currentRecording;
 	public String accumulatedKeys;
-	public int state;
 	private ArrayList<StateWatcher> stateWatchers;
-
-	/*private static final int DISCONNECTED = 0;
-	private static final int CONNECTED = 1;
-	public static final int RECORDING = 2;
-	public static final int MAILBOX_MENU = 3;
-	public static final int MESSAGE_MENU = 4;
-	public static final int CHANGE_PASSCODE = 5;
-	private static final int CHANGE_GREETING = 6;*/
 
 	private static final String INITIAL_PROMPT = 
 	      "Enter mailbox number followed by #";      
@@ -55,38 +46,22 @@ public class Connection
    */
    public void dial(String key)
    {
-      if (isConnected())
-         _state.dial(key,this);
-      else if (isRecording())
-         _state.dial(key, this);
-      else if (isChangePassCode())
-         _state.dial(key,this);
-      else if (isChangeGreeting())
-         _state.dial(key,this);
-      else if (isMailBoxMenu())
-          _state.dial(key,this);
-      else if (isMessageMenu())
-         _state.dial(key,this);
-
+      _state.dial(key,this);
    }
    
    public boolean isConnected() {
-	   //return state==CONNECTED;
        return _state instanceof Connected;
    }
    
    public boolean isRecording() {
-	   //return state==RECORDING;
 	    return _state instanceof  Recording;
    }
 
    public boolean isChangePassCode() {
-	   //return state == CHANGE_PASSCODE;
       return _state instanceof  ChangePassCode;
    }
    
    public boolean isChangeGreeting() {
-	   //return state == CHANGE_GREETING;
       return _state instanceof  ChangeGreeting;
    }
    
@@ -126,8 +101,7 @@ public class Connection
    {
       currentRecording = "";
       accumulatedKeys = "";
-      //state = CONNECTED;
-       changeState(new Connected());
+      changeState(new Connected());
       notifyObservers(INITIAL_PROMPT);
    }
    

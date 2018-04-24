@@ -14,13 +14,11 @@ public class MailBoxMenuState implements ConnectionState {
             }
             else if (key.equals("2"))
             {
-                //connection.state=connection.CHANGE_PASSCODE;
                 changeState(connection,new ChangePassCode());
                 connection.notifyObservers("Enter new passcode followed by the # key");
             }
             else if (key.equals("3"))
             {
-                //connection.state=connection.CHANGE_GREETING;
                 changeState(connection, new ChangeGreeting());
                 connection.notifyObservers("Record your greeting, then press the # key");
             }
