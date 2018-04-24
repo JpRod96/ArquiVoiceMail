@@ -126,7 +126,7 @@ public class ConnectionTest {
 		stepsForGettingIntoMailboxMenuOption(idMailBox, keyMailBox, mailBoxMenuOption);
 		connection.dial("4");
 		assertTrue(connection.isMailBoxMenu());
-		verify(mockedTelephone,times(2)).update(MAILBOX_MENU_TEXT);
+		verify(mockedTelephone).update(MAILBOX_MENU_TEXT);
 	}
 
 	@Test
