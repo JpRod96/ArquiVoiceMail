@@ -188,7 +188,11 @@ public class ConnectionTest {
 		stepsForGettingIntoMailBoxMenu(idMailBox, newKeyMailBox);
 
 		assertTrue(connection.isMailBoxMenu());
+<<<<<<< HEAD
 		verify(mockedTelephone, times(4)).update(MAILBOX_MENU_TEXT);
+=======
+		verify(mockedTelephone,times(4)).update(MAILBOX_MENU_TEXT);
+>>>>>>> 07532b617b12d8cd051fe0a731977faacfdceeae
 	}
 
 	@Test

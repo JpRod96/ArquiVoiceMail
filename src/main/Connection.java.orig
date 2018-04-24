@@ -24,8 +24,13 @@ public class Connection
 	public static final int RECORDING = 2;
 	public static final int MAILBOX_MENU = 3;
 	public static final int MESSAGE_MENU = 4;
-	public static final int CHANGE_PASSCODE = 5;
+<<<<<<< HEAD
+	private static final int CHANGE_PASSCODE = 5;
 	//private static final int CHANGE_GREETING = 6;
+=======
+	public static final int CHANGE_PASSCODE = 5;
+	public static final int CHANGE_GREETING = 6;
+>>>>>>> 07532b617b12d8cd051fe0a731977faacfdceeae
 
 	private static final String INITIAL_PROMPT = 
 	      "Enter mailbox number followed by #";      
@@ -132,17 +137,76 @@ public class Connection
    }
 
    /**
+<<<<<<< HEAD
+      Respond to the user's selection from mailbox menu.
+      @param key the phone key pressed by the user
+   */
+   private void mailboxMenu(String key)
+   {
+      if (key.equals("1"))
+      {
+         state = MESSAGE_MENU;
+         notifyObservers(MESSAGE_MENU_TEXT);
+      }
+      else if (key.equals("2"))
+      {
+         //state = CHANGE_PASSCODE;
+         _state=new ChangePassCode();
+         notifyObservers("Enter new passcode followed by the # key");
+      }
+      else if (key.equals("3"))
+      {
+         //state = CHANGE_GREETING;
+         _state=new ChangeGreeting();
+         notifyObservers("Record your greeting, then press the # key");
+      }
+   }
+=======
+      Try to connect the user with the specified mailbox.
+      @param key the phone key pressed by the user
+   */
 
+
+    /**
+      Change passcode.
+      @param key the phone key pressed by the user
+   */
+   private void changePasscode(String key)
+   {
+      if (_state instanceof MailBoxMenuState) {
+         if (key.equals("#")) {
+            currentMailbox.setPasscode(accumulatedKeys);
+            changeState(new MailBoxMenuState());
+
+            notifyObservers(MAILBOX_MENU_TEXT);
+            accumulatedKeys = "";
+         } else
+            accumulatedKeys += key;
+      }
    }
+
+   /**
+      Change greeting.
+      @param key the phone key pressed by the user
+   */
+   private void changeGreeting(String key)
+   {
+      if (_state instanceof MailBoxMenuState) {
+         if (key.equals("#")) {
+            currentMailbox.setGreeting(currentRecording);
+            currentRecording = "";
+            changeState(new MessageMenuState());
+            notifyObservers(MAILBOX_MENU_TEXT);
+         }
+     }
    }
+
+   /**
       Respond to the user's selection from mailbox menu.
       @param key the phone key pressed by the user
    */
 
-         //state = CHANGE_PASSCODE;
-         _state=new ChangePassCode();
-         //state = CHANGE_GREETING;
-         _state=new ChangeGreeting();
+>>>>>>> 07532b617b12d8cd051fe0a731977faacfdceeae
 
    /**
       Respond to the user's selection from message menu.
