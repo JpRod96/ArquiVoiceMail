@@ -172,24 +172,7 @@ public class Connection
       Respond to the user's selection from mailbox menu.
       @param key the phone key pressed by the user
    */
-   private void mailboxMenu(String key)
-   {
-      if (key.equals("1"))
-      {
-         state = MESSAGE_MENU;
-         notifyObservers(MESSAGE_MENU_TEXT);
-      }
-      else if (key.equals("2"))
-      {
-         state = CHANGE_PASSCODE;
-         notifyObservers("Enter new passcode followed by the # key");
-      }
-      else if (key.equals("3"))
-      {
-         state = CHANGE_GREETING;
-         notifyObservers("Record your greeting, then press the # key");
-      }
-   }
+
 
    /**
       Respond to the user's selection from message menu.
