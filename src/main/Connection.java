@@ -3,7 +3,6 @@ import java.util.ArrayList;
 
 import observers.*;
 
-//organizar
 /**
    Connects a phone to the mail system. The purpose of this
    class is to keep track of the state of a connection, sinc
@@ -15,7 +14,7 @@ public class Connection
     private ConnectionState _state;
 	public MailSystem system;
 	public Mailbox currentMailbox;
-	private String currentRecording;
+	public String currentRecording;
 	public String accumulatedKeys;
 	public int state;
 	private ArrayList<StateWatcher> stateWatchers;
@@ -26,7 +25,7 @@ public class Connection
 	public static final int MAILBOX_MENU = 3;
 	public static final int MESSAGE_MENU = 4;
 	private static final int CHANGE_PASSCODE = 5;
-	private static final int CHANGE_GREETING = 6;
+	//private static final int CHANGE_GREETING = 6;
 
 	private static final String INITIAL_PROMPT = 
 	      "Enter mailbox number followed by #";      
@@ -61,9 +60,9 @@ public class Connection
       else if (isRecording())
          _state.dial(key, this);
       else if (isChangePassCode())
-         changePasscode(key);
+         _state.dial(key,this);
       else if (isChangeGreeting())
-         changeGreeting(key);
+         _state.dial(key,this);
       else if (isMailBoxMenu())
           mailboxMenu(key);
       else if (isMessageMenu())
@@ -82,11 +81,13 @@ public class Connection
    }
 
    public boolean isChangePassCode() {
-	   return state == CHANGE_PASSCODE;
+	   //return state == CHANGE_PASSCODE;
+      return _state instanceof  ChangePassCode;
    }
    
    public boolean isChangeGreeting() {
-	   return state == CHANGE_GREETING;
+	   //return state == CHANGE_GREETING;
+      return _state instanceof  ChangeGreeting;
    }
    
    public boolean isMailBoxMenu() {
@@ -103,7 +104,7 @@ public class Connection
    */
    public void record(String voice)
    {
-      if (_state instanceof Recording || state == CHANGE_GREETING)
+      if (_state instanceof Recording || _state instanceof ChangeGreeting)
          currentRecording += voice;
    }
 
@@ -131,44 +132,6 @@ public class Connection
    }
 
    /**
-      Try to connect the user with the specified mailbox.
-      @param key the phone key pressed by the user
-   */
-
-
-    /**
-      Change passcode.
-      @param key the phone key pressed by the user
-   */
-   private void changePasscode(String key)
-   {
-      if (key.equals("#"))
-      {
-         currentMailbox.setPasscode(accumulatedKeys);
-         state = MAILBOX_MENU;
-         notifyObservers(MAILBOX_MENU_TEXT);
-         accumulatedKeys = "";
-      }
-      else
-         accumulatedKeys += key;
-   }
-
-   /**
-      Change greeting.
-      @param key the phone key pressed by the user
-   */
-   private void changeGreeting(String key)
-   {
-      if (key.equals("#"))
-      {
-         currentMailbox.setGreeting(currentRecording);
-         currentRecording = "";
-         state = MAILBOX_MENU;
-         notifyObservers(MAILBOX_MENU_TEXT);
-      }
-   }
-
-   /**
       Respond to the user's selection from mailbox menu.
       @param key the phone key pressed by the user
    */
@@ -181,12 +144,14 @@ public class Connection
       }
       else if (key.equals("2"))
       {
-         state = CHANGE_PASSCODE;
+         //state = CHANGE_PASSCODE;
+         _state=new ChangePassCode();
          notifyObservers("Enter new passcode followed by the # key");
       }
       else if (key.equals("3"))
       {
-         state = CHANGE_GREETING;
+         //state = CHANGE_GREETING;
+         _state=new ChangeGreeting();
          notifyObservers("Record your greeting, then press the # key");
       }
    }
