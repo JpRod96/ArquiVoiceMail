@@ -10,7 +10,7 @@ import observers.*;
  
    the phone itself is just a source of individual key presses.
 */
-public class Connection implements Subject
+public class Connection
 {
 	private MailSystem system;
 	private Mailbox currentMailbox;
@@ -94,7 +94,6 @@ public class Connection implements Subject
       Record voice.
       @param voice voice spoken by the user
    */
-   @Override
    public void record(String voice)
    {
       if (state == RECORDING || state == CHANGE_GREETING)
@@ -104,7 +103,6 @@ public class Connection implements Subject
    /**
       The user hangs up the phone.
    */
-   @Override
    public void hangup()
    {
       if (state == RECORDING)
@@ -258,19 +256,16 @@ public class Connection implements Subject
       }
    }
    
-   @Override
    public void addObserver(StateWatcher stateWatcher) {
 	   stateWatchers.add(stateWatcher);
 	   resetConnection();
    }
    
-   @Override
    public void notifyObservers(String updateString) {
 	   for(StateWatcher stateWatcher : stateWatchers) {
 		   stateWatcher.update(updateString);
 	   }
    }
-   @Override
    public void recibeData(String key){
       this.dial(key);
    }

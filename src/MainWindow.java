@@ -1,4 +1,4 @@
-import main.Subject;
+import main.Connection;
 import observers.StateWatcher;
 
 import javax.swing.*;
@@ -13,17 +13,17 @@ public class MainWindow extends JFrame implements StateWatcher, ActionListener {
     private JButton numeralButton;
 
 
-    Subject subject;
+    Connection connection;
 
 
-    public MainWindow(Subject subject){
+    public MainWindow(Connection connection){
             super("jp,mauri,abel");
             setContentPane(rootPanel);
             setSize(340,400);
             initializeActionButtons();
             initializeNumeralButtons();
-            this.subject=subject;
-            this.subject.addObserver(this);
+            this.connection=connection;
+            this.connection.addObserver(this);
         }
     public void initializeNumeralButtons(){
         a1Button.addActionListener(this);
@@ -77,18 +77,18 @@ public class MainWindow extends JFrame implements StateWatcher, ActionListener {
             if(userOption.getText().length() == 1
                     && "1234567890#".indexOf(userOption.getText()) >= 0)
             {
-                this.subject.recibeData(userOption.getText());
+                this.connection.recibeData(userOption.getText());
             }
             else
             {
-                this.subject.record(userOption.getText());
+                this.connection.record(userOption.getText());
             }
 
             userOption.setText("");
         }
         if (e.getSource()==hButton){
 
-            this.subject.hangup();
+            this.connection.hangup();
 
         }
 

@@ -2,7 +2,7 @@ package observers;
 
 import java.util.Scanner;
 
-import main.Subject;
+import main.Connection;
 
 /**
    A telephone that takes simulated keystrokes and voice input
@@ -14,17 +14,17 @@ public class Telephone implements StateWatcher
       Construct phone object.
       @param aScanner that reads text from a character-input stream
    */
-	private Subject subject;
+	private Connection connection;
 
    public Telephone(Scanner aScanner)
    {
       scanner = aScanner;
    }
    
-   public Telephone(Subject subject, Scanner aScanner) {
+   public Telephone(Connection connection, Scanner aScanner) {
         scanner = aScanner;
-		this.subject=subject;
-		subject.addObserver(this);
+		this.connection=connection;
+		connection.addObserver(this);
 	}
 	
 	@Override
