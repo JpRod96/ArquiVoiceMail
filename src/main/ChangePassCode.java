@@ -4,17 +4,23 @@ package main;
  * Created by Jp on 24/04/2018.
  */
 public class ChangePassCode implements ConnectionState{
+
+    public static final String MAILBOX_MENU_TEXT =
+            "Enter 1 to listen to your messages\n"
+                    + "Enter 2 to change your passcode\n"
+                    + "Enter 3 to change your greeting";
+
     @Override
     public void dial(String key, Connection connection) {
         if (key.equals("#"))
         {
-            connection.currentMailbox.setPasscode(connection.accumulatedKeys);
+            connection.getCurrentMailbox().setPasscode(connection.getAccumulatedKeys());
             changeState(connection,new MailBoxMenuState());
-            connection.notifyObservers(connection.MAILBOX_MENU_TEXT);
-            connection.accumulatedKeys = "";
+            connection.notifyObservers(MAILBOX_MENU_TEXT);
+            connection.setAccumulatedKeys("");
         }
         else
-            connection.accumulatedKeys += key;
+            connection.setAccumulatedKeys(connection.getAccumulatedKeys() + key);
     }
 
     @Override

@@ -12,25 +12,16 @@ import observers.*;
 public class Connection
 {
     private ConnectionState _state;
-	public MailSystem system;
-	public Mailbox currentMailbox;
-	public String currentRecording;
-	public String accumulatedKeys;
+	private MailSystem system;
+	private Mailbox currentMailbox;
+	private String currentRecording;
+	private String accumulatedKeys;
 	private ArrayList<StateWatcher> stateWatchers;
 
-	private static final String INITIAL_PROMPT = 
-	      "Enter mailbox number followed by #";      
-	public static final String MAILBOX_MENU_TEXT =
-	      "Enter 1 to listen to your messages\n"
-	      + "Enter 2 to change your passcode\n"
-	      + "Enter 3 to change your greeting";
-	public static final String MESSAGE_MENU_TEXT =
-	      "Enter 1 to listen to the current message\n"
-	      + "Enter 2 to save the current message\n"
-	      + "Enter 3 to delete the current message\n"
-	      + "Enter 4 to return to the main menu";
+    private static final String INITIAL_PROMPT =
+            "Enter mailbox number followed by #";
 
-   public Connection(MailSystem s)
+    public Connection(MailSystem s)
    {
       system = s;
       stateWatchers= new ArrayList<>();
@@ -118,7 +109,54 @@ public class Connection
    public void recibeData(String key){
       this.dial(key);
    }
-   
+
+    public ConnectionState get_state() {
+        return _state;
+    }
+
+    public void set_state(ConnectionState _state) {
+        this._state = _state;
+    }
+
+    public MailSystem getSystem() {
+        return system;
+    }
+
+    public void setSystem(MailSystem system) {
+        this.system = system;
+    }
+
+    public Mailbox getCurrentMailbox() {
+        return currentMailbox;
+    }
+
+    public void setCurrentMailbox(Mailbox currentMailbox) {
+        this.currentMailbox = currentMailbox;
+    }
+
+    public String getCurrentRecording() {
+        return currentRecording;
+    }
+
+    public void setCurrentRecording(String currentRecording) {
+        this.currentRecording = currentRecording;
+    }
+
+    public String getAccumulatedKeys() {
+        return accumulatedKeys;
+    }
+
+    public void setAccumulatedKeys(String accumulatedKeys) {
+        this.accumulatedKeys = accumulatedKeys;
+    }
+
+    public ArrayList<StateWatcher> getStateWatchers() {
+        return stateWatchers;
+    }
+
+    public void setStateWatchers(ArrayList<StateWatcher> stateWatchers) {
+        this.stateWatchers = stateWatchers;
+    }
 }
 
 
