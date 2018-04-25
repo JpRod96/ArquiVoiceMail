@@ -23,6 +23,11 @@ public class MessageMenuStateTest {
 
     @Test
     public void shouldNotifyObserverWithMailBoxMenuTxt(){
-        
+        String key="4";
+
+        when(mockedConnection.getCurrentMailbox()).thenReturn(new Mailbox(key, ""));
+
+        messageMenuState.dial(key, mockedConnection);
+        verify(mockedConnection).notifyObservers(messageMenuState.MAILBOX_MENU_TEXT);
     }
 }
