@@ -27,4 +27,9 @@ public class ChangePassCode implements ConnectionState{
     public void changeState(Connection connection, ConnectionState connectionState) {
         connection.changeState(connectionState);
     }
+
+    @Override
+    public void record() {
+
+    }
 }
