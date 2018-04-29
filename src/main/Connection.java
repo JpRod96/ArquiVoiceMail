@@ -78,8 +78,7 @@ public class Connection
    */
    public void hangup()
    {
-      if (_state instanceof Recording)
-          currentMailbox.addMessage(new Message(currentRecording));
+      _state.hangUp(this);
       resetConnection();
    }
 

@@ -4,7 +4,7 @@ public interface ConnectionState {
     public void dial(String key, Connection connection);
     public void changeState (Connection connection, ConnectionState connectionState );
     public void record();
-    public void hangUp();
+    public void hangUp(Connection connection);
 
     /**
        Try to log in the user.

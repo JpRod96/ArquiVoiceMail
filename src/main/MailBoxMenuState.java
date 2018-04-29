@@ -40,7 +40,7 @@ public class MailBoxMenuState implements ConnectionState {
     }
 
     @Override
-    public void hangUp() {
+    public void hangUp(Connection connection) {
 
     }
 }

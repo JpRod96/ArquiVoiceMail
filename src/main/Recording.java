@@ -40,7 +40,8 @@ public class Recording
     }
 
     @Override
-    public void hangUp() {
-
+    public void hangUp(Connection connection) {
+        this.connection = connection;
+        connection.getCurrentMailbox().addMessage(new Message(connection.getCurrentRecording()));
     }
 }

@@ -10,6 +10,8 @@ public class ChangePassCode implements ConnectionState{
                     + "Enter 2 to change your passcode\n"
                     + "Enter 3 to change your greeting";
 
+
+
     @Override
     public void dial(String key, Connection connection) {
         if (key.equals("#"))
@@ -34,7 +36,7 @@ public class ChangePassCode implements ConnectionState{
     }
 
     @Override
-    public void hangUp() {
-        
+    public void hangUp(Connection connection) {
+
     }
 }
