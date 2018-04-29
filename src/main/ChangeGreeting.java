@@ -32,5 +32,8 @@ public class ChangeGreeting implements ConnectionState{
         connection.setCurrentRecording(connection.getCurrentRecording());
     }
 
+    @Override
+    public void hangUp() {
 
+    }
 }

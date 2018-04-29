@@ -32,4 +32,9 @@ public class ChangePassCode implements ConnectionState{
     public void record() {
 
     }
+
+    @Override
+    public void hangUp() {
+        
+    }
 }

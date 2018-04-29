@@ -33,5 +33,9 @@ public class Connected implements ConnectionState {
 
     }
 
+    @Override
+    public void hangUp() {
+
+    }
 
 }

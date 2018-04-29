@@ -39,5 +39,8 @@ public class Recording
         connection.setCurrentRecording(connection.getCurrentRecording());
     }
 
+    @Override
+    public void hangUp() {
 
+    }
 }

@@ -48,5 +48,8 @@ public class MessageMenuState implements ConnectionState{
 
     }
 
+    @Override
+    public void hangUp() {
 
+    }
 }
