@@ -70,8 +70,7 @@ public class Connection
    */
    public void record(String voice)
    {
-      if (_state instanceof Recording || _state instanceof ChangeGreeting)
-         currentRecording += voice;
+      _state.record();
    }
 
    /**
@@ -79,8 +78,7 @@ public class Connection
    */
    public void hangup()
    {
-      if (_state instanceof Recording)
-         currentMailbox.addMessage(new Message(currentRecording));
+      _state.hangUp(this);
       resetConnection();
    }
 

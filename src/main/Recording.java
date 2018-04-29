@@ -1,7 +1,8 @@
 package main;
 
-public class Recording implements ConnectionState {
-
+public class Recording
+        implements ConnectionState {
+    Connection connection;
     public static final String MAILBOX_MENU_TEXT =
             "Enter 1 to listen to your messages\n"
                     + "Enter 2 to change your passcode\n"
@@ -9,6 +10,7 @@ public class Recording implements ConnectionState {
 
     @Override
     public void dial(String key, Connection connection) {
+        this.connection = connection;
         if (key.equals("#"))
         {
             if (connection.getCurrentMailbox().checkPasscode(connection.getAccumulatedKeys()))
@@ -30,5 +32,16 @@ public class Recording implements ConnectionState {
     @Override
     public void changeState(Connection connection, ConnectionState connectionState) {
         connection.changeState(connectionState);
+    }
+
+    @Override
+    public void record() {
+        connection.setCurrentRecording(connection.getCurrentRecording());
+    }
+
+    @Override
+    public void hangUp(Connection connection) {
+        this.connection = connection;
+        connection.getCurrentMailbox().addMessage(new Message(connection.getCurrentRecording()));
     }
 }
