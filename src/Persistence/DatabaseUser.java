@@ -14,14 +14,22 @@ public class DatabaseUser {
     private final String password = "mysql";
     private String SQLString ="SELECT * FROM example";
 
+    public void load(){
+        try
+        {
+            DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+            connectionObj = DriverManager.getConnection(dbString,userName,password);
+            statementObj = connectionObj.createStatement();
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
     public void run()
     {
         try
         {
-
-            DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-            connectionObj = DriverManager.getConnection(dbString,userName,password);
-            statementObj = connectionObj.createStatement();
             resultSet = statementObj.executeQuery(SQLString);
 
             while(resultSet.next())
@@ -39,8 +47,6 @@ public class DatabaseUser {
         {
             try
             {
-                connectionObj.close();
-                statementObj.close();
                 resultSet.close();
             }
             catch(Exception ex)
@@ -52,5 +58,21 @@ public class DatabaseUser {
 
 
     }
+    void insertValue(int i) {
+
+        try {
+            statementObj.executeUpdate("INSERT INTO `ejemplo`.`example` (`id`) VALUES" + "('" + i + "')");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    void deleteValue(int i){
+        try {
+            statementObj.executeUpdate("DELETE FROM `ejemplo`.`example` WHERE  `id`="+i);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }
