@@ -4,8 +4,9 @@ package Persistence;
         import java.sql.Connection;
         import java.sql.DriverManager;
         import java.sql.ResultSet;
+        import main.*;
 
-public class DatabaseService {
+public class DatabaseService implements PersistenceRepository{
     private Connection connectionObj;
     private Statement statementObj;
     private ResultSet resultSet;
@@ -73,6 +74,12 @@ public class DatabaseService {
             e.printStackTrace();
         }
     }
+    @Override
+    public MailSystem getMailSystem(){
+        return null;
+    }
+    @Override
+    public void saveMailSystem(){
 
-
+    }
 }
