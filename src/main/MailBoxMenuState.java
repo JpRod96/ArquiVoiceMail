@@ -35,7 +35,7 @@ public class MailBoxMenuState implements ConnectionState {
     }
 
     @Override
-    public void record() {
+    public void record(Connection connection, String voice) {
 
     }
 

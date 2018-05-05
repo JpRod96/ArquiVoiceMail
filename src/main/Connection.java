@@ -70,7 +70,7 @@ public class Connection
    */
    public void record(String voice)
    {
-      _state.record();
+      _state.record(this, voice);
    }
 
    /**
