@@ -5,14 +5,14 @@ package Persistence;
         import java.sql.DriverManager;
         import java.sql.ResultSet;
 
-public class DatabaseUser {
+public class DatabaseService {
     private Connection connectionObj;
     private Statement statementObj;
     private ResultSet resultSet;
-    private final String dbString = "jdbc:mysql://localhost:3306/ejemplo";
+    private final String dbString = "jdbc:mysql://localhost:3306/VoiceMailDB";
     private final String userName = "root";
     private final String password = "mysql";
-    private String SQLString ="SELECT * FROM example";
+    private String SQLString ="SELECT * FROM MessageQueue";
 
     public void load(){
         try
