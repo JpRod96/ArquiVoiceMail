@@ -29,7 +29,7 @@ public class Connected implements ConnectionState {
     }
 
     @Override
-    public void record() {
+    public void record(Connection connection, String voice) {
 
     }
 

@@ -43,7 +43,7 @@ public class MessageMenuState implements ConnectionState{
     }
 
     @Override
-    public void record() {
+    public void record(Connection connection, String voice) {
 
 
     }

@@ -28,8 +28,8 @@ public class ChangeGreeting implements ConnectionState{
     }
 
     @Override
-    public void record() {
-        connection.setCurrentRecording(connection.getCurrentRecording());
+    public void record(Connection connection, String voice) {
+        connection.setCurrentRecording(voice);
     }
 
     @Override
