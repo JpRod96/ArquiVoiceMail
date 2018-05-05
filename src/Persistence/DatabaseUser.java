@@ -9,10 +9,10 @@ public class DatabaseUser {
     private Connection connectionObj;
     private Statement statementObj;
     private ResultSet resultSet;
-    private final String dbString = "jdbc:mysql://localhost:3306/example";
+    private final String dbString = "jdbc:mysql://localhost:3306/ejemplo";
     private final String userName = "root";
-    private final String password = "mysqlroot";
-    private String SQLString ="SELECT * FROM example *";
+    private final String password = "mysql";
+    private String SQLString ="SELECT * FROM example";
 
     public void run()
     {
@@ -20,7 +20,7 @@ public class DatabaseUser {
         {
 
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-            connectionObj = DriverManager.getConnection(dbString,"root","sql@1234");
+            connectionObj = DriverManager.getConnection(dbString,userName,password);
             statementObj = connectionObj.createStatement();
             resultSet = statementObj.executeQuery(SQLString);
 
