@@ -17,15 +17,27 @@ public class Main
    private static final int MAILBOX_COUNT = 20;
    public static void main(String[] args)
    {
-      MailSystem system = getMailSystemInfoFromDB();
       Scanner console = new Scanner(System.in);
+
+      MailSystem system = getMailSystemInfoFromDB();
       Connection connection = new Connection(system);
-      Telephone telephone = new Telephone(connection, console);
-      MainWindow form= new MainWindow(connection);
-      form.setVisible(true);
-      form.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+      setObservers(connection, console);
+      
       run(connection, console);
       
+   }
+
+   public static void setObservers(Connection connection, Scanner console){
+      Telephone telephone = new Telephone(connection, console);
+
+      MainWindow form= new MainWindow(connection);
+      setMainWindow(form);
+   }
+
+   public static void setMainWindow(MainWindow form){
+      form.setVisible(true);
+      form.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
    }
 
    public static MailSystem getMailSystemInfoFromDB(){

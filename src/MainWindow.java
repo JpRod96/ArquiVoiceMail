@@ -1,4 +1,5 @@
 import main.Connection;
+import main.PersistenceRepository;
 import observers.StateWatcher;
 
 import javax.swing.*;
@@ -16,6 +17,7 @@ public class MainWindow extends JFrame implements StateWatcher, ActionListener {
 
 
     Connection connection;
+    PersistenceRepository dbService;
 
 
     public MainWindow(Connection connection){
@@ -96,7 +98,7 @@ public class MainWindow extends JFrame implements StateWatcher, ActionListener {
         }
         if(e.getSource()==saveButton){
             userOption.setText(userOption.getText().concat("guardando"));
-            DatabaseService dbService=new DatabaseService();
+            dbService=new DatabaseService();
             dbService.updateMailSystem(connection.getSystem());
             userOption.setText("");
             userOption.setText(userOption.getText().concat("guardado"));
