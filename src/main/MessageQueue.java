@@ -9,6 +9,8 @@ import java.util.ArrayList;
 */
 public class MessageQueue
 {
+   private ArrayList<Message> queue;
+
    /**
       Constructs an empty message queue.
    */
@@ -55,6 +57,12 @@ public class MessageQueue
       else return queue.get(0);
    }
 
-   private ArrayList<Message> queue;
+   public ArrayList<Message> getQueue() {
+      return queue;
+   }
+
+   public void setQueue(ArrayList<Message> queue) {
+      this.queue = queue;
+   }
 }
  

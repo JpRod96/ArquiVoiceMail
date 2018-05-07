@@ -1,7 +1,9 @@
 import java.util.Scanner;
 
+import Persistence.DatabaseService;
 import main.Connection;
 import main.MailSystem;
+import main.PersistenceRepository;
 import observers.Telephone;
 
 import javax.swing.*;
@@ -12,17 +14,23 @@ import javax.swing.*;
 */
 public class Main
 {
+   private static final int MAILBOX_COUNT = 20;
    public static void main(String[] args)
    {
-      MailSystem system = new MailSystem(MAILBOX_COUNT);
+      MailSystem system = getMailSystemInfoFromDB();
       Scanner console = new Scanner(System.in);
       Connection connection = new Connection(system);
       Telephone telephone = new Telephone(connection, console);
-       MainWindow form= new MainWindow(connection);
-       form.setVisible(true);
-       form.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+      MainWindow form= new MainWindow(connection);
+      form.setVisible(true);
+      form.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
       run(connection, console);
       
+   }
+
+   public static MailSystem getMailSystemInfoFromDB(){
+      PersistenceRepository persistenceRepository=new DatabaseService();
+      return persistenceRepository.getMailSystem();
    }
    
    public static void run(Connection connection, Scanner scanner)
@@ -43,6 +51,4 @@ public class Main
             connection.record(input);
       }
    }
-
-   private static final int MAILBOX_COUNT = 20;
 }

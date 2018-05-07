@@ -9,5 +9,7 @@ public interface PersistenceRepository {
 
     MailSystem getMailSystem();
 
-    void saveMailSystem();
+    void saveMailSystem(MailSystem mailsystem);
+
+    void updateMailSystem(MailSystem mailsystem);
 }

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 */
 public class MailSystem
 {
+   private ArrayList<Mailbox> mailboxes;
    /**
       Constructs a mail system with a given number of mailboxes
       @param mailboxCount the number of mailboxes
@@ -26,6 +27,10 @@ public class MailSystem
       }
    }
 
+   public MailSystem(ArrayList<Mailbox> mailboxes){
+      this.mailboxes=mailboxes;
+   }
+
    /**
       Locate a mailbox.
       @param ext the extension number
@@ -39,5 +44,11 @@ public class MailSystem
       else return null;
    }
 
-   private ArrayList<Mailbox> mailboxes;
+   public ArrayList<Mailbox> getMailboxes() {
+      return mailboxes;
+   }
+
+   public void setMailboxes(ArrayList<Mailbox> mailboxes) {
+      this.mailboxes = mailboxes;
+   }
 }
