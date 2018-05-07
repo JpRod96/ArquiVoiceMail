@@ -23,7 +23,7 @@ public class Main
       Connection connection = new Connection(system);
 
       setObservers(connection, console);
-      
+
       run(connection, console);
       
    }
