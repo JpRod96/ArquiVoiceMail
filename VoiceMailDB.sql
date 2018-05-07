@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `Mailbox` (
   `id` int(2) NOT NULL,
   `passcode` varchar(20) COLLATE utf8_bin NOT NULL,
-  `greeting` varchar(20) COLLATE utf8_bin NOT NULL,
+  `greeting` varchar(100) COLLATE utf8_bin NOT NULL,
   `keptMessageQueueId` int(2) NOT NULL,
   `newMessageQueueId` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `Mailbox` (
 
 CREATE TABLE IF NOT EXISTS `Message` (
   `Id` int(2) NOT NULL,
-  `text` varchar(50) COLLATE utf8_bin NOT NULL,
+  `text` varchar(500) COLLATE utf8_bin NOT NULL,
   `MessageQueueId` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
