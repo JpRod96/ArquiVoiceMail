@@ -5,6 +5,10 @@ package main;
 */
 public class Mailbox
 {
+   private MessageQueue newMessages;
+   private MessageQueue keptMessages;
+   private String greeting;
+   private String passcode;
    /**
       Creates Mailbox object.
       @param aPasscode passcode number
@@ -102,8 +106,23 @@ public class Mailbox
       return greeting;
    }
 
-   private MessageQueue newMessages;
-   private MessageQueue keptMessages;
-   private String greeting;
-   private String passcode;
+   public String getPasscode() {
+      return passcode;
+   }
+
+   public MessageQueue getNewMessages() {
+      return newMessages;
+   }
+
+   public void setNewMessages(MessageQueue newMessages) {
+      this.newMessages = newMessages;
+   }
+
+   public MessageQueue getKeptMessages() {
+      return keptMessages;
+   }
+
+   public void setKeptMessages(MessageQueue keptMessages) {
+      this.keptMessages = keptMessages;
+   }
 }

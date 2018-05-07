@@ -4,6 +4,7 @@ import observers.StateWatcher;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import Persistence.DatabaseService;
 
 public class MainWindow extends JFrame implements StateWatcher, ActionListener {
     private JPanel rootPanel;
@@ -11,6 +12,7 @@ public class MainWindow extends JFrame implements StateWatcher, ActionListener {
     private JLabel labelText;
     private JTextArea userOption;
     private JButton numeralButton;
+    private JButton saveButton;
 
 
     Connection connection;
@@ -42,6 +44,7 @@ public class MainWindow extends JFrame implements StateWatcher, ActionListener {
         hButton.addActionListener(this);
         actionButton.addActionListener(this);
         numeralButton.addActionListener(this);
+        saveButton.addActionListener(this);
     }
     @Override
     public void update(String updateString){
@@ -90,6 +93,13 @@ public class MainWindow extends JFrame implements StateWatcher, ActionListener {
 
             this.connection.hangup();
 
+        }
+        if(e.getSource()==saveButton){
+            userOption.setText(userOption.getText().concat("guardando"));
+            DatabaseService dbService=new DatabaseService();
+            dbService.updateMailSystem(connection.getSystem());
+            userOption.setText("");
+            userOption.setText(userOption.getText().concat("guardado"));
         }
 
     }
