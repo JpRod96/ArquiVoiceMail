@@ -44,11 +44,17 @@ public class Main
             connection.hangup();
          else if (input.equalsIgnoreCase("Q"))
             more = false;
-         else if (input.length() == 1
-            && "1234567890#".indexOf(input) >= 0)
+         else if (input.equalsIgnoreCase("S")) {
+            DatabaseService dbService=new DatabaseService();
+            dbService.updateMailSystem(connection.getSystem());
+            System.out.println("Saved");
+            connection.hangup();
+         }
+         else if (input.length() == 1 && "1234567890#".indexOf(input) >= 0)
             connection.dial(input);
          else
             connection.record(input);
       }
    }
+
 }

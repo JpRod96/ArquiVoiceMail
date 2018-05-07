@@ -98,7 +98,7 @@ public class MainWindow extends JFrame implements StateWatcher, ActionListener {
             userOption.setText(userOption.getText().concat("guardando"));
             DatabaseService dbService=new DatabaseService();
             dbService.updateMailSystem(connection.getSystem());
-            userOption.setText(userOption.getText().concat(""));
+            userOption.setText("");
             userOption.setText(userOption.getText().concat("guardado"));
         }
 
