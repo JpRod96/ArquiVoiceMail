@@ -10,7 +10,7 @@ import java.util.ArrayList;
 /**
  * Created by Jp on 07/05/2018.
  */
-public class MessagePersistenceService {
+public class MessagePersistenceService implements MessageRepository{
 
     private Connection connectionObj;
     private Statement statementObj;
@@ -36,19 +36,21 @@ public class MessagePersistenceService {
         }
     }
 
-    public void saveMessage(Message message, int queueId){
+    public void saveMessage(Message message, int mailBoxId){
         String text=message.getText();
-
-        try {
-            statementObj.executeUpdate("INSERT INTO `VoiceMailDB`.`Message` (`text`,`MessageQueueId`) VALUES" + "('" + text + "', '" + queueId + "')");
-        } catch (Exception e) {
-            e.printStackTrace();
+        int id=message.getId();
+        if(id==0){
+            try {
+                statementObj.executeUpdate("INSERT INTO `VoiceMailDB`.`Message` (`text`,`MailBoxId`) VALUES" + "('" + text + "', '" + mailBoxId + "')");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
-    public ArrayList<Message> getAllMessagesByQueueId(int queueId){
+    public ArrayList<Message> getAllMessagesByMailBoxId(int mailBoxId){
         ArrayList<Message> messages=new ArrayList<Message>();
-        String query="SELECT id FROM Message WHERE MessageQueueId = "+queueId;
+        String query="SELECT id FROM Message WHERE MailBoxId = "+mailBoxId;
 
         try {
             resultSet = statementObj.executeQuery(query);
@@ -81,10 +83,12 @@ public class MessagePersistenceService {
         try {
             resultSet = statementObj.executeQuery(query);
             String text="";
+            int id=0;
             while(resultSet.next()) {
+                id=Integer.parseInt(resultSet.getString("Id"));
                 text=resultSet.getString("text");
             }
-            message=new Message(text);
+            message=new Message(text,id);
         }
         catch(Exception ex) {
             ex.printStackTrace();
@@ -99,6 +103,25 @@ public class MessagePersistenceService {
         }
 
         return message;
+    }
+
+    public void saveAllMessages(MessageQueue queue, int mailBoxId){
+        ArrayList<Message> messages=queue.getQueue();
+        for (Message message: messages){
+            saveMessage(message, mailBoxId);
+        }
+    }
+
+    public void deleteMessage(Message message){
+        int id=message.getId();
+        String query="DELETE FROM Message WHERE Id="+id;
+        if(id==0){
+            try {
+                statementObj.executeUpdate(query);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }

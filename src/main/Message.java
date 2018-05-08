@@ -5,6 +5,8 @@ package main;
 */
 public class Message
 {
+   private String text;
+   private int id;
    /**
       Construct a Message object.
       @param messageText the message text
@@ -12,6 +14,11 @@ public class Message
    public Message(String messageText)
    {
       text = messageText;
+   }
+   public Message(String messageText, int id)
+   {
+      text = messageText;
+      this.id=id;
    }
 
    /**
@@ -23,5 +30,11 @@ public class Message
       return text;
    }
 
-   private String text;
+   public int getId() {
+      return id;
+   }
+
+   public void setId(int id) {
+      this.id = id;
+   }
 }

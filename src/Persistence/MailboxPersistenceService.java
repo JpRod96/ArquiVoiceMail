@@ -5,23 +5,24 @@ import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 /**
  * Created by Jp on 07/05/2018.
  */
-public class MailboxPersistenceService {
+public class MailboxPersistenceService implements MailBoxRepository{
     private Connection connectionObj;
     private Statement statementObj;
     private ResultSet resultSet;
     private final String dbString = "jdbc:mysql://localhost:3306/VoiceMailDB";
     private final String userName = "root";
     private final String password = "mysql";
-    private MessageQueuePersistenceService messageQueuePersistenceService;
+    private MessagePersistenceService messagePersistenceService;
 
     public MailboxPersistenceService(){
         load();
-        messageQueuePersistenceService =new MessageQueuePersistenceService();
-        messageQueuePersistenceService.load();
+        messagePersistenceService =new MessagePersistenceService();
+        messagePersistenceService.load();
     }
 
     public void load(){
@@ -37,33 +38,24 @@ public class MailboxPersistenceService {
         }
     }
 
-    public void saveMailbox(Mailbox mailbox, int id, int initialQueueId){
-        int keptMessagesId=initialQueueId,
-                newMessagesId=initialQueueId+1;
-        MessageQueue keptMessages=mailbox.getKeptMessages(),
-                newMessages=mailbox.getNewMessages();
+    public void saveMailbox(Mailbox mailbox, int id){
+        MessageQueue keptMessages=mailbox.getKeptMessages();
         String passcode=mailbox.getPasscode(),
                 greeting=mailbox.getGreeting();
-        messageQueuePersistenceService.saveMessageQueue(keptMessages, keptMessagesId);
-        messageQueuePersistenceService.saveMessageQueue(newMessages, newMessagesId);
 
         try {
-            statementObj.executeUpdate("INSERT INTO `VoiceMailDB`.`Mailbox` (`id`,`passcode`, `greeting`, `keptMessageQueueId`, `newMessageQueueId`) VALUES('" + id + "'," +
-                    "'" + passcode + "', '" + greeting + "', '" + keptMessagesId + "', '" + newMessagesId + "')");
+            statementObj.executeUpdate("INSERT INTO `VoiceMailDB`.`Mailbox` (`id`,`passcode`, `greeting`) VALUES('" + id + "'," +
+                    "'" + passcode + "', '" + greeting + "')");
+            messagePersistenceService.saveAllMessages(keptMessages, id);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void updateMailbox(Mailbox mailbox, int mailboxId, int initialQueueId){
-        int keptMessagesId=initialQueueId,
-                newMessagesId=initialQueueId+1;
-        MessageQueue keptMessages=mailbox.getKeptMessages(),
-                newMessages=mailbox.getNewMessages();
+    public void updateMailbox(Mailbox mailbox, int mailboxId){
+        MessageQueue keptMessages=mailbox.getKeptMessages();
         String passcode=mailbox.getPasscode(),
                 greeting=mailbox.getGreeting();
-        messageQueuePersistenceService.updateMessageQueue(keptMessages, keptMessagesId);
-        messageQueuePersistenceService.updateMessageQueue(newMessages, newMessagesId);
 
         String query="UPDATE `Mailbox` SET `passcode`='"+passcode+"',`greeting`='"+greeting+"' WHERE id = "+mailboxId;
 
@@ -83,16 +75,14 @@ public class MailboxPersistenceService {
             resultSet = statementObj.executeQuery(query);
 
             while(resultSet.next()) {
-                int keptMessagesId=Integer.parseInt(resultSet.getString("keptMessageQueueId"));
-                int newMessageId=Integer.parseInt(resultSet.getString("newMessageQueueId"));
                 String passcode=resultSet.getString("passcode"),
                         greeting=resultSet.getString("greeting");
                 mailbox=new Mailbox(passcode,greeting);
-                MessageQueue keptMessageQueue=messageQueuePersistenceService.getMessageQueueById(keptMessagesId);
-                MessageQueue newMessageQueue=messageQueuePersistenceService.getMessageQueueById(newMessageId);
+                ArrayList<Message> messages= messagePersistenceService.getAllMessagesByMailBoxId(mailboxId);
+                MessageQueue keptMessageQueue= new MessageQueue();
+                keptMessageQueue.setQueue(messages);
 
                 mailbox.setKeptMessages(keptMessageQueue);
-                mailbox.setNewMessages(newMessageQueue);
             }
         }
         catch(Exception ex) {
@@ -110,4 +100,31 @@ public class MailboxPersistenceService {
         return mailbox;
     }
 
+    public ArrayList<Mailbox> getAllMailBoxes(){
+        String query="SELECT id FROM Mailbox";
+        ArrayList<Mailbox> mailboxes=new ArrayList<>();
+
+        try {
+            resultSet = statementObj.executeQuery(query);
+
+            while(resultSet.next()) {
+                int mailboxId=Integer.parseInt(resultSet.getString("id"));
+                mailboxes.add(getMailBoxById(mailboxId));
+            }
+        }
+        catch(Exception ex) {
+            ex.printStackTrace();
+        }
+        finally {
+            try{
+
+            }
+            catch(Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+
+
+        return mailboxes;
+    }
 }

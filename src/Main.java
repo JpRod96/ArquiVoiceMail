@@ -1,9 +1,10 @@
 import java.util.Scanner;
 
-import Persistence.DatabaseService;
+import Persistence.MailboxPersistenceService;
 import main.Connection;
 import main.MailSystem;
-import main.PersistenceRepository;
+import main.MailBoxRepository;
+import main.Mailbox;
 import observers.Telephone;
 
 import javax.swing.*;
@@ -41,8 +42,9 @@ public class Main
    }
 
    public static MailSystem getMailSystemInfoFromDB(){
-      PersistenceRepository persistenceRepository=new DatabaseService();
-      return persistenceRepository.getMailSystem();
+      MailBoxRepository mailBoxRepository=new MailboxPersistenceService();
+      MailSystem mailSystem=new MailSystem(mailBoxRepository.getAllMailBoxes());
+      return mailSystem;
    }
    
    public static void run(Connection connection, Scanner scanner)
@@ -56,12 +58,6 @@ public class Main
             connection.hangup();
          else if (input.equalsIgnoreCase("Q"))
             more = false;
-         else if (input.equalsIgnoreCase("S")) {
-            DatabaseService dbService=new DatabaseService();
-            dbService.updateMailSystem(connection.getSystem());
-            System.out.println("Saved");
-            connection.hangup();
-         }
          else if (input.length() == 1 && "1234567890#".indexOf(input) >= 0)
             connection.dial(input);
          else
