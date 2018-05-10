@@ -14,22 +14,17 @@ public class MailboxPersistenceService implements MailBoxRepository{
     private Connection connectionObj;
     private Statement statementObj;
     private ResultSet resultSet;
-    private final String dbString = "jdbc:mysql://localhost:3306/VoiceMailDB";
-    private final String userName = "root";
-    private final String password = "mysql";
     private MessagePersistenceService messagePersistenceService;
 
-    public MailboxPersistenceService(){
-        load();
-        messagePersistenceService =new MessagePersistenceService();
-        messagePersistenceService.load();
+    public MailboxPersistenceService(String connectionString){
+        load(connectionString);
+        messagePersistenceService =new MessagePersistenceService(connectionString);
     }
 
-    public void load(){
+    public void load(String connectionString){
         try
         {
-            DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-            connectionObj = DriverManager.getConnection(dbString,userName,password);
+            connectionObj = DriverManager.getConnection(connectionString);
             statementObj = connectionObj.createStatement();
         }
         catch(Exception ex)
@@ -88,15 +83,6 @@ public class MailboxPersistenceService implements MailBoxRepository{
         catch(Exception ex) {
             ex.printStackTrace();
         }
-        finally {
-            try{
-
-            }
-            catch(Exception ex) {
-                ex.printStackTrace();
-            }
-        }
-
         return mailbox;
     }
 
@@ -115,16 +101,6 @@ public class MailboxPersistenceService implements MailBoxRepository{
         catch(Exception ex) {
             ex.printStackTrace();
         }
-        finally {
-            try{
-
-            }
-            catch(Exception ex) {
-                ex.printStackTrace();
-            }
-        }
-
-
-        return mailboxes;
+     return mailboxes;
     }
 }

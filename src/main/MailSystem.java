@@ -8,6 +8,10 @@ import java.util.ArrayList;
 public class MailSystem
 {
    private ArrayList<Mailbox> mailboxes;
+   private MailBoxRepository mailBoxRepository;
+   public MailSystem(MailBoxRepository mailBoxRepository){
+      this.mailBoxRepository=mailBoxRepository;
+   }
    /**
       Constructs a mail system with a given number of mailboxes
       @param mailboxCount the number of mailboxes
@@ -38,11 +42,16 @@ public class MailSystem
    */
    public Mailbox findMailbox(String ext)
    {
-
       int i = Integer.parseInt(ext);
-      if (1 <= i && i <= mailboxes.size())
-         return  mailboxes.get(i - 1);
-      else return null;
+      if(mailBoxRepository!=null){
+         return mailBoxRepository.getMailBoxById(i);
+      }
+      else
+      {
+         if (1 <= i && i <= mailboxes.size())
+            return  mailboxes.get(i - 1);
+         else return null;
+      }
    }
 
    public ArrayList<Mailbox> getMailboxes() {

@@ -9,18 +9,15 @@ import observers.Telephone;
 
 import javax.swing.*;
 
-/**
-   This program tests the mail system. A single phone
-   communicates with the program through System.in/System.out.
-*/
 public class Main
 {
    private static final int MAILBOX_COUNT = 20;
    public static void main(String[] args)
    {
+      String connectionString="jdbc:sqlite:db.db";
       Scanner console = new Scanner(System.in);
-
-      MailSystem system = getMailSystemInfoFromDB();
+      //TODO cambiar esta linea por MailSystem= new MailSystem(repositorioMailbox); donde repositorio es la implementacion de mailboxRepository
+      MailSystem system = getMailSystemInfoFromDB(connectionString);
       Connection connection = new Connection(system);
 
       setObservers(connection, console);
@@ -40,9 +37,9 @@ public class Main
       form.setVisible(true);
       form.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
    }
-
-   public static MailSystem getMailSystemInfoFromDB(){
-      MailBoxRepository mailBoxRepository=new MailboxPersistenceService();
+   //TODO borrar este metodo cuando la persistencia este funcionando con el programa
+   public static MailSystem getMailSystemInfoFromDB(String connectionString){
+      MailBoxRepository mailBoxRepository=new MailboxPersistenceService(connectionString);
       MailSystem mailSystem=new MailSystem(mailBoxRepository.getAllMailBoxes());
       return mailSystem;
    }
