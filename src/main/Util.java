@@ -12,6 +12,6 @@ public class Util {
     }
 
     public static final MailBoxRepository mailBoxRepository = new MailboxPersistenceService("jdbc:sqlite:db.db");
-
+    public static final MessageRepository messageRepository = new MessagePersistenceService("jdbc:sqlite:db.db");
 
 }
