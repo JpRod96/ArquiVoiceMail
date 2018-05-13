@@ -9,6 +9,17 @@ public class Mailbox
    private MessageQueue keptMessages;
    private String greeting;
    private String passcode;
+
+   public int getId() {
+      return id;
+   }
+
+   public void setId(int id) {
+      this.id = id;
+   }
+
+   private int id;
+
    /**
       Creates Mailbox object.
       @param aPasscode passcode number

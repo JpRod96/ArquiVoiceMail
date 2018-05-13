@@ -20,7 +20,7 @@ public class ChangeGreeting implements ConnectionState{
         this.connection=connection;
         if (key.equals("#"))
         {
-            int id = getId(connection.getCurrentMailbox().getPasscode(),connection.getCurrentMailbox().getGreeting());
+            int id = connection.getCurrentMailbox().getId();
             connection.getCurrentMailbox().setGreeting(connection.getCurrentRecording());
             mailBoxRepository.updateMailbox(connection.getCurrentMailbox(),id);
             connection.setCurrentRecording("");
@@ -42,10 +42,6 @@ public class ChangeGreeting implements ConnectionState{
     @Override
     public void hangUp(Connection connection) {
 
-    }
-    public int getId(String passcode, String greeting){
-        int id = mailBoxRepository.getIdFromPasswordAndGretting(passcode,greeting);
-        return id;
     }
 }
 

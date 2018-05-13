@@ -13,4 +13,5 @@ public interface MailBoxRepository {
     Mailbox getMailBoxById(int mailboxId);
     ArrayList<Mailbox> getAllMailBoxes();
     int getIdFromPasswordAndGretting(String pass, String greeting);
+    void setPassCode(String pass, String id);
 }
