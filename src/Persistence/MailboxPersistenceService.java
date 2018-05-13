@@ -85,7 +85,6 @@ public class MailboxPersistenceService implements MailBoxRepository{
         }
         return mailbox;
     }
-
     public ArrayList<Mailbox> getAllMailBoxes(){
         String query="SELECT id FROM Mailbox";
         ArrayList<Mailbox> mailboxes=new ArrayList<>();
@@ -102,5 +101,14 @@ public class MailboxPersistenceService implements MailBoxRepository{
             ex.printStackTrace();
         }
      return mailboxes;
+    }
+
+    public void setPassCode(String pass,String id){
+        String query = "update Mailbox set passcode = "+pass+" where id = "+id+";";
+        try {
+            statementObj.executeUpdate(query);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

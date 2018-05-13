@@ -12,4 +12,5 @@ public interface MailBoxRepository {
     void updateMailbox(Mailbox mailbox, int mailboxId);
     Mailbox getMailBoxById(int mailboxId);
     ArrayList<Mailbox> getAllMailBoxes();
+    void setPassCode(String pass, String id);
 }

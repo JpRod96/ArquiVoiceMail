@@ -2,16 +2,16 @@ package main;
 
 import java.util.ArrayList;
 
+import static main.Util.mailBoxRepository;
+
 /**
    A system of voice mail boxes.
 */
 public class MailSystem
 {
    private ArrayList<Mailbox> mailboxes;
-   private MailBoxRepository mailBoxRepository;
-   public MailSystem(MailBoxRepository mailBoxRepository){
-      this.mailBoxRepository=mailBoxRepository;
-   }
+   public MailSystem(MailBoxRepository mailBoxRepository){}
+
    /**
       Constructs a mail system with a given number of mailboxes
       @param mailboxCount the number of mailboxes
