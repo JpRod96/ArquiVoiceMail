@@ -85,6 +85,18 @@ public class MailboxPersistenceService implements MailBoxRepository{
         }
         return mailbox;
     }
+    public int getIdFromPasswordAndGretting(String passcode,String greeting){
+        String query="select id from Mailbox where passcode=" + passcode + " and greeting='"+greeting+"';";
+        int id=0;
+        try{
+            resultSet =  statementObj.executeQuery(query);
+            id= resultSet.getInt("id");
+        }
+        catch(Exception ex) {
+            ex.printStackTrace();
+        }
+        return id;
+    }
 
     public ArrayList<Mailbox> getAllMailBoxes(){
         String query="SELECT id FROM Mailbox";
