@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 /**
  * Created by Jp on 07/05/2018.
@@ -73,6 +74,7 @@ public class MailboxPersistenceService implements MailBoxRepository{
             while(resultSet.next()) {
                 String passcode=resultSet.getString("passcode"),
                         greeting=resultSet.getString("greeting");
+                greeting=setGreetingRetrievedFromDB(greeting);
                 mailbox=new Mailbox(passcode, greeting, mailboxId, messagePersistenceService, this);
                 ArrayList<Message> messages= messagePersistenceService.getAllMessagesByMailBoxId(mailboxId);
                 MessageQueue keptMessageQueue= new MessageQueue();
@@ -86,6 +88,17 @@ public class MailboxPersistenceService implements MailBoxRepository{
         }
         return mailbox;
     }
+
+    private String setGreetingRetrievedFromDB(String greeting){
+        String settedGreeting="";
+        StringTokenizer tokenizer=new StringTokenizer(greeting,"\\");
+        while(tokenizer.hasMoreTokens())
+        {
+            settedGreeting+=tokenizer.nextToken()+"\n";
+        }
+        return settedGreeting;
+    }
+
     public ArrayList<Mailbox> getAllMailBoxes(){
         String query="SELECT * FROM Mailbox";
         ArrayList<Mailbox> mailboxes=new ArrayList<>();
