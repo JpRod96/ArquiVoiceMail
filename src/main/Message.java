@@ -7,10 +7,7 @@ public class Message
 {
    private String text;
    private int id;
-   /**
-      Construct a Message object.
-      @param messageText the message text
-   */
+
    public Message(String messageText)
    {
       text = messageText;
@@ -21,10 +18,6 @@ public class Message
       this.id=id;
    }
 
-   /**
-      Get the message text.
-      @return message text
-   */
    public String getText()
    {
       return text;

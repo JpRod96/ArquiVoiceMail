@@ -77,16 +77,16 @@ public class Mailbox
             messageRepository.saveMessage(message, id);
       }
    }
+    private void UpdateMailxboxRepository() {
+        if(mailBoxRepository!=null)
+            mailBoxRepository.updateMailbox(this);
+    }
 
-   public void setGreeting(String newGreeting)
+
+    public void setGreeting(String newGreeting)
    {
       greeting = newGreeting;
       UpdateMailxboxRepository();
-   }
-
-   private void UpdateMailxboxRepository() {
-      if(mailBoxRepository!=null)
-      mailBoxRepository.updateMailbox(this);
    }
 
    public void setPasscode(String newPasscode)
