@@ -29,29 +29,16 @@ public class Mailbox
       this.mailBoxRepository=mailBoxRepository;
    }
 
-   /**
-      Check if the passcode is correct.
-      @param aPasscode a passcode to check
-      @return true if the supplied passcode matches the mailbox passcode
-   */
    public boolean checkPasscode(String aPasscode)
    {
       return aPasscode.equals(passcode);
    }
 
-   /**
-      Add a message to the mailbox.
-      @param aMessage the message to be added
-   */
    public void addMessage(Message aMessage)
    {
       newMessages.add(aMessage);
    }
 
-   /**
-      Get the current message.
-      @return the current message
-   */
    public Message getCurrentMessage()
    {
       if (newMessages.size() > 0)
@@ -62,10 +49,6 @@ public class Mailbox
          return null;
    }
 
-   /**
-      Remove the current message from the mailbox.
-      @return the message that has just been removed
-   */
    public Message removeCurrentMessage()
    {
       Message message;
@@ -85,9 +68,6 @@ public class Mailbox
          return null;
    }
 
-   /**
-      Save the current message
-   */
    public void saveCurrentMessage()
    {
       Message message = removeCurrentMessage();
@@ -97,33 +77,24 @@ public class Mailbox
             messageRepository.saveMessage(message, id);
       }
    }
+    private void UpdateMailxboxRepository() {
+        if(mailBoxRepository!=null)
+            mailBoxRepository.updateMailbox(this);
+    }
 
-   /**
-      Change mailbox's greeting.
-      @param newGreeting the new greeting string
-   */
-   public void setGreeting(String newGreeting)
+
+    public void setGreeting(String newGreeting)
    {
       greeting = newGreeting;
-      if(mailBoxRepository!=null)
-      mailBoxRepository.updateMailbox(this);
+      UpdateMailxboxRepository();
    }
 
-   /**
-      Change mailbox's passcode.
-      @param newPasscode the new passcode
-   */
    public void setPasscode(String newPasscode)
    {
       passcode = newPasscode;
-      if(mailBoxRepository!=null)
-      mailBoxRepository.updateMailbox(this);
+      UpdateMailxboxRepository();
    }
 
-   /**
-      Get the mailbox's greeting.
-      @return the greeting
-   */
    public String getGreeting()
    {
       return greeting;
