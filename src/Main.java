@@ -4,7 +4,6 @@ import Persistence.MailboxPersistenceService;
 import main.Connection;
 import main.MailSystem;
 import main.MailBoxRepository;
-import main.Mailbox;
 import observers.Telephone;
 
 import javax.swing.*;

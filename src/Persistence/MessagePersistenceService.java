@@ -38,6 +38,7 @@ public class MessagePersistenceService implements MessageRepository{
         if(id==0){
             try {
                 statementObj.executeUpdate("INSERT INTO Message (text,MailBoxId) VALUES" + "('" + text + "', '" + mailBoxId + "')");
+                message.setId(Integer.MAX_VALUE);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -45,7 +46,7 @@ public class MessagePersistenceService implements MessageRepository{
     }
 
     public ArrayList<Message> getAllMessagesByMailBoxId(int mailBoxId){
-        ArrayList<Message> messages=new ArrayList<Message>();
+        ArrayList<Message> messages=new ArrayList<>();
         String query="SELECT * FROM Message WHERE MailBoxId = "+mailBoxId;
 
         try {
