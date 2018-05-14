@@ -1,7 +1,8 @@
 package test;
 
-import main.Mailbox;
-import main.Message;
+import Persistence.MailboxPersistenceService;
+import Persistence.MessagePersistenceService;
+import main.*;
 
 import org.junit.Test;
 
@@ -9,6 +10,19 @@ import static org.junit.Assert.*;
 public class MailboxTest {
 	
 	Mailbox mailbox=new Mailbox("pass","saludos");
+
+    @Test
+    public void shouldReturnKeptMessages(){
+        MessageQueue keptMessages = new MessageQueue();
+        mailbox.setKeptMessages(keptMessages);
+        assertEquals(keptMessages,mailbox.getKeptMessages());
+    }
+    @Test
+    public void shouldSetKeptMessages(){
+        MessageQueue setMessages=new MessageQueue();
+        mailbox.setKeptMessages(setMessages);
+        assertEquals(setMessages,mailbox.getKeptMessages());
+    }
 	@Test
 	public void shouldChangePasscode() {
 		mailbox.setPasscode("newpass");
@@ -57,6 +71,11 @@ public class MailboxTest {
 		mailbox.saveCurrentMessage();
 		assertEquals(mailbox.getCurrentMessage(),newMessage);
 	}
+	@Test
+	public void shouldReturnPasscode(){
+		assertEquals("pass",mailbox.getPasscode());
+	}
+
 	
 	
 }

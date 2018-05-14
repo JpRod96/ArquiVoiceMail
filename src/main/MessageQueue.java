@@ -31,7 +31,7 @@ public class MessageQueue
    {
       return queue.size();
    }
-   
+
    public Message peek()
    {
       if (queue.size() == 0) return null;
