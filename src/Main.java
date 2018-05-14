@@ -16,8 +16,8 @@ public class Main
    {
       String connectionString="jdbc:sqlite:db.db";
       Scanner console = new Scanner(System.in);
-      //TODO cambiar esta linea por MailSystem= new MailSystem(repositorioMailbox); donde repositorio es la implementacion de mailboxRepository
-      MailSystem system = getMailSystemInfoFromDB(connectionString);
+      MailBoxRepository mailBoxRepository=new MailboxPersistenceService(connectionString);
+      MailSystem system = new MailSystem(mailBoxRepository);
       Connection connection = new Connection(system);
 
       setObservers(connection, console);
@@ -37,13 +37,7 @@ public class Main
       form.setVisible(true);
       form.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
    }
-   //TODO borrar este metodo cuando la persistencia este funcionando con el programa
-   public static MailSystem getMailSystemInfoFromDB(String connectionString){
-      MailBoxRepository mailBoxRepository=new MailboxPersistenceService(connectionString);
-      MailSystem mailSystem=new MailSystem(mailBoxRepository.getAllMailBoxes());
-      return mailSystem;
-   }
-   
+
    public static void run(Connection connection, Scanner scanner)
    {
       boolean more = true;

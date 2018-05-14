@@ -1,36 +1,32 @@
 package main;
 
-/**
-   A mailbox contains messages that can be listed, kept or discarded.
-*/
 public class Mailbox
 {
    private MessageQueue newMessages;
    private MessageQueue keptMessages;
    private String greeting;
    private String passcode;
-
-   public int getId() {
-      return id;
-   }
-
-   public void setId(int id) {
-      this.id = id;
-   }
-
    private int id;
+   private MessageRepository messageRepository;
+   private MailBoxRepository mailBoxRepository;
 
-   /**
-      Creates Mailbox object.
-      @param aPasscode passcode number
-      @param aGreeting greeting string
-   */
    public Mailbox(String aPasscode, String aGreeting)
    {
       passcode = aPasscode;
       greeting = aGreeting;
       newMessages = new MessageQueue();
       keptMessages = new MessageQueue();
+   }
+
+   public Mailbox(String passcode, String greeting, int id, MessageRepository messageRepository, MailBoxRepository mailBoxRepository)
+   {
+      this.passcode = passcode;
+      this.greeting = greeting;
+      newMessages = new MessageQueue();
+      keptMessages = new MessageQueue();
+      this.messageRepository=messageRepository;
+      this.id=id;
+      this.mailBoxRepository=mailBoxRepository;
    }
 
    /**
@@ -72,10 +68,19 @@ public class Mailbox
    */
    public Message removeCurrentMessage()
    {
-      if (newMessages.size() > 0)
-         return newMessages.remove();
-      else if (keptMessages.size() > 0)
-         return keptMessages.remove();
+      Message message;
+      if (newMessages.size() > 0){
+         message=newMessages.remove();
+         if(messageRepository!=null)
+            messageRepository.deleteMessage(message);
+         return message;
+      }
+      else if (keptMessages.size() > 0){
+         message=keptMessages.remove();
+         if(messageRepository!=null)
+            messageRepository.deleteMessage(message);
+         return message;
+      }
       else
          return null;
    }
@@ -85,9 +90,12 @@ public class Mailbox
    */
    public void saveCurrentMessage()
    {
-      Message m = removeCurrentMessage();
-      if (m != null)
-         keptMessages.add(m);
+      Message message = removeCurrentMessage();
+      if (message != null){
+         keptMessages.add(message);
+         if(messageRepository!=null)
+            messageRepository.saveMessage(message, id);
+      }
    }
 
    /**
@@ -97,6 +105,8 @@ public class Mailbox
    public void setGreeting(String newGreeting)
    {
       greeting = newGreeting;
+      if(mailBoxRepository!=null)
+      mailBoxRepository.updateMailbox(this);
    }
 
    /**
@@ -106,6 +116,8 @@ public class Mailbox
    public void setPasscode(String newPasscode)
    {
       passcode = newPasscode;
+      if(mailBoxRepository!=null)
+      mailBoxRepository.updateMailbox(this);
    }
 
    /**
@@ -121,19 +133,19 @@ public class Mailbox
       return passcode;
    }
 
-   public MessageQueue getNewMessages() {
-      return newMessages;
-   }
-
-   public void setNewMessages(MessageQueue newMessages) {
-      this.newMessages = newMessages;
-   }
-
    public MessageQueue getKeptMessages() {
       return keptMessages;
    }
 
    public void setKeptMessages(MessageQueue keptMessages) {
       this.keptMessages = keptMessages;
+   }
+
+   public int getId() {
+      return id;
+   }
+
+   public void setId(int id) {
+      this.id = id;
    }
 }

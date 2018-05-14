@@ -1,9 +1,5 @@
 package main;
 
-import Persistence.MailboxPersistenceService;
-
-import static main.Util.mailBoxRepository;
-
 /**
  * Created by Jp on 24/04/2018.
  */
@@ -20,9 +16,7 @@ public class ChangeGreeting implements ConnectionState{
         this.connection=connection;
         if (key.equals("#"))
         {
-            int id = connection.getCurrentMailbox().getId();
             connection.getCurrentMailbox().setGreeting(connection.getCurrentRecording());
-            mailBoxRepository.updateMailbox(connection.getCurrentMailbox(),id);
             connection.setCurrentRecording("");
             changeState(connection, new MailBoxMenuState());
             connection.notifyObservers(MAILBOX_MENU_TEXT);

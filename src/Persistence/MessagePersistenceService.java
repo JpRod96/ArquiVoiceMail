@@ -37,7 +37,7 @@ public class MessagePersistenceService implements MessageRepository{
         int id=message.getId();
         if(id==0){
             try {
-                statementObj.executeUpdate("INSERT INTO `VoiceMailDB`.`Message` (`text`,`MailBoxId`) VALUES" + "('" + text + "', '" + mailBoxId + "')");
+                statementObj.executeUpdate("INSERT INTO Message (text,MailBoxId) VALUES" + "('" + text + "', '" + mailBoxId + "')");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -46,7 +46,7 @@ public class MessagePersistenceService implements MessageRepository{
 
     public ArrayList<Message> getAllMessagesByMailBoxId(int mailBoxId){
         ArrayList<Message> messages=new ArrayList<Message>();
-        String query="SELECT id FROM Message WHERE MailBoxId = "+mailBoxId;
+        String query="SELECT * FROM Message WHERE MailBoxId = "+mailBoxId;
 
         try {
             resultSet = statementObj.executeQuery(query);
@@ -93,7 +93,7 @@ public class MessagePersistenceService implements MessageRepository{
     public void deleteMessage(Message message){
         int id=message.getId();
         String query="DELETE FROM Message WHERE Id="+id;
-        if(id==0){
+        if(id>0){
             try {
                 statementObj.executeUpdate(query);
             } catch (Exception e) {

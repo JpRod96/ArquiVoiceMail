@@ -16,7 +16,7 @@ public class MessageQueue
    */
    public MessageQueue()
    {
-      queue = new ArrayList<Message>();
+      queue = new ArrayList<>();
    }
 
    /**

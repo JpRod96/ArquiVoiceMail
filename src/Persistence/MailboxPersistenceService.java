@@ -33,10 +33,11 @@ public class MailboxPersistenceService implements MailBoxRepository{
         }
     }
 
-    public void saveMailbox(Mailbox mailbox, int id){
+    public void saveMailbox(Mailbox mailbox){
         MessageQueue keptMessages=mailbox.getKeptMessages();
         String passcode=mailbox.getPasscode(),
                 greeting=mailbox.getGreeting();
+        int id=mailbox.getId();
 
         try {
             statementObj.executeUpdate("INSERT INTO `VoiceMailDB`.`Mailbox` (`id`,`passcode`, `greeting`) VALUES('" + id + "'," +
@@ -47,12 +48,12 @@ public class MailboxPersistenceService implements MailBoxRepository{
         }
     }
 
-    public void updateMailbox(Mailbox mailbox, int mailboxId){
-        MessageQueue keptMessages=mailbox.getKeptMessages();
+    public void updateMailbox(Mailbox mailbox){
         String passcode=mailbox.getPasscode(),
                 greeting=mailbox.getGreeting();
+        int id=mailbox.getId();
 
-        String query="UPDATE `Mailbox` SET `passcode`='"+passcode+"',`greeting`='"+greeting+"' WHERE id = "+mailboxId;
+        String query="UPDATE `Mailbox` SET `passcode`='"+passcode+"',`greeting`='"+greeting+"' WHERE id = "+id;
 
         try {
             statementObj.executeUpdate(query);
@@ -72,7 +73,7 @@ public class MailboxPersistenceService implements MailBoxRepository{
             while(resultSet.next()) {
                 String passcode=resultSet.getString("passcode"),
                         greeting=resultSet.getString("greeting");
-                mailbox=new Mailbox(passcode,greeting);
+                mailbox=new Mailbox(passcode, greeting, mailboxId, messagePersistenceService, this);
                 ArrayList<Message> messages= messagePersistenceService.getAllMessagesByMailBoxId(mailboxId);
                 MessageQueue keptMessageQueue= new MessageQueue();
                 keptMessageQueue.setQueue(messages);
@@ -86,29 +87,12 @@ public class MailboxPersistenceService implements MailBoxRepository{
         return mailbox;
     }
     public ArrayList<Mailbox> getAllMailBoxes(){
-        String query="SELECT id FROM Mailbox";
+        String query="SELECT * FROM Mailbox";
         ArrayList<Mailbox> mailboxes=new ArrayList<>();
-
-        try {
-            resultSet = statementObj.executeQuery(query);
-
-            while(resultSet.next()) {
-                int mailboxId=Integer.parseInt(resultSet.getString("id"));
-                mailboxes.add(getMailBoxById(mailboxId));
-            }
+        for (int mailboxId=1; mailboxId<=20;mailboxId++){
+            mailboxes.add(getMailBoxById(mailboxId));
         }
-        catch(Exception ex) {
-            ex.printStackTrace();
-        }
+
      return mailboxes;
     }
-
-    public void setPassCode(String pass,String id){
-        String query = "update Mailbox set passcode = "+pass+" where id = "+id+";";
-        try {
-            statementObj.executeUpdate(query);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
-}

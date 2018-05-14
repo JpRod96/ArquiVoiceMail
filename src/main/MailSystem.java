@@ -2,25 +2,19 @@ package main;
 
 import java.util.ArrayList;
 
-import static main.Util.mailBoxRepository;
-
-/**
-   A system of voice mail boxes.
-*/
 public class MailSystem
 {
    private ArrayList<Mailbox> mailboxes;
-   public MailSystem(MailBoxRepository mailBoxRepository){}
+   private MailBoxRepository mailBoxRepository;
 
-   /**
-      Constructs a mail system with a given number of mailboxes
-      @param mailboxCount the number of mailboxes
-   */
+   public MailSystem(MailBoxRepository mailBoxRepository){
+      this.mailBoxRepository=mailBoxRepository;
+      getMailboxesFromDB();
+   }
+
    public MailSystem(int mailboxCount)
    {
       mailboxes = new ArrayList<Mailbox>();
-
-      // Initialize mail boxes.
 
       for (int i = 0; i < mailboxCount; i++)
       {
@@ -31,34 +25,16 @@ public class MailSystem
       }
    }
 
-   public MailSystem(ArrayList<Mailbox> mailboxes){
-      this.mailboxes=mailboxes;
-   }
-
-   /**
-      Locate a mailbox.
-      @param ext the extension number
-      @return the mailbox or null if not found
-   */
    public Mailbox findMailbox(String ext)
    {
       int i = Integer.parseInt(ext);
-      if(mailBoxRepository!=null){
-         return mailBoxRepository.getMailBoxById(i);
-      }
-      else
-      {
-         if (1 <= i && i <= mailboxes.size())
-            return  mailboxes.get(i - 1);
-         else return null;
-      }
+      if (1 <= i && i <= mailboxes.size())
+         return  mailboxes.get(i - 1);
+      else return null;
    }
 
-   public ArrayList<Mailbox> getMailboxes() {
-      return mailboxes;
+   public void getMailboxesFromDB(){
+      this.mailboxes=mailBoxRepository.getAllMailBoxes();
    }
 
-   public void setMailboxes(ArrayList<Mailbox> mailboxes) {
-      this.mailboxes = mailboxes;
-   }
 }

@@ -10,7 +10,6 @@ public class Connected implements ConnectionState {
             connection.setCurrentMailbox(connection.getSystem().findMailbox(connection.getAccumulatedKeys()));
             if (connection.getCurrentMailbox() != null)
             {   connection.getCurrentMailbox().setId(Integer.parseInt(connection.getAccumulatedKeys()));
-                //connection.state = Connection.RECORDING;
                 changeState(connection,new Recording());
                 connection.notifyObservers(connection.getCurrentMailbox().getGreeting());
             }
@@ -37,5 +36,4 @@ public class Connected implements ConnectionState {
     public void hangUp(Connection connection) {
 
     }
-
 }

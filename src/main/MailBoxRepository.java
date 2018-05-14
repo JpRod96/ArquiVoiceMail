@@ -8,9 +8,8 @@ import java.util.List;
  */
 public interface MailBoxRepository {
 
-    void saveMailbox(Mailbox mailbox, int id);
-    void updateMailbox(Mailbox mailbox, int mailboxId);
+    void saveMailbox(Mailbox mailbox);
+    void updateMailbox(Mailbox mailbox);
     Mailbox getMailBoxById(int mailboxId);
     ArrayList<Mailbox> getAllMailBoxes();
-    void setPassCode(String pass, String id);
 }

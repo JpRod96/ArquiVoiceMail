@@ -1,7 +1,5 @@
 package main;
 
-import static main.Util.mailBoxRepository;
-
 /**
  * Created by Jp on 24/04/2018.
  */
@@ -12,14 +10,11 @@ public class ChangePassCode implements ConnectionState{
                     + "Enter 2 to change your passcode\n"
                     + "Enter 3 to change your greeting";
 
-
-
     @Override
     public void dial(String key, Connection connection) {
         if (key.equals("#"))
         {
             connection.getCurrentMailbox().setPasscode(connection.getAccumulatedKeys());
-            mailBoxRepository.setPassCode(connection.getAccumulatedKeys(),Integer.toString(connection.getCurrentMailbox().getId()));
             changeState(connection,new MailBoxMenuState());
             connection.notifyObservers(MAILBOX_MENU_TEXT);
             connection.setAccumulatedKeys("");
