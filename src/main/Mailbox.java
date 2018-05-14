@@ -105,6 +105,10 @@ public class Mailbox
    public void setGreeting(String newGreeting)
    {
       greeting = newGreeting;
+      UpdateMailxboxRepository();
+   }
+
+   private void UpdateMailxboxRepository() {
       if(mailBoxRepository!=null)
       mailBoxRepository.updateMailbox(this);
    }
@@ -116,8 +120,7 @@ public class Mailbox
    public void setPasscode(String newPasscode)
    {
       passcode = newPasscode;
-      if(mailBoxRepository!=null)
-      mailBoxRepository.updateMailbox(this);
+      UpdateMailxboxRepository();
    }
 
    /**
