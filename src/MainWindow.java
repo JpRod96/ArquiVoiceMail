@@ -1,3 +1,5 @@
+import Controllers.InterfaceController;
+import Presenters.InterfacePresenter;
 import main.Connection;
 import main.MailBoxRepository;
 import observers.StateWatcher;
@@ -13,10 +15,8 @@ public class MainWindow extends JFrame implements StateWatcher, ActionListener {
     private JLabel labelText;
     private JTextArea userOption;
     private JButton numeralButton;
-
-    Connection connection;
-    MailBoxRepository dbService;
-
+    private InterfacePresenter interfacePresenter;
+    private InterfaceController interfaceController;
 
     public MainWindow(Connection connection){
             super("jp,mauri,abel");
@@ -24,8 +24,9 @@ public class MainWindow extends JFrame implements StateWatcher, ActionListener {
             setSize(340,400);
             initializeActionButtons();
             initializeNumeralButtons();
-            this.connection=connection;
-            this.connection.addObserver(this);
+            interfaceController= new InterfaceController(connection);
+            interfacePresenter = new InterfacePresenter(interfaceController);
+            interfaceController.addObserver(this);
         }
     public void initializeNumeralButtons(){
         a1Button.addActionListener(this);
@@ -40,14 +41,14 @@ public class MainWindow extends JFrame implements StateWatcher, ActionListener {
         a0Button.addActionListener(this);
     }
     public void initializeActionButtons(){
-
         hButton.addActionListener(this);
         actionButton.addActionListener(this);
         numeralButton.addActionListener(this);
     }
-    @Override
+   @Override
     public void update(String updateString){
-        labelText.setText("<html>" + updateString.replaceAll("\n", "<br/>") + "</html>");
+       interfacePresenter.assignMessage(this.labelText,updateString);
+      // labelText.setText("<html>" + updateString.replaceAll("\n", "<br/>") + "</html>");
     }
 
     public void actionPerformed(ActionEvent e){
@@ -75,23 +76,23 @@ public class MainWindow extends JFrame implements StateWatcher, ActionListener {
         if(e.getSource()==numeralButton)
             userOption.setText(userOption.getText().concat("#"));
         if (e.getSource()==actionButton){
-
             if(userOption.getText().length() == 1
                     && "1234567890#".indexOf(userOption.getText()) >= 0)
             {
-                this.connection.recibeData(userOption.getText());
+                //this.connection.recibeData(userOption.getText());
+                interfacePresenter.recibeData(userOption.getText());
+
             }
             else
             {
-                this.connection.record(userOption.getText());
+                //this.connection.record(userOption.getText());
+                interfacePresenter.record(userOption.getText());
             }
-
             userOption.setText("");
         }
         if (e.getSource()==hButton){
-
-            this.connection.hangup();
-
+           // this.connection.hangup();
+            interfacePresenter.hangUp();
         }
     }
 
