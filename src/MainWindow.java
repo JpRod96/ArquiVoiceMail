@@ -1,13 +1,11 @@
-import Controllers.InterfaceController;
-import Presenters.InterfacePresenter;
+import Controllers.UIController;
+import Presenters.UIPresenter;
 import main.Connection;
-import main.MailBoxRepository;
 import observers.StateWatcher;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import Persistence.*;
 
 public class MainWindow extends JFrame implements StateWatcher, ActionListener {
     private JPanel rootPanel;
@@ -15,8 +13,8 @@ public class MainWindow extends JFrame implements StateWatcher, ActionListener {
     private JLabel labelText;
     private JTextArea userOption;
     private JButton numeralButton;
-    private InterfacePresenter interfacePresenter;
-    private InterfaceController interfaceController;
+    private UIPresenter uiPresenter;
+    private UIController uiController;
 
     public MainWindow(Connection connection){
             super("jp,mauri,abel");
@@ -24,9 +22,9 @@ public class MainWindow extends JFrame implements StateWatcher, ActionListener {
             setSize(340,400);
             initializeActionButtons();
             initializeNumeralButtons();
-            interfaceController= new InterfaceController(connection);
-            interfacePresenter = new InterfacePresenter(interfaceController);
-            interfaceController.addObserver(this);
+            uiController = new UIController(connection);
+            uiPresenter = new UIPresenter(uiController);
+            uiController.addObserver(this);
         }
     public void initializeNumeralButtons(){
         a1Button.addActionListener(this);
@@ -47,7 +45,7 @@ public class MainWindow extends JFrame implements StateWatcher, ActionListener {
     }
    @Override
     public void update(String updateString){
-       interfacePresenter.assignMessage(this.labelText,updateString);
+       uiPresenter.assignMessage(this.labelText,updateString);
       // labelText.setText("<html>" + updateString.replaceAll("\n", "<br/>") + "</html>");
     }
 
@@ -80,19 +78,19 @@ public class MainWindow extends JFrame implements StateWatcher, ActionListener {
                     && "1234567890#".indexOf(userOption.getText()) >= 0)
             {
                 //this.connection.recibeData(userOption.getText());
-                interfacePresenter.recibeData(userOption.getText());
+                uiPresenter.recibeData(userOption.getText());
 
             }
             else
             {
                 //this.connection.record(userOption.getText());
-                interfacePresenter.record(userOption.getText());
+                uiPresenter.record(userOption.getText());
             }
             userOption.setText("");
         }
         if (e.getSource()==hButton){
            // this.connection.hangup();
-            interfacePresenter.hangUp();
+            uiPresenter.hangUp();
         }
     }
 

@@ -1,5 +1,6 @@
 package Controllers;
 
+import main.Connected;
 import main.Connection;
 import main.ConnectionState;
 import observers.StateWatcher;
@@ -7,15 +8,16 @@ import observers.StateWatcher;
 /**
  * Created by CORE i7 on 27/05/2018.
  */
-public class InterfaceController implements StateWatcher {
+public class UIController implements StateWatcher {
     private ConnectionState connectionState;
     private Connection connection;
 
-    public InterfaceController (Connection connection){
+    public UIController(Connection connection){
         this.connection = connection;
         this.connectionState = connection.get_state();
     }
     public void update(String updateString){
+        connectionState=connection.get_state();
 
     }
     public void addObserver(StateWatcher stateWatcher){
