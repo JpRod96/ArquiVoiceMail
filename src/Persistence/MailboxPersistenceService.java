@@ -34,11 +34,11 @@ public class MailboxPersistenceService implements MailBoxRepository{
             statementObj = connectionObj.createStatement();
            // Statement statement= connectionObj.createStatement();
             //statement.execute("CREATE DATABASE IF NOT EXISTS mailvoice;");
-            connectionObj.close();
-            connectionObj= DriverManager.getConnection("jdbc:postgresql://localhost:5432/mailvoice", user, password);
+            //connectionObj.close();
+           // connectionObj= DriverManager.getConnection("jdbc:postgresql://localhost:5432/mailvoice", user, password);
             Statement statement2 = connectionObj.createStatement();
             statement2.execute("CREATE TABLE IF NOT EXISTS Mailbox ( id SERIAL PRIMARY  KEY, passcode CHAR(20) NOT NULL, greeting CHAR(100) NOT NULL);");
-            statement2.execute("INSERT INTO Mailbox (id, passcode, greeting) VALUES(1, '1', 'You have reached mailbox 1. \\Please leave a message now.');");
+           // statement2.execute("INSERT INTO Mailbox (id, passcode, greeting) VALUES(1, '1', 'You have reached mailbox 1. \\Please leave a message now.');");
 
 
 
@@ -94,7 +94,7 @@ public class MailboxPersistenceService implements MailBoxRepository{
     public Mailbox getMailBoxById(int mailboxId){
         Mailbox mailbox=null;
 
-        String query="SELECT * FROM Mailbox WHERE id = "+mailboxId;
+        String query="SELECT * FROM mailbox WHERE id = "+mailboxId;
 
         try {
             resultSet = statementObj.executeQuery(query);

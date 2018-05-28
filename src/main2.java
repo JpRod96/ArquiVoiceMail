@@ -21,7 +21,7 @@ public class main2 {
         }
 
         port(port);
-        String connectionString="jdbc:postgresql://localhost:5432/postgres";
+        String connectionString="jdbc:postgresql://localhost:5432/mailvoice";
         String user="abel";
         String password="73441710bliokiN";
         String driver="org.postgresql.Driver";
@@ -42,6 +42,17 @@ public class main2 {
 
 
         });
+        get("/mailboxs/:id", (request, response) -> {
+            response.type("application/json");
+            MailboxPersistenceService m=new MailboxPersistenceService("jdbc:sqlite:db.db");
+            Mailbox a=m.getMailBoxById(1);
+            a.setMailBoxRepository(null);
+            a.setMessageRepository(null);
+
+            return new Gson().toJson(a);
+
+        });
+
 
     }
 
