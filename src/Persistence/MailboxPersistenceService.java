@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 
 /**
@@ -108,4 +109,21 @@ public class MailboxPersistenceService implements MailBoxRepository{
 
      return mailboxes;
     }
+    public static List<Mailbox> getAllMailboxes2(){
+        String connectionString="jdbc:sqlite:db.db";
+        MailBoxRepository mailBoxRepository=new MailboxPersistenceService(connectionString);
+        List<Mailbox> mailboxes=mailBoxRepository.getAllMailBoxes();
+        List<Mailbox> mailboxes1WithoutRepos=new ArrayList<>();
+        for (Mailbox mailbox:
+                mailboxes) {
+            mailbox.setMessageRepository(null);
+            mailbox.setMailBoxRepository(null);
+            mailboxes1WithoutRepos.add(mailbox);
+        }
+        return mailboxes1WithoutRepos;
     }
+
+    public boolean userExist(String params) {
+        return true;
+    }
+}
