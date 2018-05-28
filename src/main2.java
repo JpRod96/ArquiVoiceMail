@@ -12,6 +12,15 @@ public class main2 {
 
 
     public static void main(String[] args) {
+        ProcessBuilder process = new ProcessBuilder();
+        Integer port;
+        if (process.environment().get("PORT") != null) {
+            port = Integer.parseInt(process.environment().get("PORT"));
+        } else {
+            port = 4567;
+        }
+
+        port(port);
 
         get("/hello", (req, res) -> {
             MailboxPersistenceService m=new MailboxPersistenceService("jdbc:sqlite:db.db");
@@ -31,6 +40,6 @@ public class main2 {
         });
 
     }
-  
+
 }
 
