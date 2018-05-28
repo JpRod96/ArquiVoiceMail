@@ -119,4 +119,13 @@ public class Mailbox
    public void setId(int id) {
       this.id = id;
    }
+
+   public void setMessageRepository(MessageRepository m) {
+      this.messageRepository=m;
+
+   }
+
+   public void setMailBoxRepository(MailBoxRepository m) {
+      this.mailBoxRepository=m;
+   }
 }
