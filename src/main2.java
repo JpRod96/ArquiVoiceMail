@@ -21,9 +21,13 @@ public class main2 {
         }
 
         port(port);
+        String connectionString="jdbc:postgresql://localhost:5432/postgres";
+        String user="abel";
+        String password="73441710bliokiN";
+        String driver="org.postgresql.Driver";
 
         get("/hello", (req, res) -> {
-            MailboxPersistenceService m=new MailboxPersistenceService("jdbc:sqlite:db.db");
+            MailboxPersistenceService m=new MailboxPersistenceService(connectionString,user,password,driver);
             Mailbox a= m.getMailBoxById(1);
             return a.getGreeting();
         });

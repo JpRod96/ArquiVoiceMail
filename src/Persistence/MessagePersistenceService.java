@@ -19,6 +19,21 @@ public class MessagePersistenceService implements MessageRepository{
     public MessagePersistenceService(String connectionString){
         load(connectionString);
     }
+    public MessagePersistenceService(String connectionString, String user, String password, String driver){
+        loadLocalHost(connectionString, user, password, driver);
+    }
+    public void loadLocalHost(String connectionString, String user, String password, String driver){
+        try
+        {
+            Class.forName(driver);
+            connectionObj = DriverManager.getConnection(connectionString, user, password);
+            statementObj = connectionObj.createStatement();
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
 
     public void load(String connectionString){
         try

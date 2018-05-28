@@ -22,6 +22,33 @@ public class MailboxPersistenceService implements MailBoxRepository{
         load(connectionString);
         messagePersistenceService =new MessagePersistenceService(connectionString);
     }
+    public MailboxPersistenceService(String connectionString, String user, String password, String driver){
+        loadLocalHost(connectionString, user, password, driver);
+        messagePersistenceService =new MessagePersistenceService(connectionString, user, password, driver);
+    }
+    public void loadLocalHost(String connectionString, String user, String password, String driver){
+        try
+        {
+            Class.forName(driver);
+            connectionObj = DriverManager.getConnection(connectionString, user, password);
+            statementObj = connectionObj.createStatement();
+           // Statement statement= connectionObj.createStatement();
+            //statement.execute("CREATE DATABASE IF NOT EXISTS mailvoice;");
+            connectionObj.close();
+            connectionObj= DriverManager.getConnection("jdbc:postgresql://localhost:5432/mailvoice", user, password);
+            Statement statement2 = connectionObj.createStatement();
+            statement2.execute("CREATE TABLE IF NOT EXISTS Mailbox ( id SERIAL PRIMARY  KEY, passcode CHAR(20) NOT NULL, greeting CHAR(100) NOT NULL);");
+            statement2.execute("INSERT INTO Mailbox (id, passcode, greeting) VALUES(1, '1', 'You have reached mailbox 1. \\Please leave a message now.');");
+
+
+
+
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
 
     public void load(String connectionString){
         try
