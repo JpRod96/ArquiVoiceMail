@@ -1,11 +1,11 @@
+import Controllers.UIController;
+import Presenters.UIPresenter;
 import main.Connection;
-import main.MailBoxRepository;
 import observers.StateWatcher;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import Persistence.*;
 
 public class MainWindow extends JFrame implements StateWatcher, ActionListener {
     private JPanel rootPanel;
@@ -13,10 +13,8 @@ public class MainWindow extends JFrame implements StateWatcher, ActionListener {
     private JLabel labelText;
     private JTextArea userOption;
     private JButton numeralButton;
-
-    Connection connection;
-    MailBoxRepository dbService;
-
+    private UIPresenter uiPresenter;
+    private UIController uiController;
 
     public MainWindow(Connection connection){
             super("jp,mauri,abel");
@@ -24,8 +22,9 @@ public class MainWindow extends JFrame implements StateWatcher, ActionListener {
             setSize(340,400);
             initializeActionButtons();
             initializeNumeralButtons();
-            this.connection=connection;
-            this.connection.addObserver(this);
+            uiController = new UIController(connection);
+            uiPresenter = new UIPresenter(uiController);
+            uiController.addObserver(this);
         }
     public void initializeNumeralButtons(){
         a1Button.addActionListener(this);
@@ -40,14 +39,14 @@ public class MainWindow extends JFrame implements StateWatcher, ActionListener {
         a0Button.addActionListener(this);
     }
     public void initializeActionButtons(){
-
         hButton.addActionListener(this);
         actionButton.addActionListener(this);
         numeralButton.addActionListener(this);
     }
-    @Override
+   @Override
     public void update(String updateString){
-        labelText.setText("<html>" + updateString.replaceAll("\n", "<br/>") + "</html>");
+       uiPresenter.assignMessage(this.labelText,updateString);
+      // labelText.setText("<html>" + updateString.replaceAll("\n", "<br/>") + "</html>");
     }
 
     public void actionPerformed(ActionEvent e){
@@ -75,23 +74,23 @@ public class MainWindow extends JFrame implements StateWatcher, ActionListener {
         if(e.getSource()==numeralButton)
             userOption.setText(userOption.getText().concat("#"));
         if (e.getSource()==actionButton){
-
             if(userOption.getText().length() == 1
                     && "1234567890#".indexOf(userOption.getText()) >= 0)
             {
-                this.connection.recibeData(userOption.getText());
+                //this.connection.recibeData(userOption.getText());
+                uiPresenter.recibeData(userOption.getText());
+
             }
             else
             {
-                this.connection.record(userOption.getText());
+                //this.connection.record(userOption.getText());
+                uiPresenter.record(userOption.getText());
             }
-
             userOption.setText("");
         }
         if (e.getSource()==hButton){
-
-            this.connection.hangup();
-
+           // this.connection.hangup();
+            uiPresenter.hangUp();
         }
     }
 
