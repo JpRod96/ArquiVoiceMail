@@ -1,9 +1,11 @@
 import java.util.Scanner;
 
 import Persistence.MailboxPersistenceService;
+import Persistence.MessagePersistenceService;
 import main.Connection;
 import main.MailSystem;
 import main.MailBoxRepository;
+import main.MessageRepository;
 import observers.Telephone;
 
 import javax.swing.*;
@@ -16,8 +18,9 @@ public class Main
       String connectionString="jdbc:sqlite:db.db";
       Scanner console = new Scanner(System.in);
       MailBoxRepository mailBoxRepository=new MailboxPersistenceService(connectionString);
+      MessageRepository messageRepository=new MessagePersistenceService(connectionString);
       MailSystem system = new MailSystem(mailBoxRepository);
-      Connection connection = new Connection(system);
+      Connection connection = new Connection(system,mailBoxRepository,messageRepository);
 
       setObservers(connection, console);
 
