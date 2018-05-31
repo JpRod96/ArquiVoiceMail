@@ -8,7 +8,7 @@ import javax.swing.*;
 /**
  * Created by CORE i7 on 27/05/2018.
  */
-public class UIPresenter implements Presenter <Connection>{
+public class  UIPresenter implements Presenter <Connection>{
     UIController UIController;
 
     public UIPresenter(UIController UIController){
