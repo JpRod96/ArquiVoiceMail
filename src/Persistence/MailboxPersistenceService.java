@@ -17,30 +17,15 @@ public class MailboxPersistenceService implements MailBoxRepository{
     private Statement statementObj;
     private ResultSet resultSet;
     private MessagePersistenceService messagePersistenceService;
-    private boolean injectPersistence;
 
     public MailboxPersistenceService(String connectionString){
         load(connectionString);
         messagePersistenceService = new MessagePersistenceService(connectionString);
-        injectPersistence = true;
     }
 
     public MailboxPersistenceService(String connectionString, String user, String password, String driver){
         loadLocalHost(connectionString, user, password, driver);
         messagePersistenceService = new MessagePersistenceService(connectionString, user, password, driver);
-        injectPersistence = false;
-    }
-
-    public MailboxPersistenceService(String connectionString, boolean injectPersistence){
-        load(connectionString);
-        messagePersistenceService = new MessagePersistenceService(connectionString);
-        this.injectPersistence = injectPersistence;
-    }
-
-    public MailboxPersistenceService(String connectionString, String user, String password, String driver, boolean injectPersistence){
-        loadLocalHost(connectionString, user, password, driver);
-        messagePersistenceService = new MessagePersistenceService(connectionString, user, password, driver);
-        this.injectPersistence = injectPersistence;
     }
 
     public void loadLocalHost(String connectionString, String user, String password, String driver){
@@ -82,7 +67,7 @@ public class MailboxPersistenceService implements MailBoxRepository{
         int id=mailbox.getId();
 
         try {
-            statementObj.executeUpdate("INSERT INTO `VoiceMailDB`.`Mailbox` (`id`,`passcode`, `greeting`) VALUES('" + id + "'," +
+            statementObj.executeUpdate("INSERT INTO Mailbox (`id`,`passcode`, `greeting`) VALUES('" + id + "'," +
                     "'" + passcode + "', '" + greeting + "')");
             messagePersistenceService.saveAllMessages(keptMessages, id);
         } catch (Exception e) {
@@ -95,7 +80,7 @@ public class MailboxPersistenceService implements MailBoxRepository{
                 greeting=mailbox.getGreeting();
         int id=mailbox.getId();
 
-        String query="UPDATE `Mailbox` SET `passcode`='"+passcode+"',`greeting`='"+greeting+"' WHERE id = "+id;
+        String query="UPDATE Mailbox SET `passcode`='"+passcode+"',`greeting`='"+greeting+"' WHERE id = "+id;
 
         try {
             statementObj.executeUpdate(query);
@@ -116,12 +101,7 @@ public class MailboxPersistenceService implements MailBoxRepository{
                 String passcode=resultSet.getString("passcode"),
                         greeting=resultSet.getString("greeting");
                 greeting=setGreetingRetrievedFromDB(greeting);
-                if(injectPersistence){
-                    mailbox=new Mailbox(passcode, greeting, mailboxId, messagePersistenceService, this);
-                }
-                else{
-                    mailbox=new Mailbox(passcode, greeting, mailboxId);
-                }
+                mailbox=new Mailbox(passcode, greeting, mailboxId);
                 ArrayList<Message> messages= messagePersistenceService.getAllMessagesByMailBoxId(mailboxId);
                 MessageQueue keptMessageQueue= new MessageQueue();
                 keptMessageQueue.setQueue(messages);

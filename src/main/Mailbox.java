@@ -7,8 +7,6 @@ public class Mailbox
    private String greeting;
    private String passcode;
    private int id;
-   private MessageRepository messageRepository;
-   private MailBoxRepository mailBoxRepository;
 
    public Mailbox(String aPasscode, String aGreeting)
    {
@@ -25,17 +23,6 @@ public class Mailbox
       this.id=id;
       newMessages = new MessageQueue();
       keptMessages = new MessageQueue();
-   }
-
-   public Mailbox(String passcode, String greeting, int id, MessageRepository messageRepository, MailBoxRepository mailBoxRepository)
-   {
-      this.passcode = passcode;
-      this.greeting = greeting;
-      newMessages = new MessageQueue();
-      keptMessages = new MessageQueue();
-      this.messageRepository=messageRepository;
-      this.id=id;
-      this.mailBoxRepository=mailBoxRepository;
    }
 
    public boolean checkPasscode(String aPasscode)
@@ -63,45 +50,33 @@ public class Mailbox
       Message message;
       if (newMessages.size() > 0){
          message=newMessages.remove();
-         if(messageRepository!=null)
-            messageRepository.deleteMessage(message);
          return message;
       }
       else if (keptMessages.size() > 0){
          message=keptMessages.remove();
-         if(messageRepository!=null)
-            messageRepository.deleteMessage(message);
          return message;
       }
       else
          return null;
    }
 
-   public void saveCurrentMessage()
+   public Message saveCurrentMessage()
    {
       Message message = removeCurrentMessage();
       if (message != null){
          keptMessages.add(message);
-         if(messageRepository!=null)
-            messageRepository.saveMessage(message, id);
       }
+      return message;
    }
-    private void UpdateMailxboxRepository() {
-        if(mailBoxRepository!=null)
-            mailBoxRepository.updateMailbox(this);
-    }
-
 
     public void setGreeting(String newGreeting)
    {
       greeting = newGreeting;
-      UpdateMailxboxRepository();
    }
 
    public void setPasscode(String newPasscode)
    {
       passcode = newPasscode;
-      UpdateMailxboxRepository();
    }
 
    public String getGreeting()
@@ -129,12 +104,4 @@ public class Mailbox
       this.id = id;
    }
 
-   public void setMessageRepository(MessageRepository m) {
-      this.messageRepository=m;
-
-   }
-
-   public void setMailBoxRepository(MailBoxRepository m) {
-      this.mailBoxRepository=m;
-   }
 }
