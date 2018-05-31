@@ -38,17 +38,12 @@ public class main2 {
         get("/mailboxs", (request, response) -> {
             response.type("application/json");
             MailboxPersistenceService m=new MailboxPersistenceService("jdbc:sqlite:db.db");
-            return new Gson().toJson(m.getAllMailboxes2());
-
-
+            return new Gson().toJson(m.getAllMailBoxes());
         });
         get("/mailboxs/:id", (request, response) -> {
             response.type("application/json");
             MailboxPersistenceService m=new MailboxPersistenceService("jdbc:sqlite:db.db");
             Mailbox a=m.getMailBoxById(1);
-            a.setMailBoxRepository(null);
-            a.setMessageRepository(null);
-
             return new Gson().toJson(a);
 
         });

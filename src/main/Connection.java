@@ -17,6 +17,8 @@ public class Connection
 	private String currentRecording;
 	private String accumulatedKeys;
 	private ArrayList<StateWatcher> stateWatchers;
+	private MailBoxRepository mailBoxRepository;
+	private MessageRepository messageRepository;
 
     private static final String INITIAL_PROMPT =
             "Enter mailbox number followed by #";
@@ -27,6 +29,16 @@ public class Connection
       stateWatchers= new ArrayList<>();
       _state = new Connected();
    }
+
+    public Connection(MailSystem s, MailBoxRepository mailBoxRepository, MessageRepository messageRepository)
+    {
+        system = s;
+        stateWatchers= new ArrayList<>();
+        _state = new Connected();
+        this.mailBoxRepository=mailBoxRepository;
+        this.messageRepository=messageRepository;
+    }
+
    public void changeState(ConnectionState c){
        _state=c;
    }
@@ -154,6 +166,22 @@ public class Connection
 
     public void setStateWatchers(ArrayList<StateWatcher> stateWatchers) {
         this.stateWatchers = stateWatchers;
+    }
+
+    public MailBoxRepository getMailBoxRepository() {
+        return mailBoxRepository;
+    }
+
+    public void setMailBoxRepository(MailBoxRepository mailBoxRepository) {
+        this.mailBoxRepository = mailBoxRepository;
+    }
+
+    public MessageRepository getMessageRepository() {
+        return messageRepository;
+    }
+
+    public void setMessageRepository(MessageRepository messageRepository) {
+        this.messageRepository = messageRepository;
     }
 }
 
