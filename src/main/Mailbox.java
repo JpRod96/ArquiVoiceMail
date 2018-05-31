@@ -18,6 +18,15 @@ public class Mailbox
       keptMessages = new MessageQueue();
    }
 
+   public Mailbox(String aPasscode, String aGreeting, int id)
+   {
+      passcode = aPasscode;
+      greeting = aGreeting;
+      this.id=id;
+      newMessages = new MessageQueue();
+      keptMessages = new MessageQueue();
+   }
+
    public Mailbox(String passcode, String greeting, int id, MessageRepository messageRepository, MailBoxRepository mailBoxRepository)
    {
       this.passcode = passcode;

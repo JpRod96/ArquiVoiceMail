@@ -37,14 +37,12 @@ public class main2 {
 
         get("/mailboxs", (request, response) -> {
             response.type("application/json");
-            MailboxPersistenceService m=new MailboxPersistenceService("jdbc:sqlite:db.db");
-            return new Gson().toJson(m.getAllMailboxes2());
-
-
+            MailboxPersistenceService m=new MailboxPersistenceService("jdbc:sqlite:db.db",false);
+            return new Gson().toJson(m.getAllMailBoxes());
         });
         get("/mailboxs/:id", (request, response) -> {
             response.type("application/json");
-            MailboxPersistenceService m=new MailboxPersistenceService("jdbc:sqlite:db.db");
+            MailboxPersistenceService m=new MailboxPersistenceService("jdbc:sqlite:db.db",false);
             Mailbox a=m.getMailBoxById(1);
             a.setMailBoxRepository(null);
             a.setMessageRepository(null);
