@@ -62,21 +62,29 @@ public class MessagePersistenceService implements MessageRepository{
 
     public ArrayList<Message> getAllMessagesByMailBoxId(int mailBoxId){
         ArrayList<Message> messages=new ArrayList<>();
-        String query="SELECT * FROM Message WHERE MailBoxId = "+mailBoxId;
-
-        try {
-            resultSet = statementObj.executeQuery(query);
-            while(resultSet.next()) {
-                int id=Integer.parseInt(resultSet.getString("Id"));
-                Message message=getMessageById(id);
-                messages.add(message);
-            }
-        }
-        catch(Exception ex) {
-            ex.printStackTrace();
+        int minId= getLimitMessagesIdByStrategy(mailBoxId,"MIN");
+        int maxId= getLimitMessagesIdByStrategy(mailBoxId,"MAX");
+        for(int index=minId; index<=maxId; index++){
+            messages.add(getMessageById(index));
         }
         return messages;
     }
+
+    private int getLimitMessagesIdByStrategy(int mailBoxId, String strategy){
+        int id=0;
+        String query="SELECT "+strategy+"(id) AS id FROM Message WHERE MailboxId="+mailBoxId;
+        try {
+            resultSet = statementObj.executeQuery(query);
+            while(resultSet.next()) {
+                id=Integer.parseInt(resultSet.getString("id"));
+            }
+        }
+        catch(Exception ex) {
+
+        }
+        return id;
+    }
+
 
     public Message getMessageById(int messageId){
         Message message=null;
@@ -94,7 +102,7 @@ public class MessagePersistenceService implements MessageRepository{
             message=new Message(text,id);
         }
         catch(Exception ex) {
-            ex.printStackTrace();
+
         }
         return message;
     }
