@@ -1,8 +1,8 @@
 package test;
 
-import Persistence.MailboxPersistenceService;
-import Persistence.MessagePersistenceService;
-import main.*;
+import MailVoice.Mailbox;
+import MailVoice.Message;
+import MailVoice.MessageQueue;
 
 import org.junit.Test;
 

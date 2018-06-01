@@ -11,10 +11,10 @@ public class Connected implements ConnectionState {
             if (connection.getCurrentMailbox() != null)
             {   connection.getCurrentMailbox().setId(Integer.parseInt(connection.getAccumulatedKeys()));
                 changeState(connection,new Recording());
-                connection.notifyObservers(connection.getCurrentMailbox().getGreeting());
+                connection.notifyPresenters(connection.getCurrentMailbox().getGreeting());
             }
             else {
-                connection.notifyObservers("Incorrect mailbox number. Try again!");
+                connection.notifyPresenters("Incorrect mailbox number. Try again!");
             }
             connection.setAccumulatedKeys("");
         }

@@ -1,7 +1,7 @@
 package test;
 
-import main.Message;
-import main.MessageQueue;
+import MailVoice.Message;
+import MailVoice.MessageQueue;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

@@ -1,5 +1,7 @@
 package main;
 
+import MailVoice.Message;
+
 public class Recording
         implements ConnectionState {
     Connection connection;
@@ -17,10 +19,10 @@ public class Recording
             {
                 changeState(connection,new MailBoxMenuState());
 
-                connection.notifyObservers(MAILBOX_MENU_TEXT);
+                connection.notifyPresenters(MAILBOX_MENU_TEXT);
             }
             else {
-                connection.notifyObservers("Incorrect passcode. Try again!");
+                connection.notifyPresenters("Incorrect passcode. Try again!");
             }
 
             connection.setAccumulatedKeys("");

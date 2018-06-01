@@ -1,8 +1,8 @@
 package test;
+import Views.ConsoleViews.Console;
 import main.Connection;
 import main.MailSystem;
-import main.Mailbox;
-import observers.Telephone;
+import MailVoice.Mailbox;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,7 +12,7 @@ import static org.mockito.Mockito.*;
 public class ConnectionTest {
 
 	MailSystem mockedMailsystem;
-    Telephone mockedTelephone;
+    Console mockedConsole;
     Connection connection;
 	private static final String INITIAL_PROMPT =
 			"Enter mailbox number followed by #";
@@ -29,9 +29,9 @@ public class ConnectionTest {
     @Before
 	public void init() {
 	    mockedMailsystem = mock(MailSystem.class);
-	    mockedTelephone = mock(Telephone.class);
+	    mockedConsole = mock(Console.class);
 	    connection = new Connection(mockedMailsystem);
-	    connection.addObserver(mockedTelephone);
+	    connection.addPresenter(mockedConsole);
 	}
 
 	@Test
@@ -41,7 +41,7 @@ public class ConnectionTest {
 
 	@Test
 	public void shouldShowInitialMessage() {
-		verify(mockedTelephone).update(INITIAL_PROMPT);
+		verify(mockedConsole).parseModel(INITIAL_PROMPT);
 	}
 	
 	@Test
@@ -53,7 +53,7 @@ public class ConnectionTest {
 		stepsForGettingIntoMailBox(idMailBox);
 
 		assertTrue(connection.isRecording());
-		verify(mockedTelephone).update(chosenMailbox.getGreeting());
+		verify(mockedConsole).parseModel(chosenMailbox.getGreeting());
 	}
 	@Test
 	public void shouldChangeGretting(){
@@ -67,7 +67,7 @@ public class ConnectionTest {
 		connection.dial("3");
 		connection.dial("nuevo saludo");
 		connection.dial("#");
-		verify(mockedTelephone,times(2)).update(MAILBOX_MENU_TEXT);
+		verify(mockedConsole,times(2)).parseModel(MAILBOX_MENU_TEXT);
 
 	}
 	@Test
@@ -80,7 +80,7 @@ public class ConnectionTest {
 		when(mockedMailsystem.findMailbox(idMailBox)).thenReturn(chosenMailbox);
 		stepsForGettingIntoMailBox(idMailBox);
 		connection.hangup();
-		verify(mockedTelephone,times(2)).update("Enter mailbox number followed by #");
+		verify(mockedConsole,times(2)).parseModel("Enter mailbox number followed by #");
 
 	}
 	@Test
@@ -91,7 +91,7 @@ public class ConnectionTest {
 		when(mockedMailsystem.findMailbox(idMailBox)).thenReturn(chosenMailbox);
 		stepsForGettingIntoMailBox(idMailBox);
 		connection.dial("#");
-		verify(mockedTelephone).update("Incorrect passcode. Try again!");
+		verify(mockedConsole).parseModel("Incorrect passcode. Try again!");
 	}
 	@Test
 	public void shouldGetIntoMailBoxMenu() {
@@ -103,7 +103,7 @@ public class ConnectionTest {
 		stepsForGettingIntoMailBoxMenu(idMailBox, keyMailBox);
 
 		assertTrue(connection.isMailBoxMenu());
-		verify(mockedTelephone).update(MAILBOX_MENU_TEXT);
+		verify(mockedConsole).parseModel(MAILBOX_MENU_TEXT);
 	}
 
 	@Test
@@ -112,8 +112,8 @@ public class ConnectionTest {
 		Mailbox chosenMailbox = new Mailbox(idMailBox, "Hola, como estas?");
 
 		when(mockedMailsystem.findMailbox(idMailBox)).thenReturn(chosenMailbox);
-		connection.recibeData(idMailBox);
-		verify(mockedTelephone).update("Enter mailbox number followed by #");
+		connection.reciveData(idMailBox);
+		verify(mockedConsole).parseModel("Enter mailbox number followed by #");
 	}
 	@Test
 	public void shouldQuitFromMessageMenu() {
@@ -126,7 +126,7 @@ public class ConnectionTest {
 		stepsForGettingIntoMailboxMenuOption(idMailBox, keyMailBox, mailBoxMenuOption);
 		connection.dial("4");
 		assertTrue(connection.isMailBoxMenu());
-		verify(mockedTelephone,times(2)).update(MAILBOX_MENU_TEXT);
+		verify(mockedConsole,times(2)).parseModel(MAILBOX_MENU_TEXT);
 	}
 
 	@Test
@@ -140,7 +140,7 @@ public class ConnectionTest {
 		stepsForGettingIntoMailboxMenuOption(idMailBox, keyMailBox, mailBoxMenuOption);
 		connection.dial("3");
 		assertTrue(connection.isMessageMenu());
-		verify(mockedTelephone,times(2)).update(MESSAGE_MENU_TEXT);
+		verify(mockedConsole,times(2)).parseModel(MESSAGE_MENU_TEXT);
 	}
 	@Test
 	public void shouldGetIntoMessageMenu() {
@@ -153,7 +153,7 @@ public class ConnectionTest {
 		stepsForGettingIntoMailboxMenuOption(idMailBox, keyMailBox, mailBoxMenuOption);
 
 		assertTrue(connection.isMessageMenu());
-		verify(mockedTelephone).update(MESSAGE_MENU_TEXT);
+		verify(mockedConsole).parseModel(MESSAGE_MENU_TEXT);
 	}
 	@Test
 	public void shouldGetIntoChangePassCodeMenu() {
@@ -166,7 +166,7 @@ public class ConnectionTest {
 		stepsForGettingIntoMailboxMenuOption(idMailBox, keyMailBox, mailBoxMenuOption);
 
 		assertTrue(connection.isChangePassCode());
-		verify(mockedTelephone).update("Enter new passcode followed by the # key");
+		verify(mockedConsole).parseModel("Enter new passcode followed by the # key");
 	}
 
 	@Test
@@ -188,7 +188,7 @@ public class ConnectionTest {
 		stepsForGettingIntoMailBoxMenu(idMailBox, newKeyMailBox);
 
 		assertTrue(connection.isMessageMenu());
-		verify(mockedTelephone, times(2)).update(MAILBOX_MENU_TEXT);
+		verify(mockedConsole, times(2)).parseModel(MAILBOX_MENU_TEXT);
 	}
 
 	@Test
@@ -202,7 +202,7 @@ public class ConnectionTest {
 		stepsForGettingIntoMailboxMenuOption(idMailBox, keyMailBox, mailBoxMenuOption);
 
 		assertTrue(connection.isChangeGreeting());
-		verify(mockedTelephone).update("Record your greeting, then press the # key");
+		verify(mockedConsole).parseModel("Record your greeting, then press the # key");
 	}
 
 	private void stepsForGettingIntoMailBox(String mailBoxNumber){

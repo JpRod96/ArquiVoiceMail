@@ -1,35 +1,41 @@
-package observers;
+package Views.ConsoleViews;
 
 import java.util.Scanner;
 
 import Presenters.ConsolePresenter;
 import main.Connection;
+import main.Presenter;
 
-public class Telephone implements StateWatcher
+public class Console implements Presenter
 {
 	private Connection connection;
 	private ConsolePresenter consolePresenter;
     private Scanner scanner;
 
-   public Telephone(Scanner aScanner)
+   public Console(Scanner aScanner)
    {
       scanner = aScanner;
    }
 
-   public Telephone(Connection connection, Scanner aScanner) {
+   public Console(Connection connection, Scanner aScanner) {
         scanner = aScanner;
 		this.connection=connection;
-		connection.addObserver(this);
+		connection.addPresenter(this);
    }
 
-   public Telephone(ConsolePresenter consolePresenter){
+   public Console(ConsolePresenter consolePresenter){
        this.consolePresenter=consolePresenter;
    }
 
 	@Override
-	public void update(String updateString) {
-		speak(updateString);
+	public void parseModel() {
+
 	}
+
+    @Override
+    public void parseModel(String string) {
+        speak(string);
+    }
 
    public void speak(String output)
    {

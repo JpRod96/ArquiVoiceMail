@@ -1,7 +1,7 @@
 package test;
+import Views.ConsoleViews.Console;
 import main.Connection;
 import main.MailSystem;
-import observers.Telephone;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,13 +18,13 @@ public class telephoneTest {
 	private static final Scanner Scanner = null;
 	
 	MailSystem mockedMailsystem;
-    Telephone mockedTelephone;
+    Console mockedConsole;
     Connection connection;
 
     @Before
 	public void init() {
 	    mockedMailsystem = mock(MailSystem.class);
-	    mockedTelephone = mock(Telephone.class);
+	    mockedConsole = mock(Console.class);
 	    connection = new Connection(mockedMailsystem);
 	}
 
@@ -34,7 +34,7 @@ public class telephoneTest {
 		PrintStream ps = new PrintStream(os);
 		System.setOut(ps);
 
-		Telephone t = new Telephone(Scanner);
+		Console t = new Console(Scanner);
 		t.speak("hello");
 		assertEquals("hello" + System.getProperty("line.separator"), os.toString());
 		
@@ -44,13 +44,13 @@ public class telephoneTest {
 	}
 	@Test
 	public void createPhoneJustWithScanner(){
-		Telephone t = new Telephone(Scanner);
+		Console t = new Console(Scanner);
 		assertNotNull(t);
 	}
 
 	@Test
 	public void createPhoneWithStateWatcher(){
-		Telephone t = new Telephone(connection, Scanner);
+		Console t = new Console(connection, Scanner);
 		assertNotNull(t);
 	}
 }

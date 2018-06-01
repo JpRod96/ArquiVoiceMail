@@ -18,7 +18,7 @@ public class ChangePassCode implements ConnectionState{
             if(connection.getMailBoxRepository()!=null)
                 connection.getMailBoxRepository().updateMailbox(connection.getCurrentMailbox());
             changeState(connection,new MailBoxMenuState());
-            connection.notifyObservers(MAILBOX_MENU_TEXT);
+            connection.notifyPresenters(MAILBOX_MENU_TEXT);
             connection.setAccumulatedKeys("");
         }
         else

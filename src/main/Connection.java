@@ -1,14 +1,8 @@
 package main;
 import java.util.ArrayList;
 
-import observers.*;
+import MailVoice.Mailbox;
 
-/**
-   Connects a phone to the mail system. The purpose of this
-   class is to keep track of the state of a connection, sinc
- 
-   the phone itself is just a source of individual key presses.
-*/
 public class Connection
 {
     private ConnectionState _state;
@@ -16,7 +10,7 @@ public class Connection
 	private Mailbox currentMailbox;
 	private String currentRecording;
 	private String accumulatedKeys;
-	private ArrayList<StateWatcher> stateWatchers;
+	private ArrayList<Presenter> presenters;
 	private MailBoxRepository mailBoxRepository;
 	private MessageRepository messageRepository;
 
@@ -26,14 +20,14 @@ public class Connection
     public Connection(MailSystem s)
    {
       system = s;
-      stateWatchers= new ArrayList<>();
+      presenters = new ArrayList<>();
       _state = new Connected();
    }
 
     public Connection(MailSystem s, MailBoxRepository mailBoxRepository, MessageRepository messageRepository)
     {
         system = s;
-        stateWatchers= new ArrayList<>();
+        presenters = new ArrayList<>();
         _state = new Connected();
         this.mailBoxRepository=mailBoxRepository;
         this.messageRepository=messageRepository;
@@ -43,10 +37,6 @@ public class Connection
        _state=c;
    }
 
-   /**
-      Respond to the user's pressing a key on the phone touchpad
-      @param key the phone key pressed by the user
-   */
    public void dial(String key)
    {
       _state.dial(key,this);
@@ -75,48 +65,40 @@ public class Connection
    public boolean isMessageMenu() {
       return _state instanceof MessageMenuState;
    }
-   
-   /**
-      Record voice.
-      @param voice voice spoken by the user
-   */
+
    public void record(String voice)
    {
       _state.record(this, voice);
    }
 
-   /**
-      The user hangs up the phone.
-   */
    public void hangup()
    {
       _state.hangUp(this);
       resetConnection();
    }
 
-   /**
-      Reset the connection to the initial state and prompt
-      for mailbox number
-   */
    private void resetConnection()
    {
       currentRecording = "";
       accumulatedKeys = "";
       changeState(new Connected());
-      notifyObservers(INITIAL_PROMPT);
+      notifyPresenters(INITIAL_PROMPT);
    }
    
-   public void addObserver(StateWatcher stateWatcher) {
-	   stateWatchers.add(stateWatcher);
+   public void addPresenter(Presenter presenter) {
+	   presenters.add(presenter);
 	   resetConnection();
    }
    
-   public void notifyObservers(String updateString) {
-	   for(StateWatcher stateWatcher : stateWatchers) {
-		   stateWatcher.update(updateString);
+   public void notifyPresenters(String updateString) {
+	   for(Presenter presenter : presenters) {
+	       //comentar para el mainController
+		   presenter.parseModel(updateString);
+		   //descomentar para el mainController
+		   //presenter.parseModel();
 	   }
    }
-   public void recibeData(String key){
+   public void reciveData(String key){
       this.dial(key);
    }
 
@@ -160,12 +142,12 @@ public class Connection
         this.accumulatedKeys = accumulatedKeys;
     }
 
-    public ArrayList<StateWatcher> getStateWatchers() {
-        return stateWatchers;
+    public ArrayList<Presenter> getPresenters() {
+        return presenters;
     }
 
-    public void setStateWatchers(ArrayList<StateWatcher> stateWatchers) {
-        this.stateWatchers = stateWatchers;
+    public void setPresenters(ArrayList<Presenter> presenters) {
+        this.presenters = presenters;
     }
 
     public MailBoxRepository getMailBoxRepository() {

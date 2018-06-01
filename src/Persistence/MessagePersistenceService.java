@@ -1,5 +1,7 @@
 package Persistence;
 
+import MailVoice.Message;
+import MailVoice.MessageQueue;
 import main.*;
 import java.sql.Statement;
 import java.sql.Connection;

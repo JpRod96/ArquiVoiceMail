@@ -1,6 +1,6 @@
 package test;
 
-import main.Message;
+import MailVoice.Message;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

@@ -1,7 +1,7 @@
 package test;
 
 import main.Connection;
-import main.Mailbox;
+import MailVoice.Mailbox;
 import main.MessageMenuState;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,7 +30,7 @@ public class MessageMenuStateTest {
         when(mockedConnection.getCurrentMailbox()).thenReturn(new Mailbox(key, ""));
 
         messageMenuState.dial(key, mockedConnection);
-        verify(mockedConnection).notifyObservers(messageMenuState.MAILBOX_MENU_TEXT);
+        verify(mockedConnection).notifyPresenters(messageMenuState.MAILBOX_MENU_TEXT);
     }
 
 }

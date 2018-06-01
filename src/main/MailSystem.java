@@ -1,5 +1,7 @@
 package main;
 
+import MailVoice.Mailbox;
+
 import java.util.ArrayList;
 
 public class MailSystem
