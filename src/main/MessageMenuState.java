@@ -28,13 +28,13 @@ public class MessageMenuState implements ConnectionState{
             } else if (key.equals("2")) {
                 Message message= connection.getCurrentMailbox().saveCurrentMessage();
                 int mailboxId=connection.getCurrentMailbox().getId();
-                if(message!=null){
+                if(message!=null && connection.getMessageRepository()!=null){
                     connection.getMessageRepository().saveMessage(message,mailboxId);
                 }
                 connection.notifyObservers(MESSAGE_MENU_TEXT);
             } else if (key.equals("3")) {
                 Message message=connection.getCurrentMailbox().removeCurrentMessage();
-                if (message!=null){
+                if (message!=null && connection.getMessageRepository()!=null){
                     connection.getMessageRepository().deleteMessage(message);
                 }
                 connection.notifyObservers(MESSAGE_MENU_TEXT);
