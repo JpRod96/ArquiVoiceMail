@@ -2,7 +2,7 @@ package test;
 
 import main.ChangePassCode;
 import main.Connection;
-import main.Mailbox;
+import MailVoice.Mailbox;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -32,7 +32,7 @@ public class ChangePassCodeTest {
         when(mockedConnection.getCurrentMailbox()).thenReturn(new Mailbox(key, ""));
 
         changePassCode.dial(key, mockedConnection);
-        verify(mockedConnection).notifyObservers(changePassCode.MAILBOX_MENU_TEXT);
+        verify(mockedConnection).notifyPresenters(changePassCode.MAILBOX_MENU_TEXT);
     }
 
 }

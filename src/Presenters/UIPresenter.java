@@ -8,19 +8,13 @@ import javax.swing.*;
 /**
  * Created by CORE i7 on 27/05/2018.
  */
-public class  UIPresenter implements Presenter <Connection>{
+public class  UIPresenter{
     UIController UIController;
 
     public UIPresenter(UIController UIController){
         this.UIController = UIController;
     }
 
-    @Override
-    public void showView(Connection connection){
-
-    }
-
-    @Override
     public Connection getModelFromView(){
         return null;
     }

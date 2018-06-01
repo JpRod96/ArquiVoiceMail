@@ -1,29 +1,35 @@
 package Presenters;
 
 import Controllers.ConsoleController;
-import main.*;
-import observers.Telephone;
+import Views.ConsoleViews.Console;
+import main.Connection;
+import main.ConnectionState;
+import main.Presenter;
 
 /**
  * Created by Jp on 27/05/2018.
  */
-public class ConsolePresenter implements Presenter<String>{
+public class ConsolePresenter implements Presenter{
 
-    private Telephone telephone;
+    private Console console;
+    private Connection connection;
 
-    public ConsolePresenter(Telephone telephone){
-        //this.consoleController=consoleController;
-        this.telephone=telephone;
+    public ConsolePresenter(Console console, Connection connection){
+        this.console = console;
+        this.connection=connection;
+        connection.addPresenter(this);
     }
 
     @Override
-    public void showView(String toShowString){
-        telephone.speak(toShowString);
+    public void parseModel(){
+        ConnectionState connectionState=connection.get_state();
+        String toShowString=FactoryForConsoleStrings.getStringByState(connectionState);
+        console.speak(toShowString);
     }
-
 
     @Override
-    public String getModelFromView(){
-        return null;
+    public void parseModel(String string){
+
     }
+
 }

@@ -1,5 +1,8 @@
 package main;
 
+import MailVoice.Message;
+import MailVoice.MessageQueue;
+
 import java.util.ArrayList;
 
 /**

@@ -1,7 +1,7 @@
 package test;
 
 import main.MailSystem;
-import main.Mailbox;
+import MailVoice.Mailbox;
 import org.junit.Test;
 
 import static org.junit.Assert.assertNotEquals;

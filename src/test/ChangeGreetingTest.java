@@ -2,7 +2,7 @@ package test;
 
 import main.ChangeGreeting;
 import main.Connection;
-import main.Mailbox;
+import MailVoice.Mailbox;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -31,6 +31,6 @@ public class ChangeGreetingTest {
         when(mockedConnection.getCurrentMailbox()).thenReturn(new Mailbox(key, ""));
 
         changeGreeting.dial(key, mockedConnection);
-        verify(mockedConnection).notifyObservers(changeGreeting.MAILBOX_MENU_TEXT);
+        verify(mockedConnection).notifyPresenters(changeGreeting.MAILBOX_MENU_TEXT);
     }
 }

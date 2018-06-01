@@ -1,4 +1,4 @@
-package main;
+package MailVoice;
 
 public class Mailbox
 {

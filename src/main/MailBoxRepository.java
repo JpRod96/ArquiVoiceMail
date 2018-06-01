@@ -1,7 +1,8 @@
 package main;
 
+import MailVoice.Mailbox;
+
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Jp on 05/05/2018.

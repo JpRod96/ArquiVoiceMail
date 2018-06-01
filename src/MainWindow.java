@@ -1,13 +1,13 @@
 import Controllers.UIController;
 import Presenters.UIPresenter;
 import main.Connection;
-import observers.StateWatcher;
+import main.Presenter;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MainWindow extends JFrame implements StateWatcher, ActionListener {
+public class MainWindow extends JFrame implements Presenter, ActionListener {
     private JPanel rootPanel;
     private JButton a1Button, a2Button, a3Button, a4Button, a5Button, a6Button, a7Button, a8Button, a9Button, a0Button, hButton, actionButton;
     private JLabel labelText;
@@ -44,9 +44,15 @@ public class MainWindow extends JFrame implements StateWatcher, ActionListener {
         numeralButton.addActionListener(this);
     }
    @Override
-    public void update(String updateString){
+    public void parseModel(String updateString){
        uiPresenter.assignMessage(this.labelText,updateString);
       // labelText.setText("<html>" + updateString.replaceAll("\n", "<br/>") + "</html>");
+    }
+
+    @Override
+    public void parseModel(){
+        //uiPresenter.assignMessage(this.labelText,updateString);
+        // labelText.setText("<html>" + updateString.replaceAll("\n", "<br/>") + "</html>");
     }
 
     public void actionPerformed(ActionEvent e){
@@ -77,7 +83,7 @@ public class MainWindow extends JFrame implements StateWatcher, ActionListener {
             if(userOption.getText().length() == 1
                     && "1234567890#".indexOf(userOption.getText()) >= 0)
             {
-                //this.connection.recibeData(userOption.getText());
+                //this.connection.reciveData(userOption.getText());
                 uiPresenter.recibeData(userOption.getText());
 
             }

@@ -1,5 +1,7 @@
 package main;
 
+import MailVoice.Message;
+
 /**
  * Created by CORE i7 on 24/04/2018.
  */
@@ -24,23 +26,23 @@ public class MessageMenuState implements ConnectionState{
                 if (m == null) output += "No messages." + "\n";
                 else output += m.getText() + "\n";
                 output += MESSAGE_MENU_TEXT;
-                connection.notifyObservers(output);
+                connection.notifyPresenters(output);
             } else if (key.equals("2")) {
                 Message message= connection.getCurrentMailbox().saveCurrentMessage();
                 int mailboxId=connection.getCurrentMailbox().getId();
                 if(message!=null && connection.getMessageRepository()!=null){
                     connection.getMessageRepository().saveMessage(message,mailboxId);
                 }
-                connection.notifyObservers(MESSAGE_MENU_TEXT);
+                connection.notifyPresenters(MESSAGE_MENU_TEXT);
             } else if (key.equals("3")) {
                 Message message=connection.getCurrentMailbox().removeCurrentMessage();
                 if (message!=null && connection.getMessageRepository()!=null){
                     connection.getMessageRepository().deleteMessage(message);
                 }
-                connection.notifyObservers(MESSAGE_MENU_TEXT);
+                connection.notifyPresenters(MESSAGE_MENU_TEXT);
             } else if (key.equals("4")) {
                 changeState(connection,new MailBoxMenuState());
-                connection.notifyObservers(MAILBOX_MENU_TEXT);
+                connection.notifyPresenters(MAILBOX_MENU_TEXT);
             }
 
     }

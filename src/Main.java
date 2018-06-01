@@ -6,7 +6,7 @@ import main.Connection;
 import main.MailSystem;
 import main.MailBoxRepository;
 import main.MessageRepository;
-import observers.Telephone;
+import Views.ConsoleViews.Console;
 
 import javax.swing.*;
 
@@ -29,7 +29,7 @@ public class Main
    }
 
    public static void setObservers(Connection connection, Scanner console){
-      Telephone telephone = new Telephone(connection, console);
+      Console telephone = new Console(connection, console);
 
       MainWindow form= new MainWindow(connection);
       setMainWindow(form);

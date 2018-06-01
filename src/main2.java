@@ -1,11 +1,6 @@
 import Persistence.MailboxPersistenceService;
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import main.Mailbox;
-
-import java.util.ArrayList;
-import java.util.List;
+import MailVoice.Mailbox;
 
 import static spark.Spark.*;
 public class main2 {
