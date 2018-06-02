@@ -6,10 +6,10 @@ package main;
 public class ChangeGreeting implements ConnectionState{
     Connection connection;
 
-    /*public static final String MAILBOX_MENU_TEXT =
+    public static final String MAILBOX_MENU_TEXT =
             "Enter 1 to listen to your messages\n"
                     + "Enter 2 to change your passcode\n"
-                    + "Enter 3 to change your greeting";*/
+                    + "Enter 3 to change your greeting";
 
     @Override
     public void dial(String key, Connection connection) {
