@@ -82,7 +82,8 @@ public class Connection
       currentRecording = "";
       accumulatedKeys = "";
       changeState(new Connected());
-      notifyPresenters(INITIAL_PROMPT);
+      //notifyPresenters(INITIAL_PROMPT);
+       notifyPresenters("");
    }
    
    public void addPresenter(Presenter presenter) {
@@ -93,9 +94,9 @@ public class Connection
    public void notifyPresenters(String updateString) {
 	   for(Presenter presenter : presenters) {
 	       //comentar para el mainController
-		   presenter.parseModel(updateString);
+		   //presenter.parseModel(updateString);
 		   //descomentar para el mainController
-		   //presenter.parseModel();
+		   presenter.parseModel();
 	   }
    }
    public void reciveData(String key){

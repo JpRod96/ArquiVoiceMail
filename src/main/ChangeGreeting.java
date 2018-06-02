@@ -21,7 +21,7 @@ public class ChangeGreeting implements ConnectionState{
                 connection.getMailBoxRepository().updateMailbox(connection.getCurrentMailbox());
             connection.setCurrentRecording("");
             changeState(connection, new MailBoxMenuState());
-            connection.notifyPresenters(MAILBOX_MENU_TEXT);
+            connection.notifyPresenters("");
         }
     }
 

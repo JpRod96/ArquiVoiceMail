@@ -19,10 +19,11 @@ public class Recording
             {
                 changeState(connection,new MailBoxMenuState());
 
-                connection.notifyPresenters(MAILBOX_MENU_TEXT);
+                //connection.notifyPresenters(MAILBOX_MENU_TEXT);
+                connection.notifyPresenters("");
             }
             else {
-                connection.notifyPresenters("Incorrect passcode. Try again!");
+                //connection.notifyPresenters("Incorrect passcode. Try again!");
             }
 
             connection.setAccumulatedKeys("");

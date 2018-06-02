@@ -28,8 +28,8 @@ public class ConsolePresenter implements Presenter{
     }
 
     @Override
-    public void parseModel(String string){
-
+    public void parseModel(String toShowString){
+        console.speak(toShowString);
     }
 
 }
