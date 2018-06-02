@@ -16,6 +16,11 @@ import static org.mockito.Mockito.when;
  */
 public class ChangePassCodeTest {
 
+    public static final String MAILBOX_MENU_TEXT =
+            "Enter 1 to listen to your messages\n"
+                    + "Enter 2 to change your passcode\n"
+                    + "Enter 3 to change your greeting";
+
     Connection mockedConnection;
     ChangePassCode changePassCode;
 
@@ -32,7 +37,7 @@ public class ChangePassCodeTest {
         when(mockedConnection.getCurrentMailbox()).thenReturn(new Mailbox(key, ""));
 
         changePassCode.dial(key, mockedConnection);
-        verify(mockedConnection).notifyPresenters(changePassCode.MAILBOX_MENU_TEXT);
+        verify(mockedConnection).notifyPresenters();
     }
 
 }
