@@ -14,9 +14,6 @@ public class Connection
 	private MailBoxRepository mailBoxRepository;
 	private MessageRepository messageRepository;
 
-    private static final String INITIAL_PROMPT =
-            "Enter mailbox number followed by #";
-
     public Connection(MailSystem s)
    {
       system = s;
@@ -82,8 +79,7 @@ public class Connection
       currentRecording = "";
       accumulatedKeys = "";
       changeState(new Connected());
-      //notifyPresenters(INITIAL_PROMPT);
-       notifyPresenters("");
+       notifyPresenters();
    }
    
    public void addPresenter(Presenter presenter) {
@@ -91,11 +87,8 @@ public class Connection
 	   resetConnection();
    }
    
-   public void notifyPresenters(String updateString) {
+   public void notifyPresenters() {
 	   for(Presenter presenter : presenters) {
-	       //comentar para el mainController
-		   //presenter.parseModel(updateString);
-		   //descomentar para el mainController
 		   presenter.parseModel();
 	   }
    }

@@ -5,29 +5,21 @@ package main;
  */
 public class MailBoxMenuState implements ConnectionState {
 
-    /*public static final String MESSAGE_MENU_TEXT =
-            "Enter 1 to listen to the current message\n"
-                    + "Enter 2 to save the current message\n"
-                    + "Enter 3 to delete the current message\n"
-                    + "Enter 4 to return to the main menu";*/
     @Override
     public void dial (String key, Connection connection){
 
             if (key.equals("1"))
             {
                 changeState(connection,new MessageMenuState());
-                //connection.notifyPresenters(MESSAGE_MENU_TEXT);
-                connection.notifyPresenters("");
+                connection.notifyPresenters();
             }
             else if (key.equals("2"))
             {
                 changeState(connection,new ChangePassCode());
-                //connection.notifyPresenters("Enter new passcode followed by the # key");
             }
             else if (key.equals("3"))
             {
                 changeState(connection, new ChangeGreeting());
-                //connection.notifyPresenters("Record your greeting, then press the # key");
             }
     }
     @Override
