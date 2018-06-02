@@ -82,7 +82,8 @@ public class Connection
       currentRecording = "";
       accumulatedKeys = "";
       changeState(new Connected());
-      notifyPresenters(INITIAL_PROMPT);
+      //notifyPresenters(INITIAL_PROMPT);
+       notifyPresenters("");
    }
    
    public void addPresenter(Presenter presenter) {

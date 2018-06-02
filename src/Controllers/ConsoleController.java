@@ -54,5 +54,19 @@ public class ConsoleController{
                     consolePresenter.parseModel("Incorrect mailbox number. Try again!");
             }
         }
+        if(log.getInitialState() instanceof Recording){
+            if(!log.wasThereAChangeOfStates() && connection.getAccumulatedKeys()==""){
+                consolePresenter.parseModel("Incorrect passcode. Try again!");
+            }
+        }
+
+        if(log.getInitialState() instanceof MailBoxMenuState){
+            if(log.wasThereAChangeOfStates() && log.getFinalState() instanceof ChangePassCode){
+                consolePresenter.parseModel("Enter new passcode followed by the # key");
+            }
+            if(log.wasThereAChangeOfStates() && log.getFinalState() instanceof ChangeGreeting){
+                consolePresenter.parseModel("Record your greeting, then press the # key");
+            }
+        }
     }
 }

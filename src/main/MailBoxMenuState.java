@@ -16,17 +16,18 @@ public class MailBoxMenuState implements ConnectionState {
             if (key.equals("1"))
             {
                 changeState(connection,new MessageMenuState());
-                connection.notifyPresenters(MESSAGE_MENU_TEXT);
+                //connection.notifyPresenters(MESSAGE_MENU_TEXT);
+                connection.notifyPresenters("");
             }
             else if (key.equals("2"))
             {
                 changeState(connection,new ChangePassCode());
-                connection.notifyPresenters("Enter new passcode followed by the # key");
+                //connection.notifyPresenters("Enter new passcode followed by the # key");
             }
             else if (key.equals("3"))
             {
                 changeState(connection, new ChangeGreeting());
-                connection.notifyPresenters("Record your greeting, then press the # key");
+                //connection.notifyPresenters("Record your greeting, then press the # key");
             }
     }
     @Override
