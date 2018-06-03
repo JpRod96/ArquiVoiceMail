@@ -1,61 +1,41 @@
-import java.util.Scanner;
-
+import Controllers.ConsoleController;
 import Persistence.MailboxPersistenceService;
 import Persistence.MessagePersistenceService;
-import main.Connection;
-import main.MailSystem;
-import main.MailBoxRepository;
-import main.MessageRepository;
+import Presenters.ConsolePresenter;
 import Views.ConsoleViews.Console;
+import main.Connection;
+import main.MailBoxRepository;
+import main.MailSystem;
+import main.MessageRepository;
 
-import javax.swing.*;
+import java.util.Scanner;
 
-public class Main
-{
-   private static final int MAILBOX_COUNT = 20;
-   public static void main(String[] args)
-   {
-      String connectionString="jdbc:sqlite:db.db";
-      Scanner console = new Scanner(System.in);
-      MailBoxRepository mailBoxRepository=new MailboxPersistenceService(connectionString);
-      MessageRepository messageRepository=new MessagePersistenceService(connectionString);
-      MailSystem system = new MailSystem(mailBoxRepository);
-      Connection connection = new Connection(system,mailBoxRepository,messageRepository);
+/**
+ * Created by Jp on 01/06/2018.
+ */
+public class Main {
+    private static final int MAILBOX_COUNT = 20;
+    private static MailBoxRepository mailBoxRepository;
+    private static MessageRepository messageRepository;
+    private static Connection connection;
+    private static ConsolePresenter consolePresenter;
+    private static ConsoleController consoleController;
 
-      setObservers(connection, console);
+    public static void main(String[] args){
 
-      run(connection, console);
-      
-   }
+        String connectionString="jdbc:sqlite:db.db";
+        Scanner console = new Scanner(System.in);
 
-   public static void setObservers(Connection connection, Scanner console){
-      Console telephone = new Console(connection, console);
+        mailBoxRepository=new MailboxPersistenceService(connectionString);
+        messageRepository=new MessagePersistenceService(connectionString);
 
-      MainWindow form= new MainWindow(connection);
-      setMainWindow(form);
-   }
+        MailSystem system = new MailSystem(mailBoxRepository);
+        connection = new Connection(system,mailBoxRepository,messageRepository);
 
-   public static void setMainWindow(MainWindow form){
-      form.setVisible(true);
-      form.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-   }
+        Console telephone=new Console(console);
+        consolePresenter=new ConsolePresenter(telephone, connection);
+        consoleController=new ConsoleController(connection, console, consolePresenter);
 
-   public static void run(Connection connection, Scanner scanner)
-   {
-      boolean more = true;
-      while (more)
-      {
-         String input = scanner.nextLine();
-         if (input == null) return;
-         if (input.equalsIgnoreCase("H"))
-            connection.hangup();
-         else if (input.equalsIgnoreCase("Q"))
-            more = false;
-         else if (input.length() == 1 && "1234567890#".indexOf(input) >= 0)
-            connection.dial(input);
-         else
-            connection.record(input);
-      }
-   }
-
+        consoleController.run();
+    }
 }

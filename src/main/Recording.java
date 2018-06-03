@@ -2,13 +2,8 @@ package main;
 
 import MailVoice.Message;
 
-public class Recording
-        implements ConnectionState {
+public class Recording implements ConnectionState {
     Connection connection;
-    public static final String MAILBOX_MENU_TEXT =
-            "Enter 1 to listen to your messages\n"
-                    + "Enter 2 to change your passcode\n"
-                    + "Enter 3 to change your greeting";
 
     @Override
     public void dial(String key, Connection connection) {
@@ -18,11 +13,9 @@ public class Recording
             if (connection.getCurrentMailbox().checkPasscode(connection.getAccumulatedKeys()))
             {
                 changeState(connection,new MailBoxMenuState());
-
-                connection.notifyPresenters(MAILBOX_MENU_TEXT);
+                connection.notifyPresenters();
             }
             else {
-                connection.notifyPresenters("Incorrect passcode. Try again!");
             }
 
             connection.setAccumulatedKeys("");

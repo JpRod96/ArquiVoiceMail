@@ -9,26 +9,23 @@ public class Connection
 	private MailSystem system;
 	private Mailbox currentMailbox;
 	private String currentRecording;
-	private String accumulatedKeys;
+	private String accumulatedKeys="";
 	private ArrayList<Presenter> presenters;
 	private MailBoxRepository mailBoxRepository;
 	private MessageRepository messageRepository;
-
-    private static final String INITIAL_PROMPT =
-            "Enter mailbox number followed by #";
 
     public Connection(MailSystem s)
    {
       system = s;
       presenters = new ArrayList<>();
-      _state = new Connected();
+      _state = new InitialState();
    }
 
     public Connection(MailSystem s, MailBoxRepository mailBoxRepository, MessageRepository messageRepository)
     {
         system = s;
         presenters = new ArrayList<>();
-        _state = new Connected();
+        _state = new InitialState();
         this.mailBoxRepository=mailBoxRepository;
         this.messageRepository=messageRepository;
     }
@@ -82,20 +79,18 @@ public class Connection
       currentRecording = "";
       accumulatedKeys = "";
       changeState(new Connected());
-      notifyPresenters(INITIAL_PROMPT);
+      notifyPresenters();
    }
    
    public void addPresenter(Presenter presenter) {
 	   presenters.add(presenter);
-	   resetConnection();
+	   //resetConnection();
+       notifyPresenters();
    }
    
-   public void notifyPresenters(String updateString) {
+   public void notifyPresenters() {
 	   for(Presenter presenter : presenters) {
-	       //comentar para el mainController
-		   presenter.parseModel(updateString);
-		   //descomentar para el mainController
-		   //presenter.parseModel();
+		   presenter.parseModel();
 	   }
    }
    public void reciveData(String key){
@@ -117,7 +112,6 @@ public class Connection
     public void setSystem(MailSystem system) {
         this.system = system;
     }
-
     public Mailbox getCurrentMailbox() {
         return currentMailbox;
     }

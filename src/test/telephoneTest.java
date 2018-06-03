@@ -23,9 +23,7 @@ public class telephoneTest {
 
     @Before
 	public void init() {
-	    mockedMailsystem = mock(MailSystem.class);
 	    mockedConsole = mock(Console.class);
-	    connection = new Connection(mockedMailsystem);
 	}
 
 	@Test
@@ -48,11 +46,6 @@ public class telephoneTest {
 		assertNotNull(t);
 	}
 
-	@Test
-	public void createPhoneWithStateWatcher(){
-		Console t = new Console(connection, Scanner);
-		assertNotNull(t);
-	}
 }
 
 

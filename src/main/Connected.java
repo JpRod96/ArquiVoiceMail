@@ -2,7 +2,6 @@ package main;
 
 public class Connected implements ConnectionState {
 
-
     @Override
     public void dial(String key, Connection connection) {
         if (key.equals("#"))
@@ -11,10 +10,6 @@ public class Connected implements ConnectionState {
             if (connection.getCurrentMailbox() != null)
             {   connection.getCurrentMailbox().setId(Integer.parseInt(connection.getAccumulatedKeys()));
                 changeState(connection,new Recording());
-                connection.notifyPresenters(connection.getCurrentMailbox().getGreeting());
-            }
-            else {
-                connection.notifyPresenters("Incorrect mailbox number. Try again!");
             }
             connection.setAccumulatedKeys("");
         }

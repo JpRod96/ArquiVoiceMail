@@ -6,11 +6,6 @@ package main;
 public class ChangeGreeting implements ConnectionState{
     Connection connection;
 
-    public static final String MAILBOX_MENU_TEXT =
-            "Enter 1 to listen to your messages\n"
-                    + "Enter 2 to change your passcode\n"
-                    + "Enter 3 to change your greeting";
-
     @Override
     public void dial(String key, Connection connection) {
         this.connection=connection;
@@ -21,7 +16,7 @@ public class ChangeGreeting implements ConnectionState{
                 connection.getMailBoxRepository().updateMailbox(connection.getCurrentMailbox());
             connection.setCurrentRecording("");
             changeState(connection, new MailBoxMenuState());
-            connection.notifyPresenters(MAILBOX_MENU_TEXT);
+            connection.notifyPresenters();
         }
     }
 
