@@ -7,6 +7,10 @@ import main.*;
  */
 public class FactoryForConsoleStrings {
 
+    private static final String MEMORY_STORAGE_OPTION=
+                                "Enter 1 to use in memory storage\n" +
+                                        "Enter 2 to use persistence";
+
     private static final String INITIAL_PROMPT =
             "Enter mailbox number followed by #";
 
@@ -26,7 +30,10 @@ public class FactoryForConsoleStrings {
 
     public static String getStringByState(ConnectionState connectionState){
         String outputString="";
-        if(isConnected(connectionState)){
+        if(isInitial(connectionState)){
+            outputString=MEMORY_STORAGE_OPTION;
+        }
+        else if(isConnected(connectionState)){
             outputString= INITIAL_PROMPT;
         }
         else if(isRecording(connectionState) || isChangeGreeting(connectionState) || isChangePassCode(connectionState) ){
@@ -39,6 +46,10 @@ public class FactoryForConsoleStrings {
             outputString= MESSAGE_MENU_TEXT;
         }
         return outputString;
+    }
+
+    public static boolean isInitial(ConnectionState connectionState) {
+        return connectionState instanceof InitialState;
     }
 
     public static boolean isConnected(ConnectionState connectionState) {

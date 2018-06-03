@@ -9,7 +9,7 @@ public class Connection
 	private MailSystem system;
 	private Mailbox currentMailbox;
 	private String currentRecording;
-	private String accumulatedKeys;
+	private String accumulatedKeys="";
 	private ArrayList<Presenter> presenters;
 	private MailBoxRepository mailBoxRepository;
 	private MessageRepository messageRepository;
@@ -18,14 +18,14 @@ public class Connection
    {
       system = s;
       presenters = new ArrayList<>();
-      _state = new Connected();
+      _state = new InitialState();
    }
 
     public Connection(MailSystem s, MailBoxRepository mailBoxRepository, MessageRepository messageRepository)
     {
         system = s;
         presenters = new ArrayList<>();
-        _state = new Connected();
+        _state = new InitialState();
         this.mailBoxRepository=mailBoxRepository;
         this.messageRepository=messageRepository;
     }
@@ -79,12 +79,13 @@ public class Connection
       currentRecording = "";
       accumulatedKeys = "";
       changeState(new Connected());
-       notifyPresenters();
+      notifyPresenters();
    }
    
    public void addPresenter(Presenter presenter) {
 	   presenters.add(presenter);
-	   resetConnection();
+	   //resetConnection();
+       notifyPresenters();
    }
    
    public void notifyPresenters() {
@@ -111,7 +112,6 @@ public class Connection
     public void setSystem(MailSystem system) {
         this.system = system;
     }
-
     public Mailbox getCurrentMailbox() {
         return currentMailbox;
     }
