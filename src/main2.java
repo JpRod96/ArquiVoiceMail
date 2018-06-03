@@ -28,9 +28,9 @@ public class main2 {
         //String user="abel";
         //String password="73441710bliokiN";
         String driver="org.postgresql.Driver";
+        /* Configuracion para conectar ala base de datos que proporciona heroku */
 
         URI dbUri = new URI(System.getenv("DATABASE_URL"));
-
         String user= dbUri.getUserInfo().split(":")[0];
         String password = dbUri.getUserInfo().split(":")[1];
         String connectionString = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
