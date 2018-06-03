@@ -7,6 +7,7 @@ public class Message
 {
    private String text;
    private int id;
+   private int MailboxId;
 
    public Message(String messageText)
    {
@@ -16,6 +17,12 @@ public class Message
    {
       text = messageText;
       this.id=id;
+   }
+   public Message(String messageText, int id, int MailboxId)
+   {
+      text = messageText;
+      this.id=id;
+      this.MailboxId=MailboxId;
    }
 
    public String getText()
@@ -30,4 +37,6 @@ public class Message
    public void setId(int id) {
       this.id = id;
    }
+   public int getMailboxId(){return MailboxId;}
+   public void setMailboxId(int id){this.MailboxId=id;}
 }

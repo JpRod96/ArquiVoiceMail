@@ -36,19 +36,22 @@ public class MailboxPersistenceService implements MailBoxRepository{
             Class.forName(driver);
             connectionObj = DriverManager.getConnection(connectionString, user, password);
             statementObj = connectionObj.createStatement();
-           // Statement statement = connectionObj.createStatement();
+            //Statement statement = connectionObj.createStatement();
             //statement.execute("CREATE DATABASE IF NOT EXISTS mailvoice;");
             //connectionObj.close();
            // connectionObj= DriverManager.getConnection("jdbc:postgresql://localhost:5432/mailvoice", user, password);
             Statement statement2 = connectionObj.createStatement();
             statement2.execute("CREATE TABLE IF NOT EXISTS Mailbox ( id SERIAL PRIMARY  KEY, passcode CHAR(20) NOT NULL, greeting CHAR(100) NOT NULL);");
-           // statement2.execute("INSERT INTO Mailbox (id, passcode, greeting) VALUES(1, '1', 'You have reached mailbox 1. \\Please leave a message now.');");
+
+           //statement2.execute("INSERT INTO Mailbox (id, passcode, greeting) VALUES(1, '1', 'You have reached mailbox 2.Please leave a message now csm.');");
+
         }
         catch(Exception ex)
         {
             ex.printStackTrace();
         }
     }
+
 
     public void load(String connectionString){
         try
@@ -61,7 +64,21 @@ public class MailboxPersistenceService implements MailBoxRepository{
             ex.printStackTrace();
         }
     }
+    public void saveMailbox2(Mailbox mailbox){
+            int id=mailbox.getId();
+            String passcode=mailbox.getPasscode();
+            String greeting=mailbox.getGreeting();
 
+
+            try {
+                statementObj.executeUpdate("INSERT INTO Mailbox (id, passcode, greeting) VALUES" + "('" + id + "' , '" + passcode + "', '" + greeting + "')");
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+    }
     public void saveMailbox(Mailbox mailbox){
         MessageQueue keptMessages=mailbox.getKeptMessages();
         String passcode=mailbox.getPasscode(),
@@ -92,7 +109,7 @@ public class MailboxPersistenceService implements MailBoxRepository{
     }
 
     public Mailbox getMailBoxById(int mailboxId){
-        Mailbox mailbox=null;
+        Mailbox mailbox1=null;
 
         String query="SELECT * FROM mailbox WHERE id = "+mailboxId;
 
@@ -103,18 +120,18 @@ public class MailboxPersistenceService implements MailBoxRepository{
                 String passcode=resultSet.getString("passcode"),
                         greeting=resultSet.getString("greeting");
                 greeting=setGreetingRetrievedFromDB(greeting);
-                mailbox=new Mailbox(passcode, greeting, mailboxId);
+                mailbox1=new Mailbox(passcode, greeting, mailboxId);
                 ArrayList<Message> messages= messagePersistenceService.getAllMessagesByMailBoxId(mailboxId);
                 MessageQueue keptMessageQueue= new MessageQueue();
                 keptMessageQueue.setQueue(messages);
 
-                mailbox.setKeptMessages(keptMessageQueue);
+                mailbox1.setKeptMessages(keptMessageQueue);
             }
         }
         catch(Exception ex) {
             ex.printStackTrace();
         }
-        return mailbox;
+        return mailbox1;
     }
 
     private String setGreetingRetrievedFromDB(String greeting){
@@ -134,6 +151,7 @@ public class MailboxPersistenceService implements MailBoxRepository{
         }
      return mailboxes;
     }
+    public MessagePersistenceService getMessagePersistenceService(){return messagePersistenceService;}
 
     public boolean userExist(String params) {
         return true;

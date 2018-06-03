@@ -16,6 +16,7 @@ The following files have been resolved:
    org.objenesis:objenesis:jar:2.6:compile
    org.eclipse.jetty:jetty-webapp:jar:9.3.2.v20150730:compile
    org.slf4j:slf4j-simple:jar:1.7.12:compile
+   org.xerial:sqlite-jdbc:jar:3.21.0.1:compile
    org.eclipse.jetty.websocket:websocket-client:jar:9.3.2.v20150730:compile
    org.eclipse.jetty:jetty-http:jar:9.3.2.v20150730:compile
    org.eclipse.jetty:jetty-security:jar:9.3.2.v20150730:compile
@@ -25,4 +26,5 @@ The following files have been resolved:
    junit:junit:jar:4.12:compile
    org.eclipse.jetty.websocket:websocket-servlet:jar:9.3.2.v20150730:compile
    net.bytebuddy:byte-buddy-agent:jar:1.8.3:compile
+   postgresql:postgresql:jar:9.1-901-1.jdbc4:compile
 
