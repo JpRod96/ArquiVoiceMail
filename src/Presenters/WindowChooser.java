@@ -20,9 +20,10 @@ public class WindowChooser {
         this.mainWindow = mainWindow;
     }
     public void generateOptions(){
-       enableUsedButtons();
+
         String option="";
         if(isAMenu(chosedMenu)){
+            enableButtons();
             for (int i=0 ; i< chosedMenu.length();i++){
                 option = option + chosedMenu.charAt(i);
                 if(chosedMenu.charAt(i)=='\n' || i==chosedMenu.length()-1){
@@ -34,6 +35,7 @@ public class WindowChooser {
             }
         }
         else{
+            disableRestantButtons();
             writeMessage(chosedMenu);
         }
         disableUnusedButtons();
@@ -46,11 +48,16 @@ public class WindowChooser {
         if(optionCounter==4){
             mainWindow.getOption4Field().setVisible(false);}
     }
-    private void enableUsedButtons(){
+    private void enableButtons(){
+        mainWindow.getOption1Field().setVisible(true);
+        mainWindow.getOption2Field().setVisible(true);
         mainWindow.getOption4Field().setVisible(true);
         mainWindow.getOption3Field().setVisible(true);
     }
-
+    private void disableRestantButtons(){
+        mainWindow.getOption1Field().setVisible(false);
+        mainWindow.getOption2Field().setVisible(false);
+    }
     private JButton getCorrectOption(int option) {
 
         if (option == 1) {

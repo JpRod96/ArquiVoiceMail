@@ -58,20 +58,16 @@ public class MainWindow extends JFrame implements ActionListener {
         option2.addActionListener(this);
         option3.addActionListener(this);
         option4.addActionListener(this);
+        actionButton.addActionListener(this);
 
     }
     public void actionPerformed(ActionEvent e){
         if (e.getSource()==actionButton) {
             if (userInput.getText().length() == 1
                     && "1234567890#".indexOf(userInput.getText()) >= 0) {
-                //this.connection.reciveData(userOption.getText());
-                //    uiPresenter.parseModel();
                 uiController.recibeData(userInput.getText());
             } else {
-                //this.connection.record(userOption.getText());
                 uiController.record(userInput.getText());
-
-
             }
             userInput.setText("");
         }
