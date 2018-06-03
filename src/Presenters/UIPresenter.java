@@ -5,8 +5,6 @@ import main.Connection;
 import main.ConnectionState;
 import main.Presenter;
 
-import javax.swing.*;
-
 
 /**
  * Created by CORE i7 on 27/05/2018.
@@ -31,9 +29,10 @@ public class  UIPresenter implements Presenter{
     public void parseModel(){
         ConnectionState connectionState=connection.get_state();
         String toShowString=FactoryForConsoleStrings.getStringByState(connectionState);
-        if (toShowString!=null) {
-            mainWindow.getFieldToWrite().setText("<html>" + toShowString.replaceAll("\n", "<br/>") + "</html>");
-        }
+        WindowChooser windowChoser = new WindowChooser(toShowString);
+        windowChoser.assignWindow(mainWindow);
+        windowChoser.generateOptions();
+
     }
 
     @Override
