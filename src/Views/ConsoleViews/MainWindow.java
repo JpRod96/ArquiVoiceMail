@@ -1,3 +1,5 @@
+package Views.ConsoleViews;
+
 import Controllers.UIController;
 import Presenters.UIPresenter;
 import main.Connection;
@@ -7,25 +9,30 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MainWindow extends JFrame implements Presenter, ActionListener {
+public class MainWindow extends JFrame implements ActionListener {
     private JPanel rootPanel;
     private JButton a1Button, a2Button, a3Button, a4Button, a5Button, a6Button, a7Button, a8Button, a9Button, a0Button, hButton, actionButton;
     private JLabel labelText;
     private JTextArea userOption;
     private JButton numeralButton;
     private UIPresenter uiPresenter;
-    private UIController uiController;
+    public MainWindow(){
+        super("jp,mauri,abel");
+        setContentPane(rootPanel);
+        setSize(340,400);
+        initializeActionButtons();
+        initializeNumeralButtons();
 
-    public MainWindow(Connection connection){
-            super("jp,mauri,abel");
-            setContentPane(rootPanel);
-            setSize(340,400);
-            initializeActionButtons();
-            initializeNumeralButtons();
-            uiController = new UIController(connection);
-            uiPresenter = new UIPresenter(uiController);
-            uiController.addObserver(this);
-        }
+    }
+    public JLabel getFieldToWrite(){
+        return labelText;
+    }
+    public JTextArea getUserOption(){
+        return userOption;
+    }
+    public void setUiPresenter(UIPresenter uiPresenter){
+        this.uiPresenter=uiPresenter;
+    }
     public void initializeNumeralButtons(){
         a1Button.addActionListener(this);
         a2Button.addActionListener(this);
@@ -43,18 +50,6 @@ public class MainWindow extends JFrame implements Presenter, ActionListener {
         actionButton.addActionListener(this);
         numeralButton.addActionListener(this);
     }
-   @Override
-    public void parseModel(String updateString){
-       uiPresenter.assignMessage(this.labelText,updateString);
-      // labelText.setText("<html>" + updateString.replaceAll("\n", "<br/>") + "</html>");
-    }
-
-    @Override
-    public void parseModel(){
-        //uiPresenter.assignMessage(this.labelText,updateString);
-        // labelText.setText("<html>" + updateString.replaceAll("\n", "<br/>") + "</html>");
-    }
-
     public void actionPerformed(ActionEvent e){
 
         if(e.getSource()==a1Button)
@@ -84,19 +79,19 @@ public class MainWindow extends JFrame implements Presenter, ActionListener {
                     && "1234567890#".indexOf(userOption.getText()) >= 0)
             {
                 //this.connection.reciveData(userOption.getText());
-                uiPresenter.recibeData(userOption.getText());
 
+                uiPresenter.parseModel();
             }
             else
             {
                 //this.connection.record(userOption.getText());
-                uiPresenter.record(userOption.getText());
+
             }
             userOption.setText("");
         }
         if (e.getSource()==hButton){
-           // this.connection.hangup();
-            uiPresenter.hangUp();
+            // this.connection.hangup();
+
         }
     }
 

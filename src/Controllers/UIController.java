@@ -1,8 +1,8 @@
 package Controllers;
 
-import main.Connection;
-import main.ConnectionState;
-import main.Presenter;
+import MailVoice.Message;
+import Presenters.UIPresenter;
+import main.*;
 
 /**
  * Created by CORE i7 on 27/05/2018.
@@ -10,18 +10,16 @@ import main.Presenter;
 public class UIController{
     private ConnectionState connectionState;
     private Connection connection;
+    private UIPresenter uiPresenter;
 
-    public UIController(Connection connection){
+
+
+    public UIController(Connection connection,UIPresenter uiPresenter){
         this.connection = connection;
         this.connectionState = connection.get_state();
+        this.uiPresenter = uiPresenter;
     }
-    public void update(String updateString){
-        connectionState=connection.get_state();
 
-    }
-    public void addObserver(Presenter presenter){
-        connection.addPresenter(presenter);
-    }
     public void hangUp(){
         connection.hangup();
     }
