@@ -46,13 +46,14 @@ public class Main {
         uiPresenter = new UIPresenter(mainWindow,connection);
         mainWindow.setUiPresenter(uiPresenter);
         uiController = new UIController(connection,uiPresenter);
-
-
-
-
+        mainWindow.setController(uiController);
 
         mainWindow.setVisible(true);
         mainWindow.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+
+
+
 
         consoleController.run();
     }

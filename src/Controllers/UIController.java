@@ -4,6 +4,8 @@ import MailVoice.Message;
 import Presenters.UIPresenter;
 import main.*;
 
+import javax.swing.*;
+
 /**
  * Created by CORE i7 on 27/05/2018.
  */
@@ -14,11 +16,13 @@ public class UIController{
 
 
 
+
     public UIController(Connection connection,UIPresenter uiPresenter){
         this.connection = connection;
         this.connectionState = connection.get_state();
         this.uiPresenter = uiPresenter;
     }
+
 
     public void hangUp(){
         connection.hangup();
@@ -30,3 +34,4 @@ public class UIController{
         connection.record(message);
     }
 }
+

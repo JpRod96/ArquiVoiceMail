@@ -16,8 +16,6 @@ public class  UIPresenter implements Presenter{
     private MainWindow mainWindow;
     private Connection connection;
 
-    private JLabel messageToShow;
-    private JTextArea userInput;
 
     public UIPresenter(MainWindow mainWindow, Connection connection){
         this.mainWindow = mainWindow;
@@ -25,7 +23,9 @@ public class  UIPresenter implements Presenter{
         connection.addPresenter(this);
     }
 
-
+    public MainWindow getMainWindow(){
+        return mainWindow;
+    }
 
     @Override
     public void parseModel(){
@@ -37,6 +37,8 @@ public class  UIPresenter implements Presenter{
 
     @Override
     public void parseModel(String toShowString){
+        mainWindow.getFieldToWrite2().setText("<html>" + "a a a a a aa ".replaceAll("\n", "<br/>") + "</html>");
 
     }
+
 }

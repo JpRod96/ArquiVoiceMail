@@ -15,7 +15,10 @@ public class MainWindow extends JFrame implements ActionListener {
     private JLabel labelText;
     private JTextArea userOption;
     private JButton numeralButton;
+    private JLabel labelText2;
+
     private UIPresenter uiPresenter;
+    public UIController uiController;
     public MainWindow(){
         super("jp,mauri,abel");
         setContentPane(rootPanel);
@@ -27,8 +30,16 @@ public class MainWindow extends JFrame implements ActionListener {
     public JLabel getFieldToWrite(){
         return labelText;
     }
+    public JLabel getFieldToWrite2(){
+        return labelText2;
+    }
+
+
     public JTextArea getUserOption(){
         return userOption;
+    }
+    public void setController(UIController uiController){
+        this.uiController = uiController;
     }
     public void setUiPresenter(UIPresenter uiPresenter){
         this.uiPresenter=uiPresenter;
@@ -79,19 +90,20 @@ public class MainWindow extends JFrame implements ActionListener {
                     && "1234567890#".indexOf(userOption.getText()) >= 0)
             {
                 //this.connection.reciveData(userOption.getText());
-
-                uiPresenter.parseModel();
+            //    uiPresenter.parseModel();
+                uiController.recibeData(userOption.getText());
             }
             else
             {
                 //this.connection.record(userOption.getText());
+                uiController.record(userOption.getText());
+
 
             }
             userOption.setText("");
         }
         if (e.getSource()==hButton){
-            // this.connection.hangup();
-
+            uiController.hangUp();
         }
     }
 
