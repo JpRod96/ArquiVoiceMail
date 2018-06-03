@@ -30,6 +30,8 @@ public class MessagePersistenceService implements MessageRepository{
             Class.forName(driver);
             connectionObj = DriverManager.getConnection(connectionString, user, password);
             statementObj = connectionObj.createStatement();
+            statementObj.execute("CREATE TABLE IF NOT EXISTS Message ( Id SERIAL PRIMARY  KEY, text CHAR(500) NOT NULL, MailBoxId INTEGER NOT NULL REFERENCES Mailbox(id));");
+
         }
         catch(Exception ex)
         {
@@ -49,9 +51,10 @@ public class MessagePersistenceService implements MessageRepository{
         }
     }
 
-    public void saveMessage(Message message, int mailBoxId){
+    public void saveMessage(Message message){
         String text=message.getText();
         int id=message.getId();
+        int mailBoxId=message.getMailboxId();
         if(id==0){
             try {
                 statementObj.executeUpdate("INSERT INTO Message (text,MailBoxId) VALUES" + "('" + text + "', '" + mailBoxId + "')");
@@ -112,7 +115,8 @@ public class MessagePersistenceService implements MessageRepository{
     public void saveAllMessages(MessageQueue queue, int mailBoxId){
         ArrayList<Message> messages=queue.getQueue();
         for (Message message: messages){
-            saveMessage(message, mailBoxId);
+            message.setMailboxId(mailBoxId);
+            saveMessage(message);
         }
     }
 

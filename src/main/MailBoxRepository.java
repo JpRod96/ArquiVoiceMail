@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public interface MailBoxRepository {
 
     void saveMailbox(Mailbox mailbox);
+    void saveMailbox2(Mailbox mailbox);
     void updateMailbox(Mailbox mailbox);
     Mailbox getMailBoxById(int mailboxId);
     ArrayList<Mailbox> getAllMailBoxes();
