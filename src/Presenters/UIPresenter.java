@@ -31,14 +31,13 @@ public class  UIPresenter implements Presenter{
     public void parseModel(){
         ConnectionState connectionState=connection.get_state();
         String toShowString=FactoryForConsoleStrings.getStringByState(connectionState);
-
-        mainWindow.getFieldToWrite().setText("<html>" + toShowString.replaceAll("\n", "<br/>") + "</html>");
+        if (toShowString!=null) {
+            mainWindow.getFieldToWrite().setText("<html>" + toShowString.replaceAll("\n", "<br/>") + "</html>");
+        }
     }
 
     @Override
     public void parseModel(String toShowString){
-        mainWindow.getFieldToWrite2().setText("<html>" + "a a a a a aa ".replaceAll("\n", "<br/>") + "</html>");
-
     }
 
 }

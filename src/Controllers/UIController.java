@@ -14,9 +14,6 @@ public class UIController{
     private Connection connection;
     private UIPresenter uiPresenter;
 
-
-
-
     public UIController(Connection connection,UIPresenter uiPresenter){
         this.connection = connection;
         this.connectionState = connection.get_state();
@@ -24,13 +21,17 @@ public class UIController{
     }
 
 
-    public void hangUp(){
+    public void hangUp()
+    {
         connection.hangup();
     }
+
     public void recibeData(String key){
+
         connection.reciveData(key);
     }
     public void record(String message){
+
         connection.record(message);
     }
 }
