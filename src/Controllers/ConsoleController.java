@@ -47,6 +47,7 @@ public class ConsoleController{
     }
 
     private void performActionBasedOnInitialState(ConnectionStateLog log, String input){
+
         if(log.getInitialState() instanceof Connected){
             if(log.wasThereAChangeOfStates()){
                 consolePresenter.parseModel(connection.getCurrentMailbox().getGreeting());

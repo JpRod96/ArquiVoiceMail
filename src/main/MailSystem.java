@@ -39,4 +39,7 @@ public class MailSystem
       this.mailboxes=mailBoxRepository.getAllMailBoxes();
    }
 
+   public void setMailBoxRepository(MailBoxRepository mailBoxRepository) {
+      this.mailBoxRepository = mailBoxRepository;
+   }
 }
