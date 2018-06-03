@@ -32,11 +32,11 @@ public class  UIPresenter implements Presenter{
         WindowChooser windowChoser = new WindowChooser(toShowString);
         windowChoser.assignWindow(mainWindow);
         windowChoser.generateOptions();
-
     }
 
     @Override
     public void parseModel(String toShowString){
+        mainWindow.getFieldToWrite().setText("<html>" + toShowString.replaceAll("\n", "<br/>") + "</html>");
     }
 
 }

@@ -65,6 +65,7 @@ public class MainWindow extends JFrame implements ActionListener {
         if (e.getSource()==actionButton) {
             if (userInput.getText().length() == 1
                     && "1234567890#".indexOf(userInput.getText()) >= 0) {
+                uiController.performActionBasedOnStateLog(userInput.getText());
                 uiController.recibeData(userInput.getText());
             } else {
                 uiController.record(userInput.getText());
