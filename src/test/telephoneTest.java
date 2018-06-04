@@ -1,4 +1,5 @@
 package test;
+import Presenters.ConsolePresenter;
 import Views.ConsoleViews.Console;
 import main.Connection;
 import main.MailSystem;
@@ -16,9 +17,9 @@ import static org.mockito.Mockito.mock;
 
 public class telephoneTest {
 	private static final Scanner Scanner = null;
-	
-	MailSystem mockedMailsystem;
+
     Console mockedConsole;
+    Console consoleWithPresenter;
     Connection connection;
 
     @Before
@@ -40,11 +41,13 @@ public class telephoneTest {
 		System.setOut(originalOut);
 	
 	}
+
 	@Test
 	public void createPhoneJustWithScanner(){
 		Console t = new Console(Scanner);
 		assertNotNull(t);
 	}
+
 
 }
 

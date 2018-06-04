@@ -4,6 +4,8 @@ import MailVoice.Message;
 import MailVoice.MessageQueue;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.assertEquals;
 
 public class MessageQueueTest {
@@ -29,5 +31,11 @@ public class MessageQueueTest {
 	@Test
 	public void shouldReturnPikeOfQueue() {
 		assertEquals(messageQueue.peek(),null);
+	}
+	@Test
+	public void shouldGetNewQueue(){
+		ArrayList<Message> newQueue=new ArrayList<>();
+		messageQueue.setQueue(newQueue);
+		assertEquals(messageQueue.getQueue(),newQueue);
 	}
 }

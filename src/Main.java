@@ -1,13 +1,17 @@
 import Controllers.ConsoleController;
+import Controllers.UIController;
 import Persistence.MailboxPersistenceService;
 import Persistence.MessagePersistenceService;
 import Presenters.ConsolePresenter;
+import Presenters.UIPresenter;
 import Views.ConsoleViews.Console;
+import Views.ConsoleViews.MainWindow;
 import main.Connection;
 import main.MailBoxRepository;
 import main.MailSystem;
 import main.MessageRepository;
 
+import javax.swing.*;
 import java.util.Scanner;
 
 /**
@@ -20,6 +24,8 @@ public class Main {
     private static Connection connection;
     private static ConsolePresenter consolePresenter;
     private static ConsoleController consoleController;
+    private static UIPresenter uiPresenter;
+    public static UIController uiController;
 
     public static void main(String[] args){
 
@@ -35,6 +41,15 @@ public class Main {
         Console telephone=new Console(console);
         consolePresenter=new ConsolePresenter(telephone, connection);
         consoleController=new ConsoleController(connection, console, consolePresenter);
+
+        MainWindow mainWindow = new MainWindow();
+        uiPresenter = new UIPresenter(mainWindow,connection);
+        mainWindow.setUiPresenter(uiPresenter);
+        uiController = new UIController(connection,uiPresenter);
+        mainWindow.setController(uiController);
+
+        mainWindow.setVisible(true);
+        mainWindow.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         consoleController.run();
     }

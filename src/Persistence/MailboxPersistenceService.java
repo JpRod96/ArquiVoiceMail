@@ -41,8 +41,8 @@ public class MailboxPersistenceService implements MailBoxRepository{
             //statement.execute("CREATE DATABASE IF NOT EXISTS mailvoice;");
             //connectionObj.close();
            // connectionObj= DriverManager.getConnection("jdbc:postgresql://localhost:5432/mailvoice", user, password);
-            Statement statement2 = connectionObj.createStatement();
-            statement2.execute("CREATE TABLE IF NOT EXISTS Mailbox ( id SERIAL PRIMARY  KEY, passcode CHAR(20) NOT NULL, greeting CHAR(100) NOT NULL);");
+            Statement creationStatement = connectionObj.createStatement();
+            creationStatement.execute("CREATE TABLE IF NOT EXISTS Mailbox ( id SERIAL PRIMARY  KEY, passcode CHAR(20) NOT NULL, greeting CHAR(100) NOT NULL);");
 
            //statement2.execute("INSERT INTO Mailbox (id, passcode, greeting) VALUES(1, '1', 'You have reached mailbox 2.Please leave a message now csm.');");
 
@@ -121,6 +121,7 @@ public class MailboxPersistenceService implements MailBoxRepository{
             while(resultSet.next()) {
                 String passcode=resultSet.getString("passcode"),
                         greeting=resultSet.getString("greeting");
+                passcode=verifyPasscode(passcode);
                 greeting=setGreetingRetrievedFromDB(greeting);
                 mailbox1=new Mailbox(passcode, greeting, mailboxId);
                 ArrayList<Message> messages= messagePersistenceService.getAllMessagesByMailBoxId(mailboxId);
@@ -136,6 +137,15 @@ public class MailboxPersistenceService implements MailBoxRepository{
         return mailbox1;
     }
 
+    public String verifyPasscode(String passcode){
+        String finalPasscode="";
+        for (int index=0; index<passcode.length(); index++){
+            char charAt=passcode.charAt(index);
+            if(charAt!=' ')
+                finalPasscode+=charAt;
+        }
+        return finalPasscode;
+    }
 
     private String setGreetingRetrievedFromDB(String greeting){
         String settedGreeting="";
@@ -155,8 +165,4 @@ public class MailboxPersistenceService implements MailBoxRepository{
      return mailboxes;
     }
     public MessagePersistenceService getMessagePersistenceService(){return messagePersistenceService;}
-
-    public boolean userExist(String params) {
-        return true;
-    }
 }

@@ -13,8 +13,8 @@ public class MessageMenuState implements ConnectionState{
             if (key.equals("2")) {
                 Message message = connection.getCurrentMailbox().saveCurrentMessage();
                 int mailboxId=connection.getCurrentMailbox().getId();
-                message.setMailboxId(mailboxId);
                 if(message!=null && connection.getMessageRepository()!=null){
+                    message.setMailboxId(mailboxId);
                     connection.getMessageRepository().saveMessage(message);
                 }
                 connection.notifyPresenters();
