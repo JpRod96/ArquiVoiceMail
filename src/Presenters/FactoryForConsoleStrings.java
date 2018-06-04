@@ -29,23 +29,21 @@ public class FactoryForConsoleStrings {
 
 
     public static String getStringByState(ConnectionState connectionState){
-        String outputString="";
         if(isInitial(connectionState)){
-            outputString=MEMORY_STORAGE_OPTION;
+            return MEMORY_STORAGE_OPTION;
         }
         else if(isConnected(connectionState)){
-            outputString= INITIAL_PROMPT;
+            return  INITIAL_PROMPT;
         }
-        else if(isRecording(connectionState) || isChangeGreeting(connectionState) || isChangePassCode(connectionState) ){
-            outputString= MAILBOX_MENU_TEXT;
+        else if(isRecording(connectionState) || isChangeGreeting(connectionState) || isChangePassCode(connectionState) || isMailBoxMenu(connectionState)){
+            return  MAILBOX_MENU_TEXT;
         }
-        else if(isMailBoxMenu(connectionState)){
-            outputString= MAILBOX_MENU_TEXT;
+        else if(isMessageMenu(connectionState)){
+            return  MESSAGE_MENU_TEXT;
         }
-        else {
-            outputString= MESSAGE_MENU_TEXT;
+        else{
+            return "";
         }
-        return outputString;
     }
 
     public static boolean isInitial(ConnectionState connectionState) {
