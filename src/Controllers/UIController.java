@@ -38,23 +38,30 @@ public class UIController{
             }else{
                 if(connection.getAccumulatedKeys()=="")
                     uiPresenter.parseModel("Incorrect mailbox number. Try again!");
+                    uiPresenter.itHasAMessage(false);
             }
         }
 
         if(log.getInitialState() instanceof Recording){
 
             if(!log.wasThereAChangeOfStates() && connection.getAccumulatedKeys()==""){
+
                 uiPresenter.parseModel("Incorrect passcode. Try again!");
+                uiPresenter.itHasAMessage(false);
             }
         }
 
         if(log.getInitialState() instanceof MailBoxMenuState){
 
             if(log.wasThereAChangeOfStates() && log.getFinalState() instanceof ChangePassCode){
+
                 uiPresenter.parseModel("Enter new passcode followed by the # key");
+                uiPresenter.itHasAMessage(false);
             }
             if(log.wasThereAChangeOfStates() && log.getFinalState() instanceof ChangeGreeting){
+
                 uiPresenter.parseModel("Record your greeting, then press the # key");
+                uiPresenter.itHasAMessage(false);
             }
         }
 
@@ -66,9 +73,12 @@ public class UIController{
                 output += "No messages." + "\n";
             else
                 output += m.getText() + "\n";
+
             uiPresenter.parseModel(output);
+            uiPresenter.itHasAMessage(true);
             uiPresenter.parseModel();
         }
+
     }
 
     public void hangUp()
