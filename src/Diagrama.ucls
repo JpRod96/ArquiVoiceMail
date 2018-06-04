@@ -3,7 +3,7 @@
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
   <class id="1" language="java" name="main.MailSystem" project="VoiceMail" file="/VoiceMail/src/main/MailSystem.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="54" width="118" x="120" y="402"/>    
+    <position height="54" width="118" x="124" y="440"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -66,7 +66,7 @@
   </class>  
   <class id="8" language="java" name="main.MessageMenuState" project="VoiceMail" 
     file="/VoiceMail/src/main/MessageMenuState.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="53" width="137" x="480" y="-42"/>    
+    <position height="53" width="137" x="480" y="-62"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -75,7 +75,7 @@
   </class>  
   <class id="9" language="java" name="main.Recording" project="VoiceMail" file="/VoiceMail/src/main/Recording.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="53" width="87" x="487" y="16"/>    
+    <position height="53" width="87" x="653" y="-39"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -120,7 +120,7 @@
   </class>  
   <class id="14" language="java" name="MailVoice.Mailbox" project="VoiceMail" 
     file="/VoiceMail/src/MailVoice/Mailbox.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="53" width="87" x="394" y="341"/>    
+    <position height="53" width="87" x="353" y="411"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -129,7 +129,7 @@
   </class>  
   <class id="15" language="java" name="MailVoice.MessageQueue" project="VoiceMail" 
     file="/VoiceMail/src/MailVoice/MessageQueue.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="53" width="113" x="565" y="341"/>    
+    <position height="53" width="113" x="520" y="409"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -138,7 +138,7 @@
   </class>  
   <class id="16" language="java" name="MailVoice.Message" project="VoiceMail" 
     file="/VoiceMail/src/MailVoice/Message.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="53" width="87" x="483" y="448"/>    
+    <position height="53" width="87" x="442" y="518"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -147,7 +147,7 @@
   </class>  
   <interface id="17" language="java" name="main.Presenter" project="VoiceMail" file="/VoiceMail/src/main/Presenter.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="53" width="103" x="524" y="155"/>    
+    <position height="53" width="103" x="701" y="209"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -156,158 +156,602 @@
   </interface>  
   <class id="18" language="java" name="main.InitialState" project="VoiceMail" 
     file="/VoiceMail/src/main/InitialState.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="53" width="87" x="479" y="80"/>    
+    <position height="53" width="87" x="671" y="19"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <association id="19">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="20" name="currentMailbox"/>      
-      <multiplicity id="21" minimum="0" maximum="1"/>    
+  <class id="19" language="java" name="Controllers.ConsoleController" project="VoiceMail" 
+    file="/VoiceMail/src/Controllers/ConsoleController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="126" x="1026" y="72"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="Controllers.UIController" project="VoiceMail" 
+    file="/VoiceMail/src/Controllers/UIController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="132" x="1002" y="764"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="21" language="java" name="Controllers.Util.ActionPerformer" project="VoiceMail" 
+    file="/VoiceMail/src/Controllers/Util/ActionPerformer.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="119" x="1285" y="78"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="22" language="java" name="Controllers.Util.FactoryForActionPerformer" project="VoiceMail" 
+    file="/VoiceMail/src/Controllers/Util/FactoryForActionPerformer.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="179" x="1256" y="3"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="Controllers.Util.MessageMenuPerformer" project="VoiceMail" 
+    file="/VoiceMail/src/Controllers/Util/MessageMenuPerformer.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="166" x="1344" y="420"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="Controllers.Util.ConnectionStateLog" project="VoiceMail" 
+    file="/VoiceMail/src/Controllers/Util/ConnectionStateLog.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="223" x="974" y="-28"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="Controllers.Util.ConnectedPerformer" project="VoiceMail" 
+    file="/VoiceMail/src/Controllers/Util/ConnectedPerformer.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="144" x="1381" y="336"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="Controllers.Util.RecordingPerformer" project="VoiceMail" 
+    file="/VoiceMail/src/Controllers/Util/RecordingPerformer.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="141" x="1427" y="243"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" name="Controllers.Util.MailboxPerformer" project="VoiceMail" 
+    file="/VoiceMail/src/Controllers/Util/MailboxPerformer.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="127" x="1448" y="155"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="Presenters.ConsolePresenter" project="VoiceMail" 
+    file="/VoiceMail/src/Presenters/ConsolePresenter.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="127" x="1089" y="460"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="Presenters.FactoryForConsoleStrings" project="VoiceMail" 
+    file="/VoiceMail/src/Presenters/FactoryForConsoleStrings.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="171" x="1513" y="526"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="Presenters.UIPresenter" project="VoiceMail" 
+    file="/VoiceMail/src/Presenters/UIPresenter.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="92" x="1209" y="657"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="Presenters.WindowChooser" project="VoiceMail" 
+    file="/VoiceMail/src/Presenters/WindowChooser.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="118" x="1484" y="714"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="Views.ConsoleViews.Console" project="VoiceMail" 
+    file="/VoiceMail/src/Views/ConsoleViews/Console.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="95" x="1396" y="523"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="33" language="java" name="Views.ConsoleViews.MainWindow" project="VoiceMail" 
+    file="/VoiceMail/src/Views/ConsoleViews/MainWindow.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="171" x="1328" y="784"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="34" language="java" name="Main" project="VoiceMail" file="/VoiceMail/src/Main.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="53" width="87" x="567" y="-331"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <realization id="35">    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="17"/>  
+  </realization>  
+  <association id="36">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="37" name="uiPresenter"/>      
+      <multiplicity id="38" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="14" navigable="true"/>    
+    <end type="TARGET" refId="30" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="22">    
+  <association id="39">    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="23" name="mailBoxRepository">        
+      <attribute id="40" name="messageRepository">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="24" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="10" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="25">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="26" name="messageRepository">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="27" minimum="0" maximum="1">        
+      <multiplicity id="41" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="11" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="28">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="3"/>  
-  </realization>  
-  <realization id="29">    
+  <association id="42">    
+    <bendpoint x="597" y="127"/>    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="43" name="connection"/>      
+      <multiplicity id="44" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="45">    
     <end type="SOURCE" refId="7"/>    
     <end type="TARGET" refId="3"/>  
   </realization>  
-  <realization id="30">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="3"/>  
-  </realization>  
-  <association id="31">    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="32" name="messagePersistenceService">        
-        <position height="0" width="0" x="-42" y="1"/>      
-      </attribute>      
-      <multiplicity id="33" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-42" y="1"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="34">    
+  <realization id="46">    
     <end type="SOURCE" refId="12"/>    
     <end type="TARGET" refId="10"/>  
   </realization>  
-  <realization id="35">    
+  <realization id="47">    
     <end type="SOURCE" refId="8"/>    
     <end type="TARGET" refId="3"/>  
   </realization>  
-  <association id="36">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="37" name="system">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="38" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="39">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="3"/>  
-  </realization>  
-  <association id="40">    
-    <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="41" name="queue"/>      
-      <multiplicity id="42" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="16" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="43">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="44" name="presenters"/>      
-      <multiplicity id="45" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="17" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="46">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="3"/>  
-  </realization>  
-  <realization id="47">    
-    <end type="SOURCE" refId="13"/>    
-    <end type="TARGET" refId="11"/>  
-  </realization>  
   <association id="48">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="49" name="mailBoxRepository">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="50" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
+    <bendpoint x="-167" y="-295"/>    
+    <bendpoint x="-177" y="1"/>    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="49" name="mailBoxRepository"/>      
+      <multiplicity id="50" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="51">    
-    <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="52" name="newMessages"/>      
-      <multiplicity id="53" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="15" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="54">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="55" name="mailboxes"/>      
-      <multiplicity id="56" minimum="0" maximum="2147483647"/>    
+      <attribute id="52" name="mailboxes"/>      
+      <multiplicity id="53" minimum="0" maximum="2147483647"/>    
     </end>    
     <end type="TARGET" refId="14" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="57">    
+  <association id="54">    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="58" name="_state">        
+      <attribute id="55" name="_state">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="59" minimum="0" maximum="1">        
+      <multiplicity id="56" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <association id="57">    
+    <bendpoint x="648" y="326"/>    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="58" name="connection"/>      
+      <multiplicity id="59" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <realization id="60">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
+  <realization id="61">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="21"/>  
+  </realization>  
+  <association id="62">    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="63" name="connection"/>      
+      <multiplicity id="64" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="65">    
+    <bendpoint x="1437" y="-312"/>    
+    <bendpoint x="1394" y="-93"/>    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="66" name="consoleController"/>      
+      <multiplicity id="67" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="68">    
+    <bendpoint x="-5" y="-297"/>    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="69" name="messageRepository"/>      
+      <multiplicity id="70" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="71">    
+    <bendpoint x="1657" y="362"/>    
+    <bendpoint x="1656" y="504"/>    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="72" name="consolePresenter"/>      
+      <multiplicity id="73" minimum="0" maximum="1">        
+        <position height="16" width="23" x="115" y="915"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="74">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="75" name="uiController"/>      
+      <multiplicity id="76" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="77">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="78" name="uiPresenter"/>      
+      <multiplicity id="79" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="80">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="21"/>  
+  </realization>  
+  <association id="81">    
+    <bendpoint x="1808" y="-319"/>    
+    <bendpoint x="1813" y="684"/>    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="82" name="uiPresenter"/>      
+      <multiplicity id="83" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="84">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
+  <association id="85">    
+    <bendpoint x="1660" y="271"/>    
+    <bendpoint x="1656" y="505"/>    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="86" name="consolePresenter">        
+        <position height="18" width="93" x="1861" y="1025"/>      
+      </attribute>      
+      <multiplicity id="87" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="88">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="89" name="mailBoxRepository">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="90" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="91">    
+    <bendpoint x="1663" y="182"/>    
+    <bendpoint x="1656" y="506"/>    
+    <end type="SOURCE" refId="27" navigable="false">      
+      <attribute id="92" name="consolePresenter">        
+        <position height="18" width="93" x="175" y="1006"/>      
+      </attribute>      
+      <multiplicity id="93" minimum="0" maximum="1">        
+        <position height="16" width="23" x="508" y="922"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="94">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="95" name="currentMailbox"/>      
+      <multiplicity id="96" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="97">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="98" name="mailBoxRepository">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="99" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="100">    
+    <bendpoint x="642" y="325"/>    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="101" name="connection"/>      
+      <multiplicity id="102" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="103">    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="21"/>  
+  </realization>  
+  <association id="104">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="105" name="actionPerformer"/>      
+      <multiplicity id="106" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="107">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="21"/>  
+  </realization>  
+  <realization id="108">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
+  <association id="109">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="110" name="consolePresenter">        
+        <position height="18" width="93" x="141" y="1002"/>      
+      </attribute>      
+      <multiplicity id="111" minimum="0" maximum="1">        
+        <position height="16" width="23" x="374" y="865"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="112">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="113" name="newMessages"/>      
+      <multiplicity id="114" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="115">    
+    <bendpoint x="708" y="100"/>    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="116" name="initialState"/>      
+      <multiplicity id="117" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="118">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="119" name="console"/>      
+      <multiplicity id="120" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="32" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="121">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="122" name="connectionState"/>      
+      <multiplicity id="123" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="124">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
+  <association id="125">    
+    <bendpoint x="1745" y="-317"/>    
+    <bendpoint x="1761" y="507"/>    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="126" name="consolePresenter"/>      
+      <multiplicity id="127" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="128">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="129" name="messagePersistenceService">        
+        <position height="0" width="0" x="-42" y="1"/>      
+      </attribute>      
+      <multiplicity id="130" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-42" y="1"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="131">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="132" name="mainWindow"/>      
+      <multiplicity id="133" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="134">    
+    <bendpoint x="650" y="327"/>    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="135" name="connection"/>      
+      <multiplicity id="136" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="137">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="138" name="system">        
+        <position height="0" width="0" x="4" y="38"/>      
+      </attribute>      
+      <multiplicity id="139" minimum="0" maximum="1">        
+        <position height="0" width="0" x="4" y="38"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="140">    
+    <bendpoint x="1655" y="446"/>    
+    <bendpoint x="1655" y="506"/>    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="141" name="consolePresenter">        
+        <position height="18" width="93" x="575" y="925"/>      
+      </attribute>      
+      <multiplicity id="142" minimum="0" maximum="1">        
+        <position height="16" width="23" x="350" y="982"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="143">    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="144" name="mainWindow"/>      
+      <multiplicity id="145" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="146">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="147" name="queue"/>      
+      <multiplicity id="148" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="149">    
+    <bendpoint x="650" y="326"/>    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="150" name="connection"/>      
+      <multiplicity id="151" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="152">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="153" name="presenters"/>      
+      <multiplicity id="154" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="155">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="11"/>  
+  </realization>  
+  <association id="156">    
+    <bendpoint x="1896" y="-320"/>    
+    <bendpoint x="1902" y="969"/>    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="157" name="uiController"/>      
+      <multiplicity id="158" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="159">    
+    <bendpoint x="645" y="324"/>    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="160" name="connection"/>      
+      <multiplicity id="161" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="162">    
+    <bendpoint x="642" y="324"/>    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="163" name="connection"/>      
+      <multiplicity id="164" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="165">    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="17"/>  
+  </realization>  
+  <association id="166">    
+    <bendpoint x="645" y="325"/>    
+    <end type="SOURCE" refId="27" navigable="false">      
+      <attribute id="167" name="connection"/>      
+      <multiplicity id="168" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="169">    
     <end type="SOURCE" refId="18"/>    
     <end type="TARGET" refId="3"/>  
   </realization>  
