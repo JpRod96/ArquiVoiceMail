@@ -57,9 +57,7 @@ public class MessagePersistenceService implements MessageRepository{
         int mailBoxId=message.getMailboxId();
         if(id==0){
             try {
-                statementObj.executeUpdate("INSERT INTO Message (text,MailBoxId) VALUES('" + text + "', '" + mailBoxId + "')");
-
-
+                statementObj.executeUpdate("INSERT INTO Message (text,MailBoxId) VALUES" + "('" + text + "', '" + mailBoxId + "')");
                 message.setId(Integer.MAX_VALUE);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -71,10 +69,8 @@ public class MessagePersistenceService implements MessageRepository{
         ArrayList<Message> messages=new ArrayList<>();
         int minId= getLimitMessagesIdByStrategy(mailBoxId,"MIN");
         int maxId= getLimitMessagesIdByStrategy(mailBoxId,"MAX");
-        if(minId>0){
-            for(int index=minId; index<=maxId; index++){
-                messages.add(getMessageById(index));
-            }
+        for(int index=minId; index<=maxId; index++){
+            messages.add(getMessageById(index));
         }
         return messages;
     }
@@ -119,7 +115,6 @@ public class MessagePersistenceService implements MessageRepository{
     public void saveAllMessages(MessageQueue queue, int mailBoxId){
         ArrayList<Message> messages=queue.getQueue();
         for (Message message: messages){
-            System.out.println("entro");
             message.setMailboxId(mailBoxId);
             saveMessage(message);
         }
