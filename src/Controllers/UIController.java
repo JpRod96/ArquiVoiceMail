@@ -1,6 +1,7 @@
 package Controllers;
 
 import Controllers.Util.ConnectionStateLog;
+import MailVoice.Mailbox;
 import MailVoice.Message;
 import Presenters.UIPresenter;
 import main.*;
@@ -14,6 +15,7 @@ public class UIController{
     private ConnectionState connectionState;
     private Connection connection;
     private UIPresenter uiPresenter;
+    private final String TEXT_FOR_EMPTY_QUEUE="No messages.\n";
 
     public UIController(Connection connection,UIPresenter uiPresenter){
         this.connection = connection;
@@ -68,14 +70,14 @@ public class UIController{
         if(log.getInitialState() instanceof MessageMenuState && input.equalsIgnoreCase("1")){
 
             String output = "";
-            Message m = connection.getCurrentMailbox().getCurrentMessage();
-            if (m == null || m.getText().equals(""))
-                output += "No messages." + "\n";
+            Mailbox currentMailbox=connection.getCurrentMailbox();
+            Message message = currentMailbox.getCurrentMessage();
+            if (message == null || message.getText().equals(""))
+                output += TEXT_FOR_EMPTY_QUEUE;
             else
-                output += m.getText() + "\n";
+                output += message.getText() + "\n";
 
             uiPresenter.parseModel(output);
-            uiPresenter.itHasAMessage(true);
             uiPresenter.parseModel();
         }
 

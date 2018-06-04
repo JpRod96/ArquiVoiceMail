@@ -71,8 +71,10 @@ public class MessagePersistenceService implements MessageRepository{
         ArrayList<Message> messages=new ArrayList<>();
         int minId= getLimitMessagesIdByStrategy(mailBoxId,"MIN");
         int maxId= getLimitMessagesIdByStrategy(mailBoxId,"MAX");
-        for(int index=minId; index<=maxId; index++){
-            messages.add(getMessageById(index));
+        if(minId>0){
+            for(int index=minId; index<=maxId; index++){
+                messages.add(getMessageById(index));
+            }
         }
         return messages;
     }
