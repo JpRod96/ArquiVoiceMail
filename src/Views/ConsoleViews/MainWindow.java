@@ -66,8 +66,6 @@ public class MainWindow extends JFrame implements ActionListener {
             if (userInput.getText().length() == 1
                     && "1234567890#".indexOf(userInput.getText()) >= 0) {
                 uiController.recibeData(userInput.getText());
-            } else {
-                uiController.record(userInput.getText());
             }
             userInput.setText("");
         }
@@ -84,8 +82,9 @@ public class MainWindow extends JFrame implements ActionListener {
             uiController.recibeData("4");
         }
         if (e.getSource()== leaveMessageButton){
+            uiController.record(userInput.getText());
             uiController.hangUp();
+            userInput.setText("");
         }
     }
-
 }
