@@ -9,9 +9,9 @@ public class ConnectionStateLog {
     private ConnectionState initialState;
     private ConnectionState finalState;
 
-    ConnectionStateLog(){}
+    public ConnectionStateLog(){}
 
-    ConnectionStateLog(ConnectionState initialState, ConnectionState finalState){
+    public ConnectionStateLog(ConnectionState initialState, ConnectionState finalState){
         this.initialState =initialState;
         this.finalState=finalState;
     }
