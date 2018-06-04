@@ -84,7 +84,6 @@ public class Connection
    
    public void addPresenter(Presenter presenter) {
 	   presenters.add(presenter);
-	   //resetConnection();
        notifyPresenters();
    }
    

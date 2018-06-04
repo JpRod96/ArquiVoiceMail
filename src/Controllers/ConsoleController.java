@@ -53,7 +53,8 @@ public class ConsoleController{
     private void performActionBasedOnConnectionState(ConnectionStateLog log, String input){
 
         actionPerformer= FactoryForActionPerformer.getActionPerformerByInitialState(log.getInitialState(),connection,consolePresenter);
-        actionPerformer.performAction(log,input);
+        if(actionPerformer!=null)
+            actionPerformer.performAction(log,input);
 
     }
 }

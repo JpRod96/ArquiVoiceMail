@@ -102,6 +102,7 @@ public class MailboxPersistenceService implements MailBoxRepository{
             while(resultSet.next()) {
                 String passcode=resultSet.getString("passcode"),
                         greeting=resultSet.getString("greeting");
+                passcode=verifyPasscode(passcode);
                 greeting=setGreetingRetrievedFromDB(greeting);
                 mailbox=new Mailbox(passcode, greeting, mailboxId);
                 ArrayList<Message> messages= messagePersistenceService.getAllMessagesByMailBoxId(mailboxId);
@@ -115,6 +116,16 @@ public class MailboxPersistenceService implements MailBoxRepository{
             ex.printStackTrace();
         }
         return mailbox;
+    }
+
+    public String verifyPasscode(String passcode){
+        String finalPasscode="";
+        for (int index=0; index<passcode.length(); index++){
+            char charAt=passcode.charAt(index);
+            if(charAt!=' ')
+                finalPasscode+=charAt;
+        }
+        return finalPasscode;
     }
 
     private String setGreetingRetrievedFromDB(String greeting){
