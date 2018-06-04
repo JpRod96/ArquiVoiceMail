@@ -3,6 +3,7 @@ package Persistence;
 import MailVoice.Mailbox;
 import MailVoice.Message;
 import MailVoice.MessageQueue;
+import com.google.gson.Gson;
 import main.*;
 import java.sql.Statement;
 import java.sql.Connection;
@@ -27,7 +28,7 @@ public class MailboxPersistenceService implements MailBoxRepository{
 
     public MailboxPersistenceService(String connectionString, String user, String password, String driver){
         loadLocalHost(connectionString, user, password, driver);
-        messagePersistenceService = new MessagePersistenceService(connectionString, user, password, driver);
+        messagePersistenceService = this.getMessagePersistenceService();
     }
 
     public void loadLocalHost(String connectionString, String user, String password, String driver){
@@ -65,14 +66,15 @@ public class MailboxPersistenceService implements MailBoxRepository{
         }
     }
     public void saveMailbox2(Mailbox mailbox){
+            MessageQueue keptMessages=mailbox.getKeptMessages();
             int id=mailbox.getId();
             String passcode=mailbox.getPasscode();
             String greeting=mailbox.getGreeting();
 
 
             try {
-                statementObj.executeUpdate("INSERT INTO Mailbox (id, passcode, greeting) VALUES" + "('" + id + "' , '" + passcode + "', '" + greeting + "')");
-
+                statementObj.executeUpdate("INSERT INTO Mailbox (id, passcode, greeting) VALUES('" + id + "' , '" + passcode + "', '" + greeting + "')");
+                messagePersistenceService.saveAllMessages(keptMessages, id);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -99,7 +101,7 @@ public class MailboxPersistenceService implements MailBoxRepository{
                 greeting=mailbox.getGreeting();
         int id=mailbox.getId();
 
-        String query="UPDATE Mailbox SET `passcode`='"+passcode+"',`greeting`='"+greeting+"' WHERE id = "+id;
+        String query="UPDATE Mailbox SET passcode='"+passcode+"',greeting='"+greeting+"' WHERE id = "+id;
 
         try {
             statementObj.executeUpdate(query);
@@ -125,8 +127,8 @@ public class MailboxPersistenceService implements MailBoxRepository{
                 ArrayList<Message> messages= messagePersistenceService.getAllMessagesByMailBoxId(mailboxId);
                 MessageQueue keptMessageQueue= new MessageQueue();
                 keptMessageQueue.setQueue(messages);
-
                 mailbox1.setKeptMessages(keptMessageQueue);
+
             }
         }
         catch(Exception ex) {
@@ -157,7 +159,7 @@ public class MailboxPersistenceService implements MailBoxRepository{
 
     public ArrayList<Mailbox> getAllMailBoxes(){
         ArrayList<Mailbox> mailboxes=new ArrayList<>();
-        for (int mailboxId=1; mailboxId<=20;mailboxId++){
+        for (int mailboxId=1; mailboxId<=4;mailboxId++){
             mailboxes.add(getMailBoxById(mailboxId));
         }
      return mailboxes;

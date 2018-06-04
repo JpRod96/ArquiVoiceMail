@@ -57,7 +57,9 @@ public class MessagePersistenceService implements MessageRepository{
         int mailBoxId=message.getMailboxId();
         if(id==0){
             try {
-                statementObj.executeUpdate("INSERT INTO Message (text,MailBoxId) VALUES" + "('" + text + "', '" + mailBoxId + "')");
+                statementObj.executeUpdate("INSERT INTO Message (text,MailBoxId) VALUES('" + text + "', '" + mailBoxId + "')");
+
+
                 message.setId(Integer.MAX_VALUE);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -115,6 +117,7 @@ public class MessagePersistenceService implements MessageRepository{
     public void saveAllMessages(MessageQueue queue, int mailBoxId){
         ArrayList<Message> messages=queue.getQueue();
         for (Message message: messages){
+            System.out.println("entro");
             message.setMailboxId(mailBoxId);
             saveMessage(message);
         }
