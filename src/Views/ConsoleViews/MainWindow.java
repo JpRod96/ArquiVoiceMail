@@ -17,6 +17,7 @@ public class MainWindow extends JFrame implements ActionListener {
     private JTextArea userInput;
     private JLabel showedMessage;
     private JButton actionButton;
+    private JButton loginButton;
 
     private UIPresenter uiPresenter;
     public UIController uiController;
@@ -44,7 +45,9 @@ public class MainWindow extends JFrame implements ActionListener {
     public JButton getOption3Field() {
         return option3;
     }
-
+    public JButton getEnterButton(){return actionButton;}
+    public JButton getLeaveMessageButton(){return leaveMessageButton ;}
+    public JButton getLoginButton(){return loginButton ;}
     public void setController(UIController uiController){
         this.uiController = uiController;
 
@@ -59,6 +62,7 @@ public class MainWindow extends JFrame implements ActionListener {
         option3.addActionListener(this);
         option4.addActionListener(this);
         actionButton.addActionListener(this);
+        loginButton.addActionListener(this);
 
     }
     public void actionPerformed(ActionEvent e){
@@ -66,8 +70,6 @@ public class MainWindow extends JFrame implements ActionListener {
             if (userInput.getText().length() == 1
                     && "1234567890#".indexOf(userInput.getText()) >= 0) {
                 uiController.recibeData(userInput.getText());
-            } else {
-                uiController.record(userInput.getText());
             }
             userInput.setText("");
         }
@@ -84,8 +86,14 @@ public class MainWindow extends JFrame implements ActionListener {
             uiController.recibeData("4");
         }
         if (e.getSource()== leaveMessageButton){
+            uiController.record(userInput.getText());
             uiController.hangUp();
+            userInput.setText("");
+        }
+        if(e.getSource()==loginButton){
+            uiController.recibeData(userInput.getText());
+            uiController.recibeData("#");
+            userInput.setText("");
         }
     }
-
 }
