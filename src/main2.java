@@ -25,18 +25,18 @@ public class main2 {
 
         port(port);
         String driver="org.postgresql.Driver";
-        /* Configuracion para conectar a una base de datos local
+        /* Configuracion para conectar a una base de datos local */
         String connectionString="jdbc:postgresql://localhost:5432/postgres";
         String user="abel";
-        String password="73441710bliokiN";*/
+        String password="73441710bliokiN";
 
-        /* Configuracion para conectar ala base de datos que proporciona heroku*/
+        /* Configuracion para conectar ala base de datos que proporciona heroku
 
         URI dbUri = new URI(System.getenv("DATABASE_URL"));
         String user= dbUri.getUserInfo().split(":")[0];
         String password = dbUri.getUserInfo().split(":")[1];
         String connectionString = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
-
+        */
         MailboxPersistenceService mailboxPersistenceService = new MailboxPersistenceService(connectionString, user, password, driver);
         MessagePersistenceService messagePersistenceService= mailboxPersistenceService.getMessagePersistenceService();
 
@@ -64,13 +64,9 @@ public class main2 {
         before((request, response) -> response.header("Access-Control-Allow-Origin", "*"));
 
 
-        get("/hello", (req, res) -> {
-            //MailboxPersistenceService m=new MailboxPersistenceService(connectionString,user,password,driver);
-            Mailbox a= mailboxPersistenceService.getMailBoxById(1);
-            return a.getGreeting();
-        });
-        get("/" (req,res)->{
-            return "Hello, "+ req.params(":name");
+        
+        get("/", (req,res)->{
+            return "<h1>hola</h1>";
         });
 
         get("/mailboxs", (request, response) -> {
