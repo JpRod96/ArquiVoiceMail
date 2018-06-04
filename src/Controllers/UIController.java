@@ -54,7 +54,6 @@ public class UIController{
             }
             if(log.wasThereAChangeOfStates() && log.getFinalState() instanceof ChangeGreeting){
                 uiPresenter.parseModel("Record your greeting, then press the # key");
-
             }
         }
 
