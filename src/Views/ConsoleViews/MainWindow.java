@@ -23,7 +23,7 @@ public class MainWindow extends JFrame implements ActionListener {
     public MainWindow(){
         super("jp,mauri,abel");
         setContentPane(rootPanel);
-        setSize(400,430);
+        setSize(500,400);
         initializeActionButtons();
     }
     public JLabel getFieldToWrite(){
