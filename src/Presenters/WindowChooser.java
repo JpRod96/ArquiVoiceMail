@@ -9,9 +9,10 @@ import java.util.ArrayList;
  * Created by CORE i7 on 03/06/2018.
  */
 public class WindowChooser {
-    String chosedMenu;
-    int optionCounter = 1;
-    MainWindow mainWindow;
+    private String chosedMenu;
+    private int optionCounter = 1;
+    private MainWindow mainWindow;
+    private boolean hasMessage;
     public WindowChooser(String chosedMenu){
         this.chosedMenu=chosedMenu;
     }
@@ -21,6 +22,9 @@ public class WindowChooser {
 
     public void generateOptions(){
         String option="";
+        if (hasMessage==false){
+            writeMessage(" ");
+        }
         if(isAMenu(chosedMenu)){
             enableButtons();
             for (int i=0 ; i< chosedMenu.length();i++){
@@ -33,7 +37,7 @@ public class WindowChooser {
             }
         }
         else{
-            disableRestantButtons();
+            disableAllButtons();
             writeMessage(chosedMenu);
         }
         disableUnusedButtons();
@@ -51,9 +55,12 @@ public class WindowChooser {
         mainWindow.getOption4Field().setVisible(true);
         mainWindow.getOption3Field().setVisible(true);
     }
-    private void disableRestantButtons(){
+    private void disableAllButtons(){
         mainWindow.getOption1Field().setVisible(false);
         mainWindow.getOption2Field().setVisible(false);
+        mainWindow.getOption3Field().setVisible(false);
+        mainWindow.getOption4Field().setVisible(false);
+
     }
     private JButton getCorrectOption(int option) {
 
@@ -80,6 +87,9 @@ public class WindowChooser {
         else{
             return true;
         }
+    }
+    public void isAMessage(boolean hasMessage){
+        this.hasMessage=hasMessage;
     }
 }
 

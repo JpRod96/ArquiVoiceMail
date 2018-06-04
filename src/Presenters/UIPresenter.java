@@ -13,6 +13,7 @@ public class  UIPresenter implements Presenter{
 
     private MainWindow mainWindow;
     private Connection connection;
+    private boolean hasMessage=false;
 
 
     public UIPresenter(MainWindow mainWindow, Connection connection){
@@ -21,19 +22,18 @@ public class  UIPresenter implements Presenter{
         connection.addPresenter(this);
     }
 
-    public MainWindow getMainWindow(){
-        return mainWindow;
-    }
-
     @Override
     public void parseModel(){
         ConnectionState connectionState=connection.get_state();
         String toShowString=FactoryForConsoleStrings.getStringByState(connectionState);
         WindowChooser windowChooser = new WindowChooser(toShowString);
         windowChooser.assignWindow(mainWindow);
+        windowChooser.isAMessage(this.hasMessage);
         windowChooser.generateOptions();
     }
-
+    public void itHasAMessage(boolean hasMessage){
+        this.hasMessage=hasMessage;
+    }
     @Override
     public void parseModel(String toShowString){
         mainWindow.getFieldToWrite().setText("<html>" + toShowString.replaceAll("\n", "<br/>") + "</html>");
