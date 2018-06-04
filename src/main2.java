@@ -79,12 +79,10 @@ public class main2 {
 
         get("/mailboxs", (request, response) -> {
             response.type("application/json");
-            //MailboxPersistenceService m=new MailboxPersistenceService(connectionString,user,password,driver);
             return new Gson().toJson(mailboxPersistenceService.getAllMailBoxes());
         });
         get("/mailboxs/:id", (request, response) -> {
             response.type("application/json");
-           // MailboxPersistenceService m=new MailboxPersistenceService("jdbc:sqlite:db.db");
             Mailbox a=mailboxPersistenceService.getMailBoxById(Integer.parseInt(request.params(":id")));
 
             return new Gson().toJson(a);
@@ -92,7 +90,6 @@ public class main2 {
         });
         post("/messages", (request, response) -> {
             response.type("application/json");
-
             Message me = new Gson().fromJson(request.body(), Message.class);
             messagePersistenceService.saveMessage(me);
 
