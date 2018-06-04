@@ -31,6 +31,7 @@ public class UIController{
     private void performActionBasedOnInitialState(ConnectionStateLog log, String input){
 
         if(log.getInitialState() instanceof Connected){
+
             if(log.wasThereAChangeOfStates()){
                 uiPresenter.parseModel(connection.getCurrentMailbox().getGreeting());
             }else{
@@ -40,29 +41,33 @@ public class UIController{
         }
 
         if(log.getInitialState() instanceof Recording){
+
             if(!log.wasThereAChangeOfStates() && connection.getAccumulatedKeys()==""){
                 uiPresenter.parseModel("Incorrect passcode. Try again!");
             }
         }
 
         if(log.getInitialState() instanceof MailBoxMenuState){
+
             if(log.wasThereAChangeOfStates() && log.getFinalState() instanceof ChangePassCode){
                 uiPresenter.parseModel("Enter new passcode followed by the # key");
             }
             if(log.wasThereAChangeOfStates() && log.getFinalState() instanceof ChangeGreeting){
                 uiPresenter.parseModel("Record your greeting, then press the # key");
+
             }
         }
 
         if(log.getInitialState() instanceof MessageMenuState && input.equalsIgnoreCase("1")){
+
             String output = "";
             Message m = connection.getCurrentMailbox().getCurrentMessage();
             if (m == null || m.getText().equals(""))
                 output += "No messages." + "\n";
             else
                 output += m.getText() + "\n";
-
             uiPresenter.parseModel(output);
+            uiPresenter.parseModel();
         }
     }
 

@@ -18,8 +18,8 @@ public class WindowChooser {
     public void assignWindow(MainWindow mainWindow){
         this.mainWindow = mainWindow;
     }
-    public void generateOptions(){
 
+    public void generateOptions(){
         String option="";
         if(isAMenu(chosedMenu)){
             enableButtons();
@@ -39,7 +39,6 @@ public class WindowChooser {
         disableUnusedButtons();
     }
     private void disableUnusedButtons(){
-
         if (optionCounter==3){
             mainWindow.getOption4Field().setVisible(false);
             mainWindow.getOption3Field().setVisible(false);}
