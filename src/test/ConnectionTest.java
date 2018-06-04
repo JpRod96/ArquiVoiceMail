@@ -35,6 +35,7 @@ public class ConnectionTest {
 
 	    connection = new Connection(mockedMailsystem);
 	    connection.addPresenter(mockedConsolePresenter);
+		getIntoInMemoryStorage();
 	}
 
 	@Test
@@ -44,7 +45,7 @@ public class ConnectionTest {
 
 	@Test
 	public void shouldShowInitialMessage() {
-		verify(mockedConsolePresenter).parseModel();
+		verify(mockedConsolePresenter, times(2)).parseModel();
 	}
 	
 	@Test
@@ -69,7 +70,7 @@ public class ConnectionTest {
 		connection.dial("3");
 		connection.dial("nuevo saludo");
 		connection.dial("#");
-		verify(mockedConsolePresenter,times(3)).parseModel();
+		verify(mockedConsolePresenter,times(4)).parseModel();
 
 	}
 	@Test
@@ -82,7 +83,7 @@ public class ConnectionTest {
 		when(mockedMailsystem.findMailbox(idMailBox)).thenReturn(chosenMailbox);
 		stepsForGettingIntoMailBox(idMailBox);
 		connection.hangup();
-		verify(mockedConsolePresenter,times(2)).parseModel();
+		verify(mockedConsolePresenter,times(3)).parseModel();
 
 	}
 	@Test
@@ -93,7 +94,7 @@ public class ConnectionTest {
 		when(mockedMailsystem.findMailbox(idMailBox)).thenReturn(chosenMailbox);
 		stepsForGettingIntoMailBox(idMailBox);
 		connection.dial("#");
-		verify(mockedConsolePresenter).parseModel();
+		verify(mockedConsolePresenter, times(2)).parseModel();
 	}
 	@Test
 	public void shouldGetIntoMailBoxMenu() {
@@ -105,7 +106,7 @@ public class ConnectionTest {
 		stepsForGettingIntoMailBoxMenu(idMailBox, keyMailBox);
 
 		assertTrue(connection.isMailBoxMenu());
-		verify(mockedConsolePresenter, times(2)).parseModel();
+		verify(mockedConsolePresenter, times(3)).parseModel();
 	}
 
 	@Test
@@ -115,7 +116,7 @@ public class ConnectionTest {
 
 		when(mockedMailsystem.findMailbox(idMailBox)).thenReturn(chosenMailbox);
 		connection.reciveData(idMailBox);
-		verify(mockedConsolePresenter).parseModel();
+		verify(mockedConsolePresenter, times(2)).parseModel();
 	}
 	@Test
 	public void shouldQuitFromMessageMenu() {
@@ -128,7 +129,7 @@ public class ConnectionTest {
 		stepsForGettingIntoMailboxMenuOption(idMailBox, keyMailBox, mailBoxMenuOption);
 		connection.dial("4");
 		assertTrue(connection.isMailBoxMenu());
-		verify(mockedConsolePresenter,times(4)).parseModel();
+		verify(mockedConsolePresenter,times(5)).parseModel();
 	}
 
 	@Test
@@ -142,7 +143,7 @@ public class ConnectionTest {
 		stepsForGettingIntoMailboxMenuOption(idMailBox, keyMailBox, mailBoxMenuOption);
 		connection.dial("3");
 		assertTrue(connection.isMessageMenu());
-		verify(mockedConsolePresenter,times(4)).parseModel();
+		verify(mockedConsolePresenter,times(5)).parseModel();
 	}
 	@Test
 	public void shouldGetIntoMessageMenu() {
@@ -155,7 +156,7 @@ public class ConnectionTest {
 		stepsForGettingIntoMailboxMenuOption(idMailBox, keyMailBox, mailBoxMenuOption);
 
 		assertTrue(connection.isMessageMenu());
-		verify(mockedConsolePresenter, times(3)).parseModel();
+		verify(mockedConsolePresenter, times(4)).parseModel();
 	}
 	@Test
 	public void shouldGetIntoChangePassCodeMenu() {
@@ -168,7 +169,7 @@ public class ConnectionTest {
 		stepsForGettingIntoMailboxMenuOption(idMailBox, keyMailBox, mailBoxMenuOption);
 
 		assertTrue(connection.isChangePassCode());
-		verify(mockedConsolePresenter, times(2)).parseModel();
+		verify(mockedConsolePresenter, times(3)).parseModel();
 	}
 
 	@Test
@@ -190,7 +191,7 @@ public class ConnectionTest {
 		stepsForGettingIntoMailBoxMenu(idMailBox, newKeyMailBox);
 
 		assertTrue(connection.isMessageMenu());
-		verify(mockedConsolePresenter, times(5)).parseModel();
+		verify(mockedConsolePresenter, times(6)).parseModel();
 	}
 
 	@Test
@@ -204,7 +205,11 @@ public class ConnectionTest {
 		stepsForGettingIntoMailboxMenuOption(idMailBox, keyMailBox, mailBoxMenuOption);
 
 		assertTrue(connection.isChangeGreeting());
-		verify(mockedConsolePresenter,times(2)).parseModel();
+		verify(mockedConsolePresenter,times(3)).parseModel();
+	}
+
+	private void getIntoInMemoryStorage(){
+		connection.dial("1");
 	}
 
 	private void stepsForGettingIntoMailBox(String mailBoxNumber){
