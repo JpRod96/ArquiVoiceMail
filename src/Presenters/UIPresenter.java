@@ -1,33 +1,42 @@
 package Presenters;
 
-import Controllers.UIController;
+import Views.ConsoleViews.MainWindow;
 import main.Connection;
+import main.ConnectionState;
+import main.Presenter;
 
-import javax.swing.*;
 
 /**
  * Created by CORE i7 on 27/05/2018.
  */
-public class  UIPresenter{
-    UIController UIController;
+public class  UIPresenter implements Presenter{
 
-    public UIPresenter(UIController UIController){
-        this.UIController = UIController;
+    private MainWindow mainWindow;
+    private Connection connection;
+
+
+    public UIPresenter(MainWindow mainWindow, Connection connection){
+        this.mainWindow = mainWindow;
+        this.connection=connection;
+        connection.addPresenter(this);
     }
 
-    public Connection getModelFromView(){
-        return null;
+    public MainWindow getMainWindow(){
+        return mainWindow;
     }
-    public void hangUp(){
-        UIController.hangUp();
+
+    @Override
+    public void parseModel(){
+        ConnectionState connectionState=connection.get_state();
+        String toShowString=FactoryForConsoleStrings.getStringByState(connectionState);
+        WindowChooser windowChoser = new WindowChooser(toShowString);
+        windowChoser.assignWindow(mainWindow);
+        windowChoser.generateOptions();
     }
-    public void recibeData(String key){
-        UIController.recibeData(key);
+
+    @Override
+    public void parseModel(String toShowString){
+        mainWindow.getFieldToWrite().setText("<html>" + toShowString.replaceAll("\n", "<br/>") + "</html>");
     }
-    public void record(String message){
-        UIController.record(message);
-    }
-    public void assignMessage(JLabel jlabel,String updateString) {
-        jlabel.setText("<html>" + updateString.replaceAll("\n", "<br/>") + "</html>");
-    }
+
 }
