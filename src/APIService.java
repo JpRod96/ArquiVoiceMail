@@ -4,6 +4,8 @@ import Persistence.MessagePersistenceService;
 import com.google.gson.Gson;
 import MailVoice.Mailbox;
 import com.mysql.jdbc.Connection;
+import main.MailBoxRepository;
+import main.MessageRepository;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -11,8 +13,11 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import static spark.Spark.*;
-public class main2 {
+public class APIService {
 
+    private static main.Connection connection;
+    private static MessageRepository messageRepository;
+    private static MailBoxRepository mailBoxRepository;
 
     public static void main(String[] args) throws URISyntaxException, SQLException {
         ProcessBuilder process = new ProcessBuilder();

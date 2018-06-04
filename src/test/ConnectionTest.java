@@ -35,6 +35,7 @@ public class ConnectionTest {
 
 	    connection = new Connection(mockedMailsystem);
 	    connection.addPresenter(mockedConsolePresenter);
+
 		getIntoInMemoryStorage();
 	}
 

@@ -11,9 +11,6 @@ public class InitialState implements ConnectionState{
     public void dial(String key, Connection connection) {
         if (key.equals(USE_IN_MEMORY_STORAGE))
         {
-            MailSystem mailSystem=connection.getSystem();
-            mailSystem.setMailBoxRepository(null);
-            connection.setSystem(mailSystem);
             connection.setMailBoxRepository(null);
             connection.setMessageRepository(null);
 
