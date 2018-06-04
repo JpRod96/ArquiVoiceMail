@@ -1,4 +1,4 @@
-package Controllers;
+package Controllers.Util;
 
 import main.ConnectionState;
 
