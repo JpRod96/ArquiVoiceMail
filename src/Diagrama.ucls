@@ -102,7 +102,7 @@
   </interface>  
   <class id="12" language="java" name="Persistence.MailboxPersistenceService" project="VoiceMail" 
     file="/VoiceMail/src/Persistence/MailboxPersistenceService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="56" width="180" x="-340" y="311"/>    
+    <position height="56" width="180" x="-410" y="311"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -111,7 +111,7 @@
   </class>  
   <class id="13" language="java" name="Persistence.MessagePersistenceService" project="VoiceMail" 
     file="/VoiceMail/src/Persistence/MessagePersistenceService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="53" width="188" x="-343" y="138"/>    
+    <position height="53" width="188" x="-414" y="142"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -300,194 +300,241 @@
   </class>  
   <class id="34" language="java" name="Main" project="VoiceMail" file="/VoiceMail/src/Main.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="53" width="87" x="567" y="-331"/>    
+    <position height="53" width="87" x="566" y="-395"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <realization id="35">    
-    <end type="SOURCE" refId="28"/>    
-    <end type="TARGET" refId="17"/>  
-  </realization>  
+  <class id="35" language="java" name="APIService" project="VoiceMail" file="/VoiceMail/src/APIService.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="87" x="-341" y="593"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
   <association id="36">    
-    <end type="SOURCE" refId="33" navigable="false">      
-      <attribute id="37" name="uiPresenter"/>      
-      <multiplicity id="38" minimum="0" maximum="1"/>    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="37" name="system">        
+        <position height="0" width="0" x="4" y="38"/>      
+      </attribute>      
+      <multiplicity id="38" minimum="0" maximum="1">        
+        <position height="0" width="0" x="4" y="38"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="30" navigable="true"/>    
+    <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="39">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="40" name="messageRepository">        
-        <position height="0" width="0" x="0" y="0"/>      
+    <bendpoint x="-167" y="-295"/>    
+    <bendpoint x="-177" y="1"/>    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="40" name="mailBoxRepository">        
+        <position height="18" width="97" x="-93" y="984"/>      
       </attribute>      
       <multiplicity id="41" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="11" navigable="true"/>    
+    <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="42">    
-    <bendpoint x="597" y="127"/>    
-    <end type="SOURCE" refId="19" navigable="false">      
-      <attribute id="43" name="connection"/>      
-      <multiplicity id="44" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="45">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="3"/>  
-  </realization>  
-  <realization id="46">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="10"/>  
-  </realization>  
-  <realization id="47">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="3"/>  
-  </realization>  
-  <association id="48">    
-    <bendpoint x="-167" y="-295"/>    
-    <bendpoint x="-177" y="1"/>    
-    <end type="SOURCE" refId="34" navigable="false">      
-      <attribute id="49" name="mailBoxRepository"/>      
-      <multiplicity id="50" minimum="0" maximum="1"/>    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="43" name="mailBoxRepository">        
+        <position height="18" width="97" x="205" y="913"/>      
+      </attribute>      
+      <multiplicity id="44" minimum="0" maximum="1">        
+        <position height="16" width="23" x="61" y="983"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="51">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="52" name="mailboxes"/>      
-      <multiplicity id="53" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="14" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="54">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="55" name="_state">        
+  <realization id="45">    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="21"/>  
+  </realization>  
+  <realization id="46">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="21"/>  
+  </realization>  
+  <association id="47">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="48" name="actionPerformer">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="56" minimum="0" maximum="1">        
+      <multiplicity id="49" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="50">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="51" name="_state">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="52" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="57">    
-    <bendpoint x="648" y="326"/>    
-    <end type="SOURCE" refId="20" navigable="false">      
-      <attribute id="58" name="connection"/>      
-      <multiplicity id="59" minimum="0" maximum="1"/>    
+  <association id="53">    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="54" name="mainWindow">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="55" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
+    <end type="TARGET" refId="33" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="60">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="3"/>  
-  </realization>  
-  <realization id="61">    
-    <end type="SOURCE" refId="27"/>    
+  <realization id="56">    
+    <end type="SOURCE" refId="25"/>    
     <end type="TARGET" refId="21"/>  
   </realization>  
-  <association id="62">    
-    <end type="SOURCE" refId="34" navigable="false">      
-      <attribute id="63" name="connection"/>      
-      <multiplicity id="64" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="65">    
-    <bendpoint x="1437" y="-312"/>    
-    <bendpoint x="1394" y="-93"/>    
-    <end type="SOURCE" refId="34" navigable="false">      
-      <attribute id="66" name="consoleController"/>      
-      <multiplicity id="67" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="19" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="68">    
-    <bendpoint x="-5" y="-297"/>    
-    <end type="SOURCE" refId="34" navigable="false">      
-      <attribute id="69" name="messageRepository"/>      
-      <multiplicity id="70" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="11" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="71">    
-    <bendpoint x="1657" y="362"/>    
-    <bendpoint x="1656" y="504"/>    
-    <end type="SOURCE" refId="25" navigable="false">      
-      <attribute id="72" name="consolePresenter"/>      
-      <multiplicity id="73" minimum="0" maximum="1">        
-        <position height="16" width="23" x="115" y="915"/>      
+  <association id="57">    
+    <bendpoint x="1660" y="271"/>    
+    <bendpoint x="1656" y="505"/>    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="58" name="consolePresenter">        
+        <position height="18" width="93" x="1861" y="1025"/>      
+      </attribute>      
+      <multiplicity id="59" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="28" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="74">    
+  <association id="60">    
     <end type="SOURCE" refId="33" navigable="false">      
-      <attribute id="75" name="uiController"/>      
-      <multiplicity id="76" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="20" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="77">    
-    <end type="SOURCE" refId="20" navigable="false">      
-      <attribute id="78" name="uiPresenter"/>      
-      <multiplicity id="79" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="30" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="80">    
-    <end type="SOURCE" refId="23"/>    
-    <end type="TARGET" refId="21"/>  
-  </realization>  
-  <association id="81">    
-    <bendpoint x="1808" y="-319"/>    
-    <bendpoint x="1813" y="684"/>    
-    <end type="SOURCE" refId="34" navigable="false">      
-      <attribute id="82" name="uiPresenter"/>      
-      <multiplicity id="83" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="30" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="84">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="3"/>  
-  </realization>  
-  <association id="85">    
-    <bendpoint x="1660" y="271"/>    
-    <bendpoint x="1656" y="505"/>    
-    <end type="SOURCE" refId="26" navigable="false">      
-      <attribute id="86" name="consolePresenter">        
-        <position height="18" width="93" x="1861" y="1025"/>      
+      <attribute id="61" name="uiPresenter">        
+        <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="87" minimum="0" maximum="1"/>    
+      <multiplicity id="62" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="63">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="64" name="consolePresenter">        
+        <position height="18" width="93" x="141" y="1002"/>      
+      </attribute>      
+      <multiplicity id="65" minimum="0" maximum="1">        
+        <position height="16" width="23" x="374" y="865"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="28" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="88">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="89" name="mailBoxRepository">        
+  <association id="66">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="67" name="queue">        
         <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="68" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="69">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="70" name="messageRepository">        
+        <position height="18" width="104" x="-69" y="949"/>      
+      </attribute>      
+      <multiplicity id="71" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="72">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
+  <realization id="73">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
+  <association id="74">    
+    <bendpoint x="650" y="327"/>    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="75" name="connection">        
+        <position height="18" width="61" x="215" y="631"/>      
+      </attribute>      
+      <multiplicity id="76" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="77">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="78" name="newMessages">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="79" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="80">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
+  <association id="81">    
+    <bendpoint x="1466" y="-331"/>    
+    <bendpoint x="1394" y="-93"/>    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="82" name="consoleController">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="83" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="84">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="85" name="uiPresenter">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="86" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="87">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
+  <association id="88">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="89" name="mailBoxRepository">        
+        <position height="18" width="97" x="-282" y="964"/>      
       </attribute>      
       <multiplicity id="90" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
@@ -497,264 +544,378 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="91">    
-    <bendpoint x="1663" y="182"/>    
-    <bendpoint x="1656" y="506"/>    
-    <end type="SOURCE" refId="27" navigable="false">      
-      <attribute id="92" name="consolePresenter">        
-        <position height="18" width="93" x="175" y="1006"/>      
+    <bendpoint x="1808" y="-319"/>    
+    <bendpoint x="1813" y="684"/>    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="92" name="uiPresenter">        
+        <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="93" minimum="0" maximum="1">        
-        <position height="16" width="23" x="508" y="922"/>      
+        <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="28" navigable="true"/>    
+    <end type="TARGET" refId="30" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="94">    
+  <realization id="94">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="10"/>  
+  </realization>  
+  <association id="95">    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="95" name="currentMailbox"/>      
-      <multiplicity id="96" minimum="0" maximum="1"/>    
+      <attribute id="96" name="currentMailbox">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="97" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="14" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="97">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="98" name="mailBoxRepository">        
+  <association id="98">    
+    <bendpoint x="915" y="129"/>    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="99" name="connection">        
+        <position height="18" width="61" x="293" y="-471"/>      
+      </attribute>      
+      <multiplicity id="100" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="101">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
+  <association id="102">    
+    <bendpoint x="645" y="324"/>    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="103" name="connection">        
+        <position height="18" width="61" x="275" y="616"/>      
+      </attribute>      
+      <multiplicity id="104" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="105">    
+    <bendpoint x="-22" y="-308"/>    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="106" name="messageRepository">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="99" minimum="0" maximum="1">        
+      <multiplicity id="107" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="108">    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="17"/>  
+  </realization>  
+  <association id="109">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="110" name="mailBoxRepository">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="111" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="100">    
-    <bendpoint x="642" y="325"/>    
-    <end type="SOURCE" refId="23" navigable="false">      
-      <attribute id="101" name="connection"/>      
-      <multiplicity id="102" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="103">    
-    <end type="SOURCE" refId="26"/>    
-    <end type="TARGET" refId="21"/>  
-  </realization>  
-  <association id="104">    
-    <end type="SOURCE" refId="19" navigable="false">      
-      <attribute id="105" name="actionPerformer"/>      
-      <multiplicity id="106" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="21" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="107">    
-    <end type="SOURCE" refId="25"/>    
-    <end type="TARGET" refId="21"/>  
-  </realization>  
-  <realization id="108">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="3"/>  
-  </realization>  
-  <association id="109">    
-    <end type="SOURCE" refId="19" navigable="false">      
-      <attribute id="110" name="consolePresenter">        
-        <position height="18" width="93" x="141" y="1002"/>      
+  <association id="112">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="113" name="mainWindow">        
+        <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="111" minimum="0" maximum="1">        
-        <position height="16" width="23" x="374" y="865"/>      
+      <multiplicity id="114" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="115">    
+    <bendpoint x="1745" y="-317"/>    
+    <bendpoint x="1761" y="507"/>    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="116" name="consolePresenter">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="117" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="28" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="112">    
-    <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="113" name="newMessages"/>      
-      <multiplicity id="114" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="15" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="115">    
-    <bendpoint x="708" y="100"/>    
-    <end type="SOURCE" refId="24" navigable="false">      
-      <attribute id="116" name="initialState"/>      
-      <multiplicity id="117" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
   <association id="118">    
-    <end type="SOURCE" refId="28" navigable="false">      
-      <attribute id="119" name="console"/>      
-      <multiplicity id="120" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="32" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="121">    
-    <end type="SOURCE" refId="20" navigable="false">      
-      <attribute id="122" name="connectionState"/>      
-      <multiplicity id="123" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="124">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="3"/>  
-  </realization>  
-  <association id="125">    
-    <bendpoint x="1745" y="-317"/>    
-    <bendpoint x="1761" y="507"/>    
-    <end type="SOURCE" refId="34" navigable="false">      
-      <attribute id="126" name="consolePresenter"/>      
-      <multiplicity id="127" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="28" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="128">    
     <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="129" name="messagePersistenceService">        
-        <position height="0" width="0" x="-42" y="1"/>      
+      <attribute id="119" name="messagePersistenceService">        
+        <position height="0" width="0" x="-113" y="5"/>      
       </attribute>      
-      <multiplicity id="130" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-42" y="1"/>      
+      <multiplicity id="120" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-113" y="5"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="13" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="131">    
-    <end type="SOURCE" refId="31" navigable="false">      
-      <attribute id="132" name="mainWindow"/>      
-      <multiplicity id="133" minimum="0" maximum="1"/>    
+  <association id="121">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="122" name="mailboxes">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="123" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="33" navigable="true"/>    
+    <end type="TARGET" refId="14" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="134">    
-    <bendpoint x="650" y="327"/>    
-    <end type="SOURCE" refId="28" navigable="false">      
-      <attribute id="135" name="connection"/>      
-      <multiplicity id="136" minimum="0" maximum="1"/>    
+  <association id="124">    
+    <bendpoint x="645" y="325"/>    
+    <end type="SOURCE" refId="27" navigable="false">      
+      <attribute id="125" name="connection">        
+        <position height="18" width="61" x="58" y="892"/>      
+      </attribute>      
+      <multiplicity id="126" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="137">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="138" name="system">        
-        <position height="0" width="0" x="4" y="38"/>      
+  <realization id="127">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="11"/>  
+  </realization>  
+  <association id="128">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="129" name="console">        
+        <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="139" minimum="0" maximum="1">        
-        <position height="0" width="0" x="4" y="38"/>      
+      <multiplicity id="130" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
+    <end type="TARGET" refId="32" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="140">    
+  <realization id="131">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
+  <association id="132">    
+    <bendpoint x="1663" y="182"/>    
+    <bendpoint x="1656" y="506"/>    
+    <end type="SOURCE" refId="27" navigable="false">      
+      <attribute id="133" name="consolePresenter">        
+        <position height="18" width="93" x="175" y="1006"/>      
+      </attribute>      
+      <multiplicity id="134" minimum="0" maximum="1">        
+        <position height="16" width="23" x="508" y="922"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="135">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="136" name="connection">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="137" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="138">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="139" name="presenters">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="140" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="141">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
+  <association id="142">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="143" name="uiController">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="144" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="145">    
+    <bendpoint x="642" y="325"/>    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="146" name="connection">        
+        <position height="18" width="61" x="50" y="601"/>      
+      </attribute>      
+      <multiplicity id="147" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="148">    
+    <bendpoint x="648" y="326"/>    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="149" name="connection">        
+        <position height="18" width="61" x="37" y="640"/>      
+      </attribute>      
+      <multiplicity id="150" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="151">    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="17"/>  
+  </realization>  
+  <association id="152">    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="153" name="messageRepository">        
+        <position height="18" width="104" x="-200" y="979"/>      
+      </attribute>      
+      <multiplicity id="154" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="155">    
     <bendpoint x="1655" y="446"/>    
     <bendpoint x="1655" y="506"/>    
     <end type="SOURCE" refId="23" navigable="false">      
-      <attribute id="141" name="consolePresenter">        
+      <attribute id="156" name="consolePresenter">        
         <position height="18" width="93" x="575" y="925"/>      
       </attribute>      
-      <multiplicity id="142" minimum="0" maximum="1">        
+      <multiplicity id="157" minimum="0" maximum="1">        
         <position height="16" width="23" x="350" y="982"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="28" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="143">    
-    <end type="SOURCE" refId="30" navigable="false">      
-      <attribute id="144" name="mainWindow"/>      
-      <multiplicity id="145" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="33" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="146">    
-    <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="147" name="queue"/>      
-      <multiplicity id="148" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="16" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="149">    
-    <bendpoint x="650" y="326"/>    
-    <end type="SOURCE" refId="30" navigable="false">      
-      <attribute id="150" name="connection"/>      
-      <multiplicity id="151" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="152">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="153" name="presenters"/>      
-      <multiplicity id="154" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="17" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="155">    
-    <end type="SOURCE" refId="13"/>    
-    <end type="TARGET" refId="11"/>  
-  </realization>  
-  <association id="156">    
+  <association id="158">    
     <bendpoint x="1896" y="-320"/>    
     <bendpoint x="1902" y="969"/>    
     <end type="SOURCE" refId="34" navigable="false">      
-      <attribute id="157" name="uiController"/>      
-      <multiplicity id="158" minimum="0" maximum="1"/>    
+      <attribute id="159" name="uiController">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="160" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="20" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="159">    
-    <bendpoint x="645" y="324"/>    
-    <end type="SOURCE" refId="26" navigable="false">      
-      <attribute id="160" name="connection"/>      
-      <multiplicity id="161" minimum="0" maximum="1"/>    
+  <association id="161">    
+    <bendpoint x="1657" y="362"/>    
+    <bendpoint x="1656" y="504"/>    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="162" name="consolePresenter">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="163" minimum="0" maximum="1">        
+        <position height="16" width="23" x="115" y="915"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="164">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="165" name="connectionState">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="166" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="167">    
+    <bendpoint x="708" y="100"/>    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="168" name="initialState">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="169" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="170">    
+    <bendpoint x="-87" y="610"/>    
+    <bendpoint x="71" y="480"/>    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="171" name="connection"/>      
+      <multiplicity id="172" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="162">    
+  <association id="173">    
     <bendpoint x="642" y="324"/>    
     <end type="SOURCE" refId="25" navigable="false">      
-      <attribute id="163" name="connection"/>      
-      <multiplicity id="164" minimum="0" maximum="1"/>    
+      <attribute id="174" name="connection">        
+        <position height="18" width="61" x="173" y="639"/>      
+      </attribute>      
+      <multiplicity id="175" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="165">    
-    <end type="SOURCE" refId="30"/>    
-    <end type="TARGET" refId="17"/>  
+  <realization id="176">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="21"/>  
   </realization>  
-  <association id="166">    
-    <bendpoint x="645" y="325"/>    
-    <end type="SOURCE" refId="27" navigable="false">      
-      <attribute id="167" name="connection"/>      
-      <multiplicity id="168" minimum="0" maximum="1"/>    
+  <association id="177">    
+    <bendpoint x="650" y="326"/>    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="178" name="connection">        
+        <position height="18" width="61" x="235" y="611"/>      
+      </attribute>      
+      <multiplicity id="179" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="169">    
-    <end type="SOURCE" refId="18"/>    
-    <end type="TARGET" refId="3"/>  
-  </realization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    
