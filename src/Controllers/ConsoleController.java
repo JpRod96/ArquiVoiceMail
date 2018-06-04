@@ -42,7 +42,7 @@ public class ConsoleController{
         }
     }
 
-    private void performAction(String input){
+    public void performAction(String input){
         ConnectionStateLog log=new ConnectionStateLog();
         log.setInitialState(connection.get_state());
         connection.dial(input);
