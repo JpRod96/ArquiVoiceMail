@@ -10,12 +10,13 @@ import static org.junit.Assert.*;
 public class MailboxTest {
 	
 	Mailbox mailbox=new Mailbox("pass","saludos");
+	Mailbox mailboxWithId=new Mailbox("1", "saludo",1);
 
     @Test
     public void shouldReturnKeptMessages(){
         MessageQueue keptMessages = new MessageQueue();
-        mailbox.setKeptMessages(keptMessages);
-        assertEquals(keptMessages,mailbox.getKeptMessages());
+		mailboxWithId.setKeptMessages(keptMessages);
+        assertEquals(keptMessages,mailboxWithId.getKeptMessages());
     }
     @Test
     public void shouldSetKeptMessages(){
