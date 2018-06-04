@@ -51,7 +51,7 @@ public class WindowChooser {
     }
     private void enableButtons(){
         disableLoginButon();
-        enableRestantButons();
+        enableEnterButton();
         mainWindow.getOption1Field().setVisible(true);
         mainWindow.getOption2Field().setVisible(true);
         mainWindow.getOption4Field().setVisible(true);
@@ -60,9 +60,8 @@ public class WindowChooser {
     private void disableLoginButon(){
         mainWindow.getLoginButton().setVisible(false);
     }
-    private void enableRestantButons(){
+    private void enableEnterButton(){
         mainWindow.getEnterButton().setVisible(true);
-        mainWindow.getLeaveMessageButton().setVisible(true);
     }
     private void disableAllButtons(){
         mainWindow.getLoginButton().setVisible(true);
@@ -71,8 +70,6 @@ public class WindowChooser {
         mainWindow.getOption3Field().setVisible(false);
         mainWindow.getOption4Field().setVisible(false);
         mainWindow.getEnterButton().setVisible(false);
-        mainWindow.getLeaveMessageButton().setVisible(false);
-
     }
     private JButton getCorrectOption(int option) {
 
