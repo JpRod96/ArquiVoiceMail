@@ -74,6 +74,7 @@ public class UIController{
     public void recibeData(String key){
 
         connection.reciveData(key);
+      //  performActionBasedOnStateLog(key);
     }
     public void record(String message){
 

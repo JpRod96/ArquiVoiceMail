@@ -12,8 +12,8 @@ public class MainWindow extends JFrame implements ActionListener {
     private JButton option1;
     private JButton option4;
     private JButton option2;
-        private JButton option3;
-    private JButton leaveMessage;
+    private JButton option3;
+    private JButton leaveMessageButton;
     private JTextArea userInput;
     private JLabel showedMessage;
     private JButton actionButton;
@@ -53,7 +53,7 @@ public class MainWindow extends JFrame implements ActionListener {
         this.uiPresenter=uiPresenter;
     }
     public void initializeActionButtons(){
-        leaveMessage.addActionListener(this);
+        leaveMessageButton.addActionListener(this);
         option1.addActionListener(this);
         option2.addActionListener(this);
         option3.addActionListener(this);
@@ -66,7 +66,6 @@ public class MainWindow extends JFrame implements ActionListener {
             if (userInput.getText().length() == 1
                     && "1234567890#".indexOf(userInput.getText()) >= 0) {
                 uiController.recibeData(userInput.getText());
-              //  uiController.performActionBasedOnStateLog(userInput.getText());  CAUSA ERRORES REVISAR
             } else {
                 uiController.record(userInput.getText());
             }
@@ -84,7 +83,7 @@ public class MainWindow extends JFrame implements ActionListener {
         if (e.getSource()==option4){
             uiController.recibeData("4");
         }
-        if (e.getSource()== leaveMessage){
+        if (e.getSource()== leaveMessageButton){
             uiController.hangUp();
         }
     }

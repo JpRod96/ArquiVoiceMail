@@ -11,7 +11,6 @@ import java.util.ArrayList;
 public class WindowChooser {
     String chosedMenu;
     int optionCounter = 1;
-    ArrayList listOfMenuOptions = new ArrayList<String>();
     MainWindow mainWindow;
     public WindowChooser(String chosedMenu){
         this.chosedMenu=chosedMenu;
@@ -31,7 +30,6 @@ public class WindowChooser {
                     option="";
                     optionCounter = optionCounter +1;
                 }
-
             }
         }
         else{

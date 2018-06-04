@@ -29,9 +29,9 @@ public class  UIPresenter implements Presenter{
     public void parseModel(){
         ConnectionState connectionState=connection.get_state();
         String toShowString=FactoryForConsoleStrings.getStringByState(connectionState);
-        WindowChooser windowChoser = new WindowChooser(toShowString);
-        windowChoser.assignWindow(mainWindow);
-        windowChoser.generateOptions();
+        WindowChooser windowChooser = new WindowChooser(toShowString);
+        windowChooser.assignWindow(mainWindow);
+        windowChooser.generateOptions();
     }
 
     @Override
