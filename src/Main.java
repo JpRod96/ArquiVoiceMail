@@ -51,10 +51,6 @@ public class Main {
         mainWindow.setVisible(true);
         mainWindow.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-
-
-
-
         consoleController.run();
     }
 }
