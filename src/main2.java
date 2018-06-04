@@ -38,7 +38,7 @@ public class main2 {
         String connectionString = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
         */
         MailboxPersistenceService mailboxPersistenceService = new MailboxPersistenceService(connectionString, user, password, driver);
-        MessagePersistenceService messagePersistenceService= mailboxPersistenceService.getMessagePersistenceService();
+        MessagePersistenceService messagePersistenceService = mailboxPersistenceService.getMessagePersistenceService();
 
 
         options("/*",
@@ -64,9 +64,17 @@ public class main2 {
         before((request, response) -> response.header("Access-Control-Allow-Origin", "*"));
 
 
-        
+
         get("/", (req,res)->{
-            return "<h1>hola</h1>";
+            return "" +
+                    " <h1>Bienvenido a Voice Mail API</h1>" +
+                    " <h2>Servicios disponibles: </h2" +
+                    " <h3> <h3>obtener todos los mailbox(GET): </h3></h3> <p>/mailboxs</p>" +
+                    " <h3>obtener mailbox por ID(GET): </h3> <p>/mailboxs/:id</p>" +
+                    " <h3>editar mailbox(PUT): </h3> <p>/mailboxs/:id</p>" +
+                    " <h3>crear mensajes(POST): </h3> <p>/messages</p>" +
+                    " <h3>eliminar mensaje(DELETE): </h3> <p>/messages/:id</p>" +
+                    "";
         });
 
         get("/mailboxs", (request, response) -> {

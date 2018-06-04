@@ -28,7 +28,7 @@ public class MailboxPersistenceService implements MailBoxRepository{
 
     public MailboxPersistenceService(String connectionString, String user, String password, String driver){
         loadLocalHost(connectionString, user, password, driver);
-        messagePersistenceService = new MessagePersistenceService(connectionString, user, password, driver);
+        messagePersistenceService = this.getMessagePersistenceService();
     }
 
     public void loadLocalHost(String connectionString, String user, String password, String driver){
@@ -66,6 +66,7 @@ public class MailboxPersistenceService implements MailBoxRepository{
         }
     }
     public void saveMailbox2(Mailbox mailbox){
+            MessageQueue keptMessages=mailbox.getKeptMessages();
             int id=mailbox.getId();
             String passcode=mailbox.getPasscode();
             String greeting=mailbox.getGreeting();
@@ -73,7 +74,7 @@ public class MailboxPersistenceService implements MailBoxRepository{
 
             try {
                 statementObj.executeUpdate("INSERT INTO Mailbox (id, passcode, greeting) VALUES('" + id + "' , '" + passcode + "', '" + greeting + "')");
-
+                messagePersistenceService.saveAllMessages(keptMessages, id);
 
             } catch (Exception e) {
                 e.printStackTrace();
