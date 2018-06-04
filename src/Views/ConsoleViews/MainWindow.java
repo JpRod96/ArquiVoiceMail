@@ -44,7 +44,8 @@ public class MainWindow extends JFrame implements ActionListener {
     public JButton getOption3Field() {
         return option3;
     }
-
+    public JButton getEnterButton(){return actionButton;}
+    public JButton getLeaveMessageButton(){return leaveMessageButton ;}
     public void setController(UIController uiController){
         this.uiController = uiController;
 
