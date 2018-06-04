@@ -76,7 +76,7 @@ public class UIController{
                 output += TEXT_FOR_EMPTY_QUEUE;
             else
                 output += message.getText() + "\n";
-
+            uiPresenter.itHasAMessage(true);
             uiPresenter.parseModel(output);
             uiPresenter.parseModel();
         }
