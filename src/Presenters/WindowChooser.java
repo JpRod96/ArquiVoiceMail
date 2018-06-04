@@ -50,20 +50,22 @@ public class WindowChooser {
             mainWindow.getOption4Field().setVisible(false);}
     }
     private void enableButtons(){
-
+        disableLoginButon();
+        enableRestantButons();
         mainWindow.getOption1Field().setVisible(true);
         mainWindow.getOption2Field().setVisible(true);
         mainWindow.getOption4Field().setVisible(true);
         mainWindow.getOption3Field().setVisible(true);
     }
     private void disableLoginButon(){
-        mainWindow.getLoginButon().setVisible(false);
+        mainWindow.getLoginButton().setVisible(false);
     }
     private void enableRestantButons(){
         mainWindow.getEnterButton().setVisible(true);
         mainWindow.getLeaveMessageButton().setVisible(true);
     }
     private void disableAllButtons(){
+        mainWindow.getLoginButton().setVisible(true);
         mainWindow.getOption1Field().setVisible(false);
         mainWindow.getOption2Field().setVisible(false);
         mainWindow.getOption3Field().setVisible(false);

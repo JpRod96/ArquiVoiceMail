@@ -17,6 +17,7 @@ public class MainWindow extends JFrame implements ActionListener {
     private JTextArea userInput;
     private JLabel showedMessage;
     private JButton actionButton;
+    private JButton loginButton;
 
     private UIPresenter uiPresenter;
     public UIController uiController;
@@ -46,6 +47,7 @@ public class MainWindow extends JFrame implements ActionListener {
     }
     public JButton getEnterButton(){return actionButton;}
     public JButton getLeaveMessageButton(){return leaveMessageButton ;}
+    public JButton getLoginButton(){return loginButton ;}
     public void setController(UIController uiController){
         this.uiController = uiController;
 
@@ -60,6 +62,7 @@ public class MainWindow extends JFrame implements ActionListener {
         option3.addActionListener(this);
         option4.addActionListener(this);
         actionButton.addActionListener(this);
+        loginButton.addActionListener(this);
 
     }
     public void actionPerformed(ActionEvent e){
@@ -85,6 +88,11 @@ public class MainWindow extends JFrame implements ActionListener {
         if (e.getSource()== leaveMessageButton){
             uiController.record(userInput.getText());
             uiController.hangUp();
+            userInput.setText("");
+        }
+        if(e.getSource()==loginButton){
+            uiController.recibeData(userInput.getText());
+            uiController.recibeData("#");
             userInput.setText("");
         }
     }
