@@ -1,6 +1,6 @@
 package test;
 
-import Controllers.ConnectionStateLog;
+import Controllers.Util.ConnectionStateLog;
 import main.Connected;
 import main.ConnectionState;
 import main.InitialState;
@@ -27,6 +27,14 @@ public class ConnectionStateLogTest {
     }
 
     @Test
+    public void noStatesRegistered(){
+        connectionStateLog=new ConnectionStateLog();
+        boolean isInitialStateEmpty=connectionStateLog.getInitialState()==null;
+        boolean isFinalStateEmpty=connectionStateLog.getFinalState()==null;
+        assertTrue(isInitialStateEmpty && isFinalStateEmpty);
+    }
+
+    @Test
     public void thereShouldBeAChangeInStates(){
         assertTrue(connectionStateLog.wasThereAChangeOfStates());
     }
@@ -35,6 +43,18 @@ public class ConnectionStateLogTest {
     public void thereShouldNotBeAChangeInStates(){
         connectionStateLog.setFinalState(initialConnectionState);
         assertFalse(connectionStateLog.wasThereAChangeOfStates());
+    }
+
+    @Test
+    public void shouldSetInitialState(){
+        connectionStateLog.setInitialState(finalConnectionState);
+        assertTrue(connectionStateLog.getInitialState() instanceof Connected);
+    }
+
+    @Test
+    public void shouldSetFinalState(){
+        connectionStateLog.setFinalState(initialConnectionState);
+        assertTrue(connectionStateLog.getFinalState() instanceof InitialState);
     }
 }
 
