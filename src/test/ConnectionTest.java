@@ -14,8 +14,8 @@ import static org.mockito.Mockito.*;
 public class ConnectionTest {
 
 	MailSystem mockedMailsystem;
-    ConsolePresenter mockedConsolePresenter;
-    Connection connection;
+	ConsolePresenter mockedConsolePresenter;
+	Connection connection;
 	private static final String INITIAL_PROMPT =
 			"Enter mailbox number followed by #";
 	private static final String MAILBOX_MENU_TEXT =
@@ -28,27 +28,27 @@ public class ConnectionTest {
 					+ "Enter 3 to delete the current message\n"
 					+ "Enter 4 to return to the main menu";
 
-    @Before
+	@Before
 	public void init() {
-	    mockedMailsystem = mock(MailSystem.class);
-	    mockedConsolePresenter=mock(ConsolePresenter.class);
+		mockedMailsystem = mock(MailSystem.class);
+		mockedConsolePresenter=mock(ConsolePresenter.class);
 
-	    connection = new Connection(mockedMailsystem);
-	    connection.addPresenter(mockedConsolePresenter);
+		connection = new Connection(mockedMailsystem);
+		connection.addPresenter(mockedConsolePresenter);
 
 		getIntoInMemoryStorage();
 	}
 
 	@Test
 	public void shouldBeInConnectedStatus() {
-	    assertTrue(connection.isConnected());
+		assertTrue(connection.isConnected());
 	}
 
 	@Test
 	public void shouldShowInitialMessage() {
 		verify(mockedConsolePresenter, times(2)).parseModel();
 	}
-	
+
 	@Test
 	public void shouldChooseValidMailBox() {
 		String idMailBox = "1";
@@ -108,12 +108,10 @@ public class ConnectionTest {
 
 		assertTrue(connection.isMailBoxMenu());
 		verify(mockedConsolePresenter, times(3)).parseModel();
-			      + "Enter 2 to change your passcode\n"
-			      + "Enter 3 to change your greeting");
 	}
 
 	@Test
-	 public void shouldAccessUsingRecibeMethod(){
+	public void shouldAccessUsingRecibeMethod(){
 		String idMailBox = "1";
 		Mailbox chosenMailbox = new Mailbox(idMailBox, "Hola, como estas?");
 
@@ -147,9 +145,6 @@ public class ConnectionTest {
 		connection.dial("3");
 		assertTrue(connection.isMessageMenu());
 		verify(mockedConsolePresenter,times(5)).parseModel();
-			      + "Enter 2 to save the current message\n"
-			      + "Enter 3 to delete the current message\n"
-			      + "Enter 4 to return to the main menu");
 	}
 	@Test
 	public void shouldGetIntoMessageMenu() {

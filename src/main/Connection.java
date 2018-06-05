@@ -6,20 +6,20 @@ import MailVoice.Mailbox;
 public class Connection
 {
     private ConnectionState _state;
-	private MailSystem system;
-	private Mailbox currentMailbox;
-	private String currentRecording;
-	private String accumulatedKeys="";
-	private ArrayList<Presenter> presenters;
-	private MailBoxRepository mailBoxRepository;
-	private MessageRepository messageRepository;
+    private MailSystem system;
+    private Mailbox currentMailbox;
+    private String currentRecording;
+    private String accumulatedKeys="";
+    private ArrayList<Presenter> presenters;
+    private MailBoxRepository mailBoxRepository;
+    private MessageRepository messageRepository;
 
     public Connection(MailSystem s)
-   {
-      system = s;
-      presenters = new ArrayList<>();
-      _state = new InitialState();
-   }
+    {
+        system = s;
+        presenters = new ArrayList<>();
+        _state = new InitialState();
+    }
 
     public Connection(MailSystem s, MailBoxRepository mailBoxRepository, MessageRepository messageRepository)
     {
@@ -30,71 +30,71 @@ public class Connection
         this.messageRepository=messageRepository;
     }
 
-   public void changeState(ConnectionState c){
-       _state=c;
-   }
+    public void changeState(ConnectionState c){
+        _state=c;
+    }
 
-   public void dial(String key)
-   {
-      _state.dial(key,this);
-   }
-   
-   public boolean isConnected() {
-       return _state instanceof Connected;
-   }
-   
-   public boolean isRecording() {
-	    return _state instanceof  Recording;
-   }
+    public void dial(String key)
+    {
+        _state.dial(key,this);
+    }
 
-   public boolean isChangePassCode() {
-      return _state instanceof  ChangePassCode;
-   }
-   
-   public boolean isChangeGreeting() {
-      return _state instanceof  ChangeGreeting;
-   }
-   
-   public boolean isMailBoxMenu() {
-	   return _state instanceof MailBoxMenuState;
-   }
-   
-   public boolean isMessageMenu() {
-      return _state instanceof MessageMenuState;
-   }
+    public boolean isConnected() {
+        return _state instanceof Connected;
+    }
 
-   public void record(String voice)
-   {
-      _state.record(this, voice);
-   }
+    public boolean isRecording() {
+        return _state instanceof  Recording;
+    }
 
-   public void hangup()
-   {
-      _state.hangUp(this);
-      resetConnection();
-   }
+    public boolean isChangePassCode() {
+        return _state instanceof  ChangePassCode;
+    }
 
-   private void resetConnection()
-   {
-      currentRecording = "";
-      accumulatedKeys = "";
-      changeState(new Connected());
-      notifyPresenters();
-   }
-   
-   public void addPresenter(Presenter presenter) {
-	   presenters.add(presenter);
-       notifyPresenters();
-   }
-   
-   public void notifyPresenters() {
-	   for(Presenter presenter : presenters) {
-		   presenter.parseModel();
-	   }
-   }
-   public void reciveData(String key){
-      this.dial(key);
-   }
+    public boolean isChangeGreeting() {
+        return _state instanceof  ChangeGreeting;
+    }
+
+    public boolean isMailBoxMenu() {
+        return _state instanceof MailBoxMenuState;
+    }
+
+    public boolean isMessageMenu() {
+        return _state instanceof MessageMenuState;
+    }
+
+    public void record(String voice)
+    {
+        _state.record(this, voice);
+    }
+
+    public void hangup()
+    {
+        _state.hangUp(this);
+        resetConnection();
+    }
+
+    private void resetConnection()
+    {
+        currentRecording = "";
+        accumulatedKeys = "";
+        changeState(new Connected());
+        notifyPresenters();
+    }
+
+    public void addPresenter(Presenter presenter) {
+        presenters.add(presenter);
+        notifyPresenters();
+    }
+
+    public void notifyPresenters() {
+        for(Presenter presenter : presenters) {
+            presenter.parseModel();
+        }
+    }
+    public void reciveData(String key){
+        this.dial(key);
+    }
 
     public ConnectionState get_state() {
         return _state;
@@ -133,13 +133,6 @@ public class Connection
 
     public void setAccumulatedKeys(String accumulatedKeys) {
         this.accumulatedKeys = accumulatedKeys;
-			     SAVE_MESSAGE_OPTION="2",
-			     DELETE_MESSAGE_OPTION="3",
-			     RETURN_TO_MAIN_MENU_OPTION="4";
-      if (keyPressed.equals(LISTEN_MESSAGE_OPTION))
-         else 
-        	 output += message.getText() + "\n";
-         
     }
 
     public ArrayList<Presenter> getPresenters() {
@@ -166,7 +159,6 @@ public class Connection
         this.messageRepository = messageRepository;
     }
 }
-
 
 
 
