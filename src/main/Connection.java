@@ -1,273 +1,170 @@
 package main;
 import java.util.ArrayList;
 
-import observers.*;
+import MailVoice.Mailbox;
 
-
-/**
-   Connects a phone to the mail system. The purpose of this
-   class is to keep track of the state of a connection, since
-   the phone itself is just a source of individual key presses.
-*/
-public class Connection implements Observable
+public class Connection
 {
+    private ConnectionState _state;
 	private MailSystem system;
 	private Mailbox currentMailbox;
 	private String currentRecording;
-	private String accumulatedKeys;
-	private Telephone phone;
-	private int state;
-	private ArrayList<Observer> observers;
+	private String accumulatedKeys="";
+	private ArrayList<Presenter> presenters;
+	private MailBoxRepository mailBoxRepository;
+	private MessageRepository messageRepository;
 
-	private static final int CONNECTED = 1;
-	private static final int RECORDING = 2;
-	private static final int MAILBOX_MENU = 3;
-	private static final int MESSAGE_MENU = 4;
-	private static final int CHANGE_PASSCODE = 5;
-	private static final int CHANGE_GREETING = 6;
-
-	private static final String INITIAL_PROMPT = 
-	      "Enter mailbox number followed by #";      
-	private static final String MAILBOX_MENU_TEXT = 
-	      "Enter 1 to listen to your messages\n"
-	      + "Enter 2 to change your passcode\n"
-	      + "Enter 3 to change your greeting";
-	private static final String MESSAGE_MENU_TEXT = 
-	      "Enter 1 to listen to the current message\n"
-	      + "Enter 2 to save the current message\n"
-	      + "Enter 3 to delete the current message\n"
-	      + "Enter 4 to return to the main menu";
-   /**
-      Construct a Connection object.
-      @param s a MailSystem object
-      @param p a Telephone object
-   */
-   public Connection(MailSystem s, Telephone p)
+    public Connection(MailSystem s)
    {
       system = s;
-      phone = p;
-      resetConnection();
-      observers= new ArrayList<>();
+      presenters = new ArrayList<>();
+      _state = new InitialState();
    }
 
-   /**
-      Respond to the user's pressing a key on the phone touchpad
-      @param key the phone key pressed by the user
-   */
+    public Connection(MailSystem s, MailBoxRepository mailBoxRepository, MessageRepository messageRepository)
+    {
+        system = s;
+        presenters = new ArrayList<>();
+        _state = new InitialState();
+        this.mailBoxRepository=mailBoxRepository;
+        this.messageRepository=messageRepository;
+    }
+
+   public void changeState(ConnectionState c){
+       _state=c;
+   }
+
    public void dial(String key)
    {
-      if (isConnected())
-         connect(key);
-      else if (isRecording())
-         login(key);
-      else if (isChangePassCode())
-         changePasscode(key);
-      else if (isChangeGreeting())
-         changeGreeting(key);
-      else if (isMailBoxMenu())
-         mailboxMenu(key);
-      else if (isMessageMenu())
-         getMessageMenuStrings(key);
+      _state.dial(key,this);
    }
    
    public boolean isConnected() {
-	   return state==CONNECTED;
+       return _state instanceof Connected;
    }
    
    public boolean isRecording() {
-	   return state==RECORDING;
+	    return _state instanceof  Recording;
    }
 
    public boolean isChangePassCode() {
-	   return state == CHANGE_PASSCODE;
+      return _state instanceof  ChangePassCode;
    }
    
    public boolean isChangeGreeting() {
-	   return state == CHANGE_GREETING;
+      return _state instanceof  ChangeGreeting;
    }
    
    public boolean isMailBoxMenu() {
-	   return state == MAILBOX_MENU;
+	   return _state instanceof MailBoxMenuState;
    }
    
    public boolean isMessageMenu() {
-	   return state == MESSAGE_MENU;
-   }
-   
-   /**
-      Record voice.
-      @param voice voice spoken by the user
-   */
-   public void record(String voice)
-   {
-      if (state == RECORDING || state == CHANGE_GREETING)
-         currentRecording += voice;
+      return _state instanceof MessageMenuState;
    }
 
-   /**
-      The user hangs up the phone.
-   */
+   public void record(String voice)
+   {
+      _state.record(this, voice);
+   }
+
    public void hangup()
    {
-      if (state == RECORDING)
-         currentMailbox.addMessage(new Message(currentRecording));
+      _state.hangUp(this);
       resetConnection();
    }
 
-   /**
-      Reset the connection to the initial state and prompt
-      for mailbox number
-   */
    private void resetConnection()
    {
       currentRecording = "";
       accumulatedKeys = "";
-      state = CONNECTED;
-      phone.speak(INITIAL_PROMPT);
+      changeState(new Connected());
+      notifyPresenters();
+   }
+   
+   public void addPresenter(Presenter presenter) {
+	   presenters.add(presenter);
+       notifyPresenters();
+   }
+   
+   public void notifyPresenters() {
+	   for(Presenter presenter : presenters) {
+		   presenter.parseModel();
+	   }
+   }
+   public void reciveData(String key){
+      this.dial(key);
    }
 
-   /**
-      Try to connect the user with the specified mailbox.
-      @param key the phone key pressed by the user
-   */
-   private void connect(String key)
-   {
-      if (key.equals("#"))
-      {
-         currentMailbox = system.findMailbox(accumulatedKeys);
-         if (currentMailbox != null)
-         {
-            state = RECORDING;
-            phone.speak(currentMailbox.getGreeting());
-         }
-         else
-            phone.speak("Incorrect mailbox number. Try again!");
-         accumulatedKeys = "";
-      }
-      else
-         accumulatedKeys += key;
-   }
+    public ConnectionState get_state() {
+        return _state;
+    }
 
-   /**
-      Try to log in the user.
-      @param key the phone key pressed by the user
-   */
-   private void login(String key)
-   {
-      if (key.equals("#"))
-      {
-         if (currentMailbox.checkPasscode(accumulatedKeys))
-         {
-            state = MAILBOX_MENU;
-            phone.speak(MAILBOX_MENU_TEXT);
-         }
-         else
-            phone.speak("Incorrect passcode. Try again!");
-         accumulatedKeys = "";
-      }
-      else
-         accumulatedKeys += key;
-   }
+    public void set_state(ConnectionState _state) {
+        this._state = _state;
+    }
 
-   /**
-      Change passcode.
-      @param key the phone key pressed by the user
-   */
-   private void changePasscode(String key)
-   {
-      if (key.equals("#"))
-      {
-         currentMailbox.setPasscode(accumulatedKeys);
-         state = MAILBOX_MENU;
-         phone.speak(MAILBOX_MENU_TEXT);
-         accumulatedKeys = "";
-      }
-      else
-         accumulatedKeys += key;
-   }
+    public MailSystem getSystem() {
+        return system;
+    }
 
-   /**
-      Change greeting.
-      @param key the phone key pressed by the user
-   */
-   private void changeGreeting(String key)
-   {
-      if (key.equals("#"))
-      {
-         currentMailbox.setGreeting(currentRecording);
-         currentRecording = "";
-         state = MAILBOX_MENU;
-         phone.speak(MAILBOX_MENU_TEXT);
-      }
-   }
+    public void setSystem(MailSystem system) {
+        this.system = system;
+    }
+    public Mailbox getCurrentMailbox() {
+        return currentMailbox;
+    }
 
-   /**
-      Respond to the user's selection from mailbox menu.
-      @param key the phone key pressed by the user
-   */
-   private void mailboxMenu(String key)
-   {
-      if (key.equals("1"))
-      {
-         state = MESSAGE_MENU;
-         phone.speak(MESSAGE_MENU_TEXT);
-      }
-      else if (key.equals("2"))
-      {
-         state = CHANGE_PASSCODE;
-         phone.speak("Enter new passcode followed by the # key");
-      }
-      else if (key.equals("3"))
-      {
-         state = CHANGE_GREETING;
-         phone.speak("Record your greeting, then press the # key");
-      }
-   }
+    public void setCurrentMailbox(Mailbox currentMailbox) {
+        this.currentMailbox = currentMailbox;
+    }
 
-   /**
-      Respond to the user's selection from message menu.
-      @param keyPressed the phone key pressed by the user
-   */
-   private void getMessageMenuStrings(String keyPressed)
-   {
-	   final String LISTEN_MESSAGE_OPTION="1",
+    public String getCurrentRecording() {
+        return currentRecording;
+    }
+
+    public void setCurrentRecording(String currentRecording) {
+        this.currentRecording = currentRecording;
+    }
+
+    public String getAccumulatedKeys() {
+        return accumulatedKeys;
+    }
+
+    public void setAccumulatedKeys(String accumulatedKeys) {
+        this.accumulatedKeys = accumulatedKeys;
 			     SAVE_MESSAGE_OPTION="2",
 			     DELETE_MESSAGE_OPTION="3",
 			     RETURN_TO_MAIN_MENU_OPTION="4";
       if (keyPressed.equals(LISTEN_MESSAGE_OPTION))
-      {
-         String output = "";
-         Message message = currentMailbox.getCurrentMessage();
-         if (message == null) 
-        	 output += "No messages." + "\n";
          else 
         	 output += message.getText() + "\n";
          
-         output += MESSAGE_MENU_TEXT;
-         phone.speak(output);
-      }
-      else if (keyPressed.equals(SAVE_MESSAGE_OPTION))
-      {
-         currentMailbox.saveCurrentMessage();
-         phone.speak(MESSAGE_MENU_TEXT);
-      }
-      else if (keyPressed.equals(DELETE_MESSAGE_OPTION))
-      {
-         currentMailbox.removeCurrentMessage();
-         phone.speak(MESSAGE_MENU_TEXT);
-      }
-      else if (keyPressed.equals(RETURN_TO_MAIN_MENU_OPTION))
-      {
-         state = MAILBOX_MENU;
-         phone.speak(MAILBOX_MENU_TEXT);
-      }
-   }
-   
-   @Override
-   public void addObserver(Observer observer) {
-	   observers.add(observer);
-   }
-   
+    }
+
+    public ArrayList<Presenter> getPresenters() {
+        return presenters;
+    }
+
+    public void setPresenters(ArrayList<Presenter> presenters) {
+        this.presenters = presenters;
+    }
+
+    public MailBoxRepository getMailBoxRepository() {
+        return mailBoxRepository;
+    }
+
+    public void setMailBoxRepository(MailBoxRepository mailBoxRepository) {
+        this.mailBoxRepository = mailBoxRepository;
+    }
+
+    public MessageRepository getMessageRepository() {
+        return messageRepository;
+    }
+
+    public void setMessageRepository(MessageRepository messageRepository) {
+        this.messageRepository = messageRepository;
+    }
 }
 
 

@@ -1,34 +1,41 @@
 package test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import MailVoice.Message;
+import MailVoice.MessageQueue;
+import org.junit.Test;
 
-import org.junit.jupiter.api.Test;
+import java.util.ArrayList;
 
-import main.Message;
-import main.MessageQueue;
+import static org.junit.Assert.assertEquals;
 
-class MessageQueueTest {
+public class MessageQueueTest {
 	MessageQueue messageQueue=new MessageQueue();
 
 	@Test
-	void shouldAddMessageToQueue() {
+	public void shouldAddMessageToQueue() {
 		Message newMessage=new Message("hola");
 		messageQueue.add(newMessage);
 		assertEquals(messageQueue.peek(),newMessage);
 	}
 	@Test 
-	void shouldRemoveMessageFromQueue() {
+	public void shouldRemoveMessageFromQueue() {
 		Message newMessage=new Message("hola");
 		messageQueue.add(newMessage);
 		Message removedMessage=messageQueue.remove();
 		assertEquals(newMessage,removedMessage);
 	}
 	@Test
-	void shouldReturnSizeOfQueue() {
+	public void shouldReturnSizeOfQueue() {
 		assertEquals(messageQueue.size(),0);
 	}
 	@Test
-	void shouldReturnPikeOfQueue() {
+	public void shouldReturnPikeOfQueue() {
 		assertEquals(messageQueue.peek(),null);
+	}
+	@Test
+	public void shouldGetNewQueue(){
+		ArrayList<Message> newQueue=new ArrayList<>();
+		messageQueue.setQueue(newQueue);
+		assertEquals(messageQueue.getQueue(),newQueue);
 	}
 }

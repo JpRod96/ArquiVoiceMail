@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ArquiVoiceMail.iml" filepath="$PROJECT_DIR$/ArquiVoiceMail.iml" />
+      <module fileurl="file://$PROJECT_DIR$/VoiceMail.iml" filepath="$PROJECT_DIR$/VoiceMail.iml" />
     </modules>
   </component>
 </project>

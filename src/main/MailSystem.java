@@ -1,21 +1,22 @@
 package main;
 
+import MailVoice.Mailbox;
+
 import java.util.ArrayList;
 
-/**
-   A system of voice mail boxes.
-*/
 public class MailSystem
 {
-   /**
-      Constructs a mail system with a given number of mailboxes
-      @param mailboxCount the number of mailboxes
-   */
+   private ArrayList<Mailbox> mailboxes;
+   private MailBoxRepository mailBoxRepository;
+
+   public MailSystem(MailBoxRepository mailBoxRepository){
+      this.mailBoxRepository=mailBoxRepository;
+      getMailboxesFromDB();
+   }
+
    public MailSystem(int mailboxCount)
    {
       mailboxes = new ArrayList<Mailbox>();
-
-      // Initialize mail boxes.
 
       for (int i = 0; i < mailboxCount; i++)
       {
@@ -26,11 +27,6 @@ public class MailSystem
       }
    }
 
-   /**
-      Locate a mailbox.
-      @param ext the extension number
-      @return the mailbox or null if not found
-   */
    public Mailbox findMailbox(String ext)
    {
       int i = Integer.parseInt(ext);
@@ -39,5 +35,11 @@ public class MailSystem
       else return null;
    }
 
-   private ArrayList<Mailbox> mailboxes;
+   public void getMailboxesFromDB(){
+      this.mailboxes=mailBoxRepository.getAllMailBoxes();
+   }
+
+   public void setMailBoxRepository(MailBoxRepository mailBoxRepository) {
+      this.mailBoxRepository = mailBoxRepository;
+   }
 }
