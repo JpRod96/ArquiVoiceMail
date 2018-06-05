@@ -25,21 +25,21 @@ public class main2 {
 
         port(port);
         String driver="org.postgresql.Driver";
-        /* Configuracion para conectar a una base de datos local */
+        /* Configuracion para conectar a una base de datos local
         String connectionString="jdbc:postgresql://localhost:5432/postgres";
         String user="abel";
-        String password="73441710bliokiN";
+        String password="73441710bliokiN";*/
 
-        /* Configuracion para conectar ala base de datos que proporciona heroku
+        /* Configuracion para conectar ala base de datos que proporciona heroku*/
 
         URI dbUri = new URI(System.getenv("DATABASE_URL"));
         String user= dbUri.getUserInfo().split(":")[0];
         String password = dbUri.getUserInfo().split(":")[1];
         String connectionString = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
-        */
-        MailboxPersistenceService mailboxPersistenceService = new MailboxPersistenceService(connectionString, user, password, driver);
-        MessagePersistenceService messagePersistenceService = mailboxPersistenceService.getMessagePersistenceService();
 
+        MailboxPersistenceService mailboxPersistenceService = new MailboxPersistenceService(connectionString, user, password, driver);
+        //MessagePersistenceService messagePersistenceService= mailboxPersistenceService.getMessagePersistenceService();
+        MessagePersistenceService messagePersistenceService= new MessagePersistenceService(connectionString,user,password,driver);
 
         options("/*",
                 (request, response) -> {
@@ -84,7 +84,6 @@ public class main2 {
         get("/mailboxs/:id", (request, response) -> {
             response.type("application/json");
             Mailbox a=mailboxPersistenceService.getMailBoxById(Integer.parseInt(request.params(":id")));
-
             return new Gson().toJson(a);
 
         });
@@ -97,7 +96,6 @@ public class main2 {
         });
         post("/mailboxs", (request, response) -> {
             response.type("application/json");
-
             Mailbox ma = new Gson().fromJson(request.body(), Mailbox.class);
             mailboxPersistenceService.saveMailbox2(ma);
 

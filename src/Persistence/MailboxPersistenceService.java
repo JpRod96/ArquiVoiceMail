@@ -5,6 +5,9 @@ import MailVoice.Message;
 import MailVoice.MessageQueue;
 import com.google.gson.Gson;
 import main.*;
+import org.mockito.internal.matchers.Null;
+
+import javax.lang.model.type.NullType;
 import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -28,7 +31,7 @@ public class MailboxPersistenceService implements MailBoxRepository{
 
     public MailboxPersistenceService(String connectionString, String user, String password, String driver){
         loadLocalHost(connectionString, user, password, driver);
-        messagePersistenceService = this.getMessagePersistenceService();
+        messagePersistenceService = new MessagePersistenceService(connectionString,user,password,driver);
     }
 
     public void loadLocalHost(String connectionString, String user, String password, String driver){
@@ -74,7 +77,11 @@ public class MailboxPersistenceService implements MailBoxRepository{
 
             try {
                 statementObj.executeUpdate("INSERT INTO Mailbox (id, passcode, greeting) VALUES('" + id + "' , '" + passcode + "', '" + greeting + "')");
-                messagePersistenceService.saveAllMessages(keptMessages, id);
+                if(keptMessages!= null)
+                {
+                    messagePersistenceService.saveAllMessages(keptMessages, id);
+                }
+
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -122,12 +129,19 @@ public class MailboxPersistenceService implements MailBoxRepository{
                 String passcode=resultSet.getString("passcode"),
                         greeting=resultSet.getString("greeting");
                 passcode=verifyPasscode(passcode);
-                greeting=setGreetingRetrievedFromDB(greeting);
+                //greeting=setGreetingRetrievedFromDB(greeting);
                 mailbox1=new Mailbox(passcode, greeting, mailboxId);
                 ArrayList<Message> messages= messagePersistenceService.getAllMessagesByMailBoxId(mailboxId);
-                MessageQueue keptMessageQueue= new MessageQueue();
-                keptMessageQueue.setQueue(messages);
-                mailbox1.setKeptMessages(keptMessageQueue);
+                if(!messages.isEmpty())
+                {
+                    System.out.println(messages.get(0).getId());
+                     MessageQueue keptMessageQueue= new MessageQueue();
+                    keptMessageQueue.setQueue(messages);
+
+
+                    mailbox1.setKeptMessages(keptMessageQueue);
+                }
+
 
             }
         }
@@ -159,7 +173,7 @@ public class MailboxPersistenceService implements MailBoxRepository{
 
     public ArrayList<Mailbox> getAllMailBoxes(){
         ArrayList<Mailbox> mailboxes=new ArrayList<>();
-        for (int mailboxId=1; mailboxId<=4;mailboxId++){
+        for (int mailboxId=1; mailboxId<=10;mailboxId++){
             mailboxes.add(getMailBoxById(mailboxId));
         }
      return mailboxes;
